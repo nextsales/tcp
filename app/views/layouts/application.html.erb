@@ -22,7 +22,7 @@
 		<%= stylesheet_link_tag "ie9", :media => "all" %>
 	<![endif]-->
 
-	<body>
+	<body class="<%= controller_name -%> <%= action_name -%>"> 
 
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
