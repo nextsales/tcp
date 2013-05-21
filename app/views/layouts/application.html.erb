@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tcp</title>
+  
+	<%= csrf_meta_tags %>
+	
+	<!-- start: CSS -->
+	<%= stylesheet_link_tag "bootstrap", :media => "all" %>
+	<%= stylesheet_link_tag "bootstrap-responsive", :media => "all" %>
+	<%= stylesheet_link_tag "style", :media => "all" %>
+	<%= stylesheet_link_tag "style-responsive", :media => "all" %>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css' />
+	
+	<!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  	<script src="http://html5shim.googlecode.com/svn/trunk/html5" %>
+			<%= stylesheet_link_tag "ie", :media => "all" %>
+	<![endif]-->
+	
+	<!--[if IE 9]>
+		<%= stylesheet_link_tag "ie9", :media => "all" %>
+	<![endif]-->
+
+	<body>
+
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+
+	<%= render 'layouts/header' %>
+
+	<%= yield %>
+
+	
+		<%= javascript_include_tag "jquery-1.7.2.min" %>
+		<%= javascript_include_tag "jquery-ui-1.8.21.custom.min" %>
+		<%= javascript_include_tag "modernizr" %>
+		<%= javascript_include_tag "bootstrap" %>
+		<%= javascript_include_tag "jquery.cookie" %>
+		<%= javascript_include_tag "fullcalendar.min" %>
+		<%= javascript_include_tag "jquery.dataTables.min" %>
+		<%= javascript_include_tag "excanvas" %>
+		<%= javascript_include_tag "jquery.flot" %>
+		<%= javascript_include_tag "jquery.flot.pie" %>
+		<%= javascript_include_tag "jquery.flot.stack" %>
+		<%= javascript_include_tag "jquery.flot.resize.min" %>
+		<%= javascript_include_tag "jquery.chosen.min" %>
+		<%= javascript_include_tag "jquery.uniform.min" %>
+		<%= javascript_include_tag "jquery.cleditor.min" %>
+		<%= javascript_include_tag "jquery.noty" %>
+		<%= javascript_include_tag "jquery.elfinder.min" %>
+		<%= javascript_include_tag "jquery.raty.min" %>
+		<%= javascript_include_tag "jquery.iphone.toggle" %>
+		<%= javascript_include_tag "jquery.uploadify-3.1.min" %>
+		<%= javascript_include_tag "jquery.gritter.min" %>
+		<%= javascript_include_tag "jquery.imagesloaded" %>
+		<%= javascript_include_tag "jquery.masonry.min" %>
+		<%= javascript_include_tag "jquery.knob.modified" %>
+		<%= javascript_include_tag "jquery.sparkline.min" %>
+		<%= javascript_include_tag "counter" %>
+		<%= javascript_include_tag "retina" %>
+		<%= javascript_include_tag "custom" %>
+	
+  </body>
+</html>
