@@ -1,51 +1,59 @@
-<h1>Listing companies</h1>
+<div class="row-fluid sortable">
+  <div class="box span12">
+    <div class="box-header" data-original-title="">
+        <h2><i class="icon-briefcase"></i><span class="break"></span>Company</h2>
+        <div class="box-icon">
+            <%= link_to new_company_path do %>
+              <i class="icon-plus"></i>
+            <% end %>
+            <a href="#" class="btn-setting"><i class="halflings-icon wrench"></i></a>
+            <a href="#" class="btn-minimize"><i class="halflings-icon chevron-up"></i></a>
+            <a href="#" class="btn-close"><i class="halflings-icon remove"></i></a>
+        </div>
+    </div>
+  <div class="box-content">
+      <%= link_to 'New Company', new_company_path %>
+    <table class="table table-striped table-bordered bootstrap-datatable datatable">
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>City</th>
+            <th>Country</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Country</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Postcode</th>
-    <th>Website</th>
-    <th>Facebook</th>
-    <th>Linkedin</th>
-    <th>Twitter</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+      <tbody>
+      <% @companies.each do |company| %>
+        <tr>
+        	<% if can? :read, company%>
+	            <td><%= link_to company.name, company %></td>
+	            <td class="center"><%= company.description %></td>
+	            <td class="center"><%= company.city %></td>
+	            <td class="center"><%= company.country %></td>
+	            <td class="center">
+	               <div class="btn-group">
+	                  <% if can? :update, company%>
+	                   <%= link_to edit_company_path(company), :class => "btn" do %>
+	                     <i class="halflings-icon edit halflings-icon"></i>
+	                   <% end %>
+	                  <% end %>
+	                  <% if can? :update, company%>
+	                    <%= link_to company, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" do %>
+	                      <i class="halflings-icon trash halflings-icon"></i>
+	                    <% end %>
+	                  <% end %>
+	               </div>
+	            </td>
+	      <% end %>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div><!--/span-->
+>>>>>>> 3ed8db175bdcfe83752da098c4ebe386fd9e91f6
 
-<% @companies.each do |company| %>
-  <tr>
-  	<% if can? :read, company%>
-	    <td><%= company.name %></td>
-	    <td><%= company.description %></td>
-	    <td><%= company.address %></td>
-	    <td><%= company.city %></td>
-	    <td><%= company.country %></td>
-	    <td><%= company.email %></td>
-	    <td><%= company.phone %></td>
-	    <td><%= company.postcode %></td>
-	    <td><%= company.website %></td>
-	    <td><%= company.facebook_id %></td>
-	    <td><%= company.linkedin_id %></td>
-	    <td><%= company.twitter_id %></td>
-	    <td><%= link_to 'Show', company %></td>
-	    <% if can? :update, company%>
-	    	<td><%= link_to 'Edit', edit_company_path(company) %></td>
-	    <% end %>
-	    <% if can? :destroy, company%>
-	    	<td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-	    <% end %>
-	 <% end %>
-  </tr>
-<% end %>
-</table>
+</div><!--/row-->
 
-<br />
-
-<%= link_to 'New Company', new_company_path %>
