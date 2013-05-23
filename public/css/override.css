@@ -1,5 +1,6 @@
 body.sessions.new,
-body.registrations.new { 
+body.registrations.new,
+body.passwords.new { 
 	background: url(../img/bg-login.jpg) !important; 
 }
 

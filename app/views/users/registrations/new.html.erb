@@ -2,10 +2,7 @@
 	<div class="row-fluid">
 		<div class="row-fluid">
 			<div class="login-box">
-				<div class="icons">
-					<a href="./index.html"><i class="halflings-icon home"></i></a>
-					<a href="#"><i class="halflings-icon cog"></i></a>
-				</div>
+				<%= render "users/shared/toplinks" %>
 				
 				<h2>Sign up</h2>
 				<%= form_for(resource, :html => {:class => "form-horizontal"}, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
