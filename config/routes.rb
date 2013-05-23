@@ -1,19 +1,15 @@
 Tcp::Application.routes.draw do
   resources :matrices
-
+  resources :competences
+  resources :industries
+  resources :companies
+  
+  match "dashboard" => "dashboard#index"
+  root :to => 'dashboard#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-
-  resources :competences
-
-
-  resources :industries
-
-
-  match "dashboard" => "dashboard#index"
-  root :to => 'dashboard#index'
-  resources :companies
+  
   devise_for :users
   ActiveAdmin.routes(self)
 
