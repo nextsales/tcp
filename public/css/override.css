@@ -1,4 +1,8 @@
-body.sessions.new { background: url(../img/bg-login.jpg) !important; }
+body.sessions.new,
+body.registrations.new { 
+	background: url(../img/bg-login.jpg) !important; 
+}
+
 .login-box input[type="text"],
 .login-box input[type="email"],
 .login-box input[type="password"] {

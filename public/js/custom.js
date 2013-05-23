@@ -102,6 +102,18 @@ $(document).ready(function(){
 	
 	});
 	
+	$("#user_password_confirmation").focus(function() {
+		
+		$(this).parent(".input-prepend").addClass("input-prepend-focus");
+	
+	});
+	
+	$("#user_password_confirmation").focusout(function() {
+		
+		$(this).parent(".input-prepend").removeClass("input-prepend-focus");
+	
+	});
+	
 				
 	/* ---------- Add class .active to current link  ---------- */
 	$('ul.main-menu li a').each(function(){
