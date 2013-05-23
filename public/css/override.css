@@ -14,3 +14,5 @@ body.passwords.new {
        -moz-box-shadow: none;
           	box-shadow: none;
 }
+
+#tc_notice, #tc_alert {display:none;}
