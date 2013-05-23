@@ -30,8 +30,12 @@
     <td><%= feed.content %></td>
     <td><%= feed.feed_type %></td>
     <td><%= link_to 'Show', feed %></td>
-    <td><%= link_to 'Edit', edit_feed_path(feed) %></td>
-    <td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if can? :update, feed%>
+    	<td><%= link_to 'Edit', edit_feed_path(feed) %></td>
+    <% end %>
+    <% if can? :destroy, feed%>
+    	<td><%= link_to 'Destroy', feed, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>

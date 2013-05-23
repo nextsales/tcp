@@ -61,6 +61,16 @@
 </p>
 
 <% if can? :update, @company%>
-	<%= link_to 'Edit', edit_company_path(@company) %>
+	<%= link_to 'Edit', edit_company_path(@company) %>|
  <% end %>
 <%= link_to 'Back', companies_path %>
+
+<div class="span8">
+    <% if @company.feeds.any? %>
+      <h3>Feeds (<%= @company.feeds.count %>)</h3>
+      <ol class="feeds">
+      	<%= render @feeds %>
+      </ol>
+    <% end %>
+  </div>
+</div>

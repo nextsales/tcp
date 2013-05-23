@@ -10,6 +10,21 @@
   <%= @matrix.description %>
 </p>
 
-
-<%= link_to 'Edit', edit_matrix_path(@matrix) %> |
+<%= link_to 'Edit', edit_matrix_path(@matrix) %>|
 <%= link_to 'Back', matrices_path %>
+
+<div class="span8">
+    <% if @matrix.companies.any? %>
+      <h3>Companies (<%= @matrix.companies.count %>)</h3>
+      <ol class="companies">
+      	<%= render @companies %>
+      </ol>
+    <% end %>
+  
+    <% if @matrix.feeds.any? %>
+      <h3>Feeds (<%= @matrix.feeds.count %>)</h3>
+      <ol class="feeds">
+      	<%= render @feeds %>
+      </ol>
+    <% end %>
+</div>

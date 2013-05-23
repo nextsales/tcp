@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130521195821) do
+ActiveRecord::Schema.define(:version => 20130523174224) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -103,6 +103,21 @@ ActiveRecord::Schema.define(:version => 20130521195821) do
     t.boolean  "is_top"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "feeds", :force => true do |t|
+    t.string   "title"
+    t.string   "photo_url"
+    t.integer  "company_id"
+    t.string   "url"
+    t.integer  "shares"
+    t.integer  "likes"
+    t.integer  "matrix_id"
+    t.datetime "origin_created_time"
+    t.text     "content"
+    t.string   "feed_type"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "follower_matrix_rs", :force => true do |t|

@@ -19,7 +19,9 @@ class Ability
       end
       
       # Matrix rule
-      can :read, Matrix
+      can :read, Matrix do |matrix|
+        matrix.try(:user) == user
+      end
       can :create, Matrix
       can :update, Matrix do |matrix|
         matrix.try(:user) == user
@@ -27,6 +29,9 @@ class Ability
       can :destroy, Matrix do |matrix|
         matrix.try(:user) == user
       end
+      
+      # Matrix rule
+      can :read, Feed
       
     end
     #

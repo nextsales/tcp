@@ -21,25 +21,27 @@
 
 <% @companies.each do |company| %>
   <tr>
-    <td><%= company.name %></td>
-    <td><%= company.description %></td>
-    <td><%= company.address %></td>
-    <td><%= company.city %></td>
-    <td><%= company.country %></td>
-    <td><%= company.email %></td>
-    <td><%= company.phone %></td>
-    <td><%= company.postcode %></td>
-    <td><%= company.website %></td>
-    <td><%= company.facebook_id %></td>
-    <td><%= company.linkedin_id %></td>
-    <td><%= company.twitter_id %></td>
-    <td><%= link_to 'Show', company %></td>
-    <% if can? :update, company%>
-    	<td><%= link_to 'Edit', edit_company_path(company) %></td>
-    <% end %>
-    <% if can? :update, company%>
-    	<td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
+  	<% if can? :read, company%>
+	    <td><%= company.name %></td>
+	    <td><%= company.description %></td>
+	    <td><%= company.address %></td>
+	    <td><%= company.city %></td>
+	    <td><%= company.country %></td>
+	    <td><%= company.email %></td>
+	    <td><%= company.phone %></td>
+	    <td><%= company.postcode %></td>
+	    <td><%= company.website %></td>
+	    <td><%= company.facebook_id %></td>
+	    <td><%= company.linkedin_id %></td>
+	    <td><%= company.twitter_id %></td>
+	    <td><%= link_to 'Show', company %></td>
+	    <% if can? :update, company%>
+	    	<td><%= link_to 'Edit', edit_company_path(company) %></td>
+	    <% end %>
+	    <% if can? :destroy, company%>
+	    	<td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	    <% end %>
+	 <% end %>
   </tr>
 <% end %>
 </table>

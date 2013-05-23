@@ -1,0 +1,12 @@
+<li>
+  <span class="title"><%= link_to feed.title, feed.url %></span>
+  <span class="content"><%= feed.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(feed.origin_created_time) %> ago.
+  </span>
+  </span>
+  <% if current_user = feed.company.user %>
+    <%= link_to "delete", micropost, method: :delete,
+                                     data: { confirm: "You sure?" }%>
+    <% end %>
+</li>
