@@ -1,1 +1,11 @@
 body.sessions.new { background: url(../img/bg-login.jpg) !important; }
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+	border: 1px solid #eee !important;
+	color: #aaa;
+	border-left: none !important;
+	-webkit-box-shadow: none;
+       -moz-box-shadow: none;
+          	box-shadow: none;
+}

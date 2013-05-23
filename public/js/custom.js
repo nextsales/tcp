@@ -78,26 +78,25 @@ jQuery(document).ready(function($){
 
 $(document).ready(function(){
 		
-			
-	$("#username").focus(function() {
+	$("#user_email").focus(function() {
 		
 		$(this).parent(".input-prepend").addClass("input-prepend-focus");
 	
 	});
 	
-	$("#username").focusout(function() {
+	$("#user_email").focusout(function() {
 		
 		$(this).parent(".input-prepend").removeClass("input-prepend-focus");
 	
 	});
 	
-	$("#password").focus(function() {
+	$("#user_password").focus(function() {
 		
 		$(this).parent(".input-prepend").addClass("input-prepend-focus");
 	
 	});
 	
-	$("#password").focusout(function() {
+	$("#user_password").focusout(function() {
 		
 		$(this).parent(".input-prepend").removeClass("input-prepend-focus");
 	
