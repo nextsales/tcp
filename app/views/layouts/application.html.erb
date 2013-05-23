@@ -45,7 +45,10 @@
 	<%= stylesheet_link_tag "application", :media => "all" %>
 </head>
 	
-<body class="<%= controller_name -%> <%= action_name -%>"> 
+<body class="<%= controller_name -%> <%= action_name -%>">
+	<% if user_signed_in? %>
+	<%= render 'layouts/header' %>
+	<% end %>
 	
 	<%- if notice %>
 	  <div class="alert alert-info">
@@ -60,8 +63,9 @@
 			<p><%= alert %></p>
 		</div>
 	<% end -%>
-
-	<%= render 'layouts/header' %>
+	<!-- 
+	
+	-->
 
 	<%= yield %>
 	
