@@ -51,10 +51,15 @@
 	<div id="tc_alert"><%= alert %></div>
 	
 	<% if user_signed_in? %>
-	<%= render 'layouts/header' %>
+		<%= render 'layouts/navbar' %>
+		<%= render 'layouts/header' %>
+			<%= yield %>
+		<%= render 'layouts/footer' %>
+	
+	<% else %>
+		<%= yield %>
 	<% end %>
-
-	<%= yield %>
+	
 	
 	<script src="//cdn.jsdelivr.net/jquery/2.0.0/jquery-2.0.0.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
@@ -86,6 +91,7 @@
 	<script src="//cdn.jsdelivr.net/retinajs/0.0.2/retina.js"></script>
 	<script src="/js/custom.js"></script>
 	<script src="/js/tc.js"></script>
+	
 	<%= javascript_include_tag "application" %>
 </body>
 </html>
