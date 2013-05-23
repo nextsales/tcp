@@ -1,4 +1,7 @@
 Tcp::Application.routes.draw do
+  resources :feeds
+
+
   resources :matrices
   resources :competences
   resources :industries
