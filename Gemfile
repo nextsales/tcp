@@ -9,8 +9,8 @@ gem 'sqlite3'
 gem "devise"
 gem "cancan"
 gem "rolify"
-
 gem "json"
+gem "oauth"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
