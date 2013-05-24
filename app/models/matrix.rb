@@ -1,5 +1,8 @@
 class Matrix < ActiveRecord::Base
   attr_accessible :description, :name
+  
+  has_many :matrix_keywords
+  
   has_many :company_matrix_rs, :dependent => :destroy
   has_many :companies, :through => :company_matrix_rs
   
