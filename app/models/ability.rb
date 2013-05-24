@@ -30,7 +30,7 @@ class Ability
         matrix.try(:user) == user
       end
       
-      # Matrix rule
+      # Feed rule
       can :read, Feed
       
     end

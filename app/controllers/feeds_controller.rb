@@ -25,12 +25,12 @@ class FeedsController < ApplicationController
   def edit
   end
 
-  # POST /companies
-  # POST /companies.json
+  # POST /feeds
+  # POST /feeds.json
   def create
     respond_to do |format|
       if @feed.save
-        format.html { redirect_to @feed, notice: 'Company was successfully created.' }
+        format.html { redirect_to @feed, notice: 'feed was successfully created.' }
         format.json { render json: @feed, status: :created, location: @feed }
       else
         format.html { render action: "new" }
