@@ -18,6 +18,9 @@ class Ability
         company.try(:user) == user
       end
       
+      # Competence rule
+      can :read, Competence
+      
       # Matrix rule
       can :read, Matrix do |matrix|
         matrix.try(:user) == user

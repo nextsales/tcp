@@ -44,7 +44,7 @@ class CompetencesController < ApplicationController
 
     respond_to do |format|
       if @competence.save
-        format.html { redirect_to @competence, notice: 'Competence was successfully created.' }
+        format.html { redirect_to competences_url, notice: 'Competence was successfully created.' }
         format.json { render json: @competence, status: :created, location: @competence }
       else
         format.html { render action: "new" }
