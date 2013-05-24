@@ -21,6 +21,9 @@ class Ability
       # Competence rule
       can :read, Competence
       
+      # Industry rule
+      can :read, Industry
+      
       # Matrix rule
       can :read, Matrix do |matrix|
         matrix.try(:user) == user
