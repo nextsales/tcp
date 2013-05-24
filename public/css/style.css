@@ -159,12 +159,7 @@ h6 {
   margin-bottom: -5px;
   text-shadow: 0px 1px 0px #fff;
 }
-.widget h2 .glyphicons i:before {
-  margin-top: -7px;
-  font-size: 20px !important;
-  line-height: 20px !important;
-  color: #3b3b41;
-}
+
 .box-header {
   height: 16px;
   font-size: 16px;
@@ -2462,11 +2457,6 @@ footer {
 .the-icons {
   list-style: none;
 }
-.glyphicons p {
-  width: 33%;
-  float: left;
-  line-height: 44px;
-}
 /* Page: Messages
 =================================================================== */
 ul.messagesList {
@@ -2482,14 +2472,7 @@ ul.messagesList li {
   padding: 5px 10px;
   cursor: pointer;
 }
-ul.messagesList li .glyphicons {
-  padding: 5px 0 5px 25px;
-}
-ul.messagesList li .glyphicons i:before {
-  font-size: 14px;
-  margin: -2px 0px 0px 5px;
-  color: #3b3b41;
-}
+
 ul.messagesList li:nth-child(odd) {
   background: #fff !important;
 }
@@ -2564,14 +2547,7 @@ ul.messagesList li span.date {
   float: right;
   text-align: right;
 }
-.message .attachments ul li span.quickMenu .glyphicons {
-  padding: 5px 0 5px 25px;
-}
-.message .attachments ul li span.quickMenu .glyphicons i:before {
-  font-size: 14px;
-  margin: -2px 0px 0px 5px;
-  color: #3b3b41;
-}
+
 /* Page: Tasks
 =================================================================== */
 .priority.high {
