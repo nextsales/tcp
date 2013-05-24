@@ -1,3 +1,3 @@
 ActiveAdmin.register TwitterFeed do
-  menu :parent => "Feed"
+  menu :parent => "Feeds"
 end

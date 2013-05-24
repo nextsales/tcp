@@ -1,3 +1,3 @@
 ActiveAdmin.register ManualFeed do
-  menu :parent => "Feed"
+  menu :parent => "Feeds"
 end

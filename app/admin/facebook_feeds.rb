@@ -1,3 +1,3 @@
 ActiveAdmin.register FacebookFeed do
-  menu :parent => "Feed"
+  menu :parent => "Feeds"
 end
