@@ -14,10 +14,7 @@
 		      </ul>
 		    </div>
 		  <% end %>
-		
-		
-			
-			
+
 			  <fieldset>
 					
 					<div class="control-group">
@@ -30,7 +27,7 @@
 					<div class="control-group">
 						<%= f.label :description, {:class => "control-label"} %>
 						<div class="controls">
-							<%= f.text_field :description, {:class => "input-xlarge focused"} %>
+							<%= f.text_area :description, {:class => "input-xlarge focused"} %>
 						</div>
 					</div>
 					
@@ -105,8 +102,8 @@
 						</div>
 					
 					<div class="form-actions">
-						<%= f.submit "Save", :class => "btn btn-primary" %>
-						<%= link_to 'Back', companies_path, :class => "btn" %>
+						<%= f.submit "Save  changes", :class => "btn btn-primary" %>
+						<%= link_to 'Cancel', companies_path, :class => "btn" %>
 					</div>
 					
 			  </fieldset>

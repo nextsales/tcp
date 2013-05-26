@@ -40,7 +40,7 @@ class CompaniesController < ApplicationController
     @company.user = current_user
     respond_to do |format|
       if @company.save
-        format.html { redirect_to companies_url, notice: 'Company was successfully created.' }
+        format.html { redirect_to companies_url, notice: @company.name + ' was successfully created.' }
         format.json { render json: @company, status: :created, location: @company }
       else
         format.html { render action: "new" }
@@ -54,7 +54,7 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update_attributes(params[:company])
-        format.html { redirect_to @company, notice: 'Company was successfully updated.' }
+        format.html { redirect_to @company, notice: @company.name + ' was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
