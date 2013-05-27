@@ -28,6 +28,7 @@ class FeedsController < ApplicationController
   # POST /feeds
   # POST /feeds.json
   def create
+    @feed.matrices.build
     respond_to do |format|
       if @feed.save
         format.html { redirect_to @feed, notice: 'feed was successfully created.' }
