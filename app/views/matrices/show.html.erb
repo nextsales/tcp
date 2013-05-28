@@ -15,10 +15,7 @@
 
 <div class="span8">
     <% if @matrix.companies.any? %>
-      <h3>Companies (<%= @matrix.companies.count %>)</h3>
-      <ol class="companies">
-      	
-      </ol>
+      <h3>Companies (<%= @matrix.companies.count %>) : <%= @matrix.companies.map(&:name).join(", ") %></h3>
     <% end %>
   
     <% if @matrix.feeds.any? %>
