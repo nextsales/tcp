@@ -11,6 +11,7 @@ gem "cancan"
 gem "rolify"
 gem "json"
 gem "oauth"
+gem "whenever"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
