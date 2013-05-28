@@ -20,4 +20,11 @@ class Matrix < ActiveRecord::Base
   
   has_many :follower_matrix_rs
   has_many :users, :through => :follower_matrix_rs
+  
+  attr_reader :company_tokens
+  attr_accessible :company_tokens
+  
+  def company_tokens=(ids)
+    self.company_ids = ids.split(",")
+  end
 end
