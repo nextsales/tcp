@@ -18,8 +18,8 @@ class Matrix < ActiveRecord::Base
   has_one :user_matrix_r
   has_one :user, :through => :user_matrix_r
   
-  has_many :follower_matrix_rs
-  has_many :users, :through => :follower_matrix_rs
+  has_many :matrix_follower_rs, dependent: :destroy
+  has_many :followers, :through => :matrix_follower_rs
   
   attr_reader :company_tokens
   attr_accessible :company_tokens, :company_ids

@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   has_many :user_matrix_rs
   has_many :matrices, :through => :user_matrix_rs
   
-  has_many :follower_matrix_rs
-  has_many :matrices, :through => :follower_matrix_rs
+  has_many :matrix_follower_rs, foreign_key: "follower_id", dependent: :destroy
+  has_many :followed_matrices, :through => :matrix_follower_rs, source: :matrix
+  
 end
