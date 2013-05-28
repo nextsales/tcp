@@ -11,6 +11,8 @@
 					<tr>
 						<th>Name</th>
 						<th>Description</th>
+						<th>Industry</th>
+						<th>Competence</th>
 						<th>City</th>
 						<th>Country</th>
 						<th>Actions</th>
@@ -23,7 +25,9 @@
 						<% if can? :read, company%>
 						<td><%= link_to company.name, company %></td>
 						<td class="center"><%= company.description %></td>
-						<td class="center"><%= company.city %></td>	
+						<td class="center"><%= company.industries.map(&:name).join(", ") %></td>
+						<td class="center"><%= company.competences.map(&:name).join(", ") %></td>
+						<td class="center"><%= company.city %></td>
 						<td class="center"><%= company.country %></td>
 						<td class="center">
 							<div class="btn-group">
