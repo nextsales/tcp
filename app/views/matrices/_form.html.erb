@@ -1,32 +1,42 @@
-<%= form_for(@matrix) do |f| %>
-  <% if @matrix.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@matrix.errors.count, "error") %> prohibited this matrix from being saved:</h2>
-
-      <ul>
-      <% @matrix.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-
-	<div class="control-group">
-		<%= f.label :company_ids, {:class => "control-label"} %>
-		<div class="controls">
-			<%= f.collection_select :company_ids, Company.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
-		</div>
+<%= form_for (@matrix), :html => {:class => "form-horizontal"} do |f| %>
+	<% if @matrix.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@matrix.errors.count, "error") %> prohibited this matrix from being saved:</h2>
+		<ul>
+		<% @matrix.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+		</ul>
 	</div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<% end %>
+
+	<fieldset>
+		<div class="control-group">
+			<%= f.label :name, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :name, {:class => "input-xlarge focused"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :description, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_area :description, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :company_ids, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.collection_select :company_ids, Company.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="form-actions">
+			<%= f.submit "Save  changes", :class => "btn btn-primary" %>
+			<%= link_to 'Cancel', matrices_path, :class => "btn" %>
+		</div>
+	
+	</fieldset>
+	
 <% end %>
