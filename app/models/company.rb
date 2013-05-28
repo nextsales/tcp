@@ -22,4 +22,19 @@ class Company < ActiveRecord::Base
   has_many :twitter_feeds, :dependent => :destroy
   has_many :linkedin_feeds, :dependent => :destroy
   
+  attr_reader :competence_tokens, :industry_tokens, :matrix_tokens
+  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens
+  
+  def competence_tokens=(ids)
+    self.competence_ids = ids.split(",")
+  end
+  
+  def industry_tokens=(ids)
+    self.industry_ids = ids.split(",")
+  end
+  
+  def matrix_tokens=(ids)
+    self.matrix_ids = ids.split(",")
+  end
+  
 end
