@@ -39,6 +39,7 @@ class MatricesController < ApplicationController
   # POST /matrices.json
   def create
     @matrix.user = current_user
+    #@matrix.user_matrix_r.new(user_id: current_user.id).save
     respond_to do |format|
       if @matrix.save
         format.html { redirect_to @matrix, notice: 'Matrix was successfully created.' }
