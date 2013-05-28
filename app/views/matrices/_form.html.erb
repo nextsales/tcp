@@ -20,10 +20,12 @@
     <%= f.text_area :description %>
   </div>
 
-	<div class="field">
-    <%= f.label :company_tokens %><br />
-    <%= f.text_field :company_tokens %>
-  </div>
+	<div class="control-group">
+		<%= f.label :company_ids, {:class => "control-label"} %>
+		<div class="controls">
+			<%= f.collection_select :company_ids, Company.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+		</div>
+	</div>
   <div class="actions">
     <%= f.submit %>
   </div>
