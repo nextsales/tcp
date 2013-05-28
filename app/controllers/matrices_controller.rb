@@ -14,7 +14,7 @@ class MatricesController < ApplicationController
   # GET /matrices/1
   # GET /matrices/1.json
   def show
-    #@feeds = @matrix.feeds
+    @feeds = @matrix.feeds
     @companies = @matrix.companies
     respond_to do |format|
       format.html # show.html.erb

@@ -6,7 +6,7 @@
   </span>
   </span>
   <% if current_user = feed.company.user %>
-    <%= link_to "delete", micropost, method: :delete,
+    <%= link_to "delete", feed, method: :delete,
                                      data: { confirm: "You sure?" }%>
     <% end %>
 </li>
