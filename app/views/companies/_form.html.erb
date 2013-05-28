@@ -96,23 +96,23 @@
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :competence_tokens, {:class => "control-label"} %>
+			<%= f.label :industry_ids, {:class => "control-label"} %>
 			<div class="controls">
-				<%= f.text_field :competence_tokens, {:class => "input-xlarge"} %>
+				<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :industry_tokens, {:class => "control-label"} %>
+			<%= f.label :competence_ids, {:class => "control-label"} %>
 			<div class="controls">
-				<%= f.text_field :industry_tokens, {:class => "input-xlarge"} %>
+				<%= f.collection_select :competence_ids, Competence.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
 			</div>
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :matrix_tokens, {:class => "control-label"} %>
+			<%= f.label :matrix_ids, {:class => "control-label"} %>
 			<div class="controls">
-				<%= f.text_field :matrix_tokens, {:class => "input-xlarge"} %>
+				<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
 			</div>
 		</div>
 		

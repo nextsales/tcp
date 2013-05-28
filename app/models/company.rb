@@ -1,6 +1,5 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :city, :country, :description, :email, :facebook_id, :linkedin_id, :name, :phone, :postcode, :twitter_id, :website, :logo_url
-  
   #validates :user_id, presence: true
   
   has_one :user_company_r
@@ -23,7 +22,7 @@ class Company < ActiveRecord::Base
   has_many :linkedin_feeds, :dependent => :destroy
   
   attr_reader :competence_tokens, :industry_tokens, :matrix_tokens
-  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens
+  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids
   
   def competence_tokens=(ids)
     self.competence_ids = ids.split(",")

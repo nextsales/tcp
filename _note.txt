@@ -3,7 +3,8 @@
 	<%= f.email_field :email, {:class => "input-large span10", :placeholder => "type user_email", :autofocus => true} %>
 </div>
 
-
-
 ### RUN CRAWLERS  ###
 ##  rake crawl:linkedin
+
+Do not use "chosen" for Competence
+
