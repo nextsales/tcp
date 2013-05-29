@@ -23,7 +23,9 @@
 						<% if can? :read, matrix%>
 						<td><%= link_to matrix.name, matrix %></td>
 						<td class="center"><%= matrix.description %></td>
-						<td class="center"><%= matrix.companies.map(&:name).join(', ') %></td>	
+						<td class="center">
+							<%= raw(matrix.companies.map{ |company| raw(link_to(company.name, company)) }.join(', ')) %>
+						</td>	
 						<td class="center"><%= matrix.matrix_keywords.map(&:name).join(', ') %></td>	
 						<td class="center">
 							<div class="btn-group">
