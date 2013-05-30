@@ -44,7 +44,7 @@ class IndustriesController < ApplicationController
 
     respond_to do |format|
       if @industry.save
-        format.html { redirect_to @industry, notice: 'Industry was successfully created.' }
+        format.html { redirect_to industries_url, notice: 'Industry was successfully created.' }
         format.json { render json: @industry, status: :created, location: @industry }
       else
         format.html { render action: "new" }
@@ -60,7 +60,7 @@ class IndustriesController < ApplicationController
 
     respond_to do |format|
       if @industry.update_attributes(params[:industry])
-        format.html { redirect_to @industry, notice: 'Industry was successfully updated.' }
+        format.html { redirect_to industries_url, notice: 'Industry was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

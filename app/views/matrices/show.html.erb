@@ -1,9 +1,28 @@
-<p id="notice"><%= notice %></p>
+<h1><%= @matrix.name %></h1>
 
-<p>
-  <b>Name:</b>
-  <%= @matrix.name %>
-</p>
+<% if @matrix.companies.any? %>
+<div class="row-fluid">
+	<% @matrix.companies.each do |company| -%>
+		<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
+			<div class="box-content">
+				<ul class="dashboard-list">
+					<li>
+						<%= link_to company, :class => "logo" do %>
+						  <img class="avatar" src="<%= company.logo_url -%>">
+						<% end %>
+						<strong><%= company.name -%></strong> <br>
+						<strong>Industry: </strong><%= company.industries.map(&:name).join(", ") -%><br>
+						<strong>Competence: </strong><%= company.competences.map(&:name).join(", ") -%><br> 
+						<p><%= company.description -%></p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	<% end %>
+</div>
+<% end %>
+
+<p id="notice"><%= notice %></p>
 
 <p>
   <b>Description:</b>
@@ -14,10 +33,6 @@
 <%= link_to 'Back', matrices_path %>
 
 <div class="span8">
-    <% if @matrix.companies.any? %>
-      <h3>Companies (<%= @matrix.companies.count %>) : <%= @matrix.companies.map(&:name).join(", ") %></h3>
-    <% end %>
-  
     <% if @matrix.feeds.any? %>
       <h3>Feeds (<%= @matrix.feeds.count %>)</h3>
       <ol class="feeds">

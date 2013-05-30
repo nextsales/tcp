@@ -60,7 +60,7 @@ class CompetencesController < ApplicationController
 
     respond_to do |format|
       if @competence.update_attributes(params[:competence])
-        format.html { redirect_to @competence, notice: 'Competence was successfully updated.' }
+        format.html { redirect_to competences_url, notice: 'Competence was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

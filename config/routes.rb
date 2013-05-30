@@ -8,6 +8,8 @@ Tcp::Application.routes.draw do
   resources :companies
   
   match "dashboard" => "dashboard#index"
+  match "test" => "dashboard#test"
+  
   root :to => 'dashboard#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
