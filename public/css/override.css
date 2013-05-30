@@ -30,4 +30,6 @@ body.passwords.new {
 	overflow:hidden;
 }
 
+.matrices.show ul.dashboard-list li a.logo {display:block;width:70px;float:left;height:100%;}
+
 #tc_notice, #tc_alert {display:none;}

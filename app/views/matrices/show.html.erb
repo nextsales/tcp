@@ -1,3 +1,5 @@
+<h1><%= @matrix.name %></h1>
+
 <% if @matrix.companies.any? %>
 <div class="row-fluid">
 	<% @matrix.companies.each do |company| -%>
@@ -5,12 +7,13 @@
 			<div class="box-content">
 				<ul class="dashboard-list">
 					<li>
-						<a href="#">
+						<a class="logo" href="#">
 							<img class="avatar" src="<%= company.logo_url -%>">
 						</a>
 						<strong><%= company.name -%></strong> <br>
 						<strong><%= company.industries.map(&:name).join(", ") -%></strong> <br>
 						<strong><%= company.competences.map(&:name).join(", ") -%></strong> <br> 
+						<p><%= company.description -%></p>
 					</li>
 				</ul>
 			</div>
@@ -22,11 +25,6 @@
 
 
 <p id="notice"><%= notice %></p>
-
-<p>
-  <b>Name:</b>
-  <%= @matrix.name %>
-</p>
 
 <p>
   <b>Description:</b>
