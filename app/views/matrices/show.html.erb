@@ -32,11 +32,16 @@
 <%= link_to 'Edit', edit_matrix_path(@matrix) %>|
 <%= link_to 'Back', matrices_path %>
 
-<div class="span8">
-    <% if @matrix.feeds.any? %>
-      <h3>Feeds (<%= @matrix.feeds.count %>)</h3>
-      <ol class="feeds">
-      	<%= render @feeds %>
-      </ol>
-    <% end %>
+<% if @matrix.feeds.any? %>
+<div class="masonry_feed" class="clearfix fluid">
+	<% @matrix.feeds.each do |feed| -%>
+		<div class="box span4">
+			<h2><%= link_to feed.title, feed.url %></h2>
+			<div><%= feed.content %></div>
+		  <span class="timestamp">
+		    Posted <%= time_ago_in_words(feed.origin_created_time) %> ago.
+		  </span>
+	  </div>
+	<% end %>
 </div>
+<% end %>
