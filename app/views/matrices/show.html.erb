@@ -1,3 +1,26 @@
+<% if @matrix.companies.any? %>
+<div class="row-fluid">
+	<% @matrix.companies.each do |company| -%>
+		<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
+			<div class="box-content">
+				<ul class="dashboard-list">
+					<li>
+						<a href="#">
+							<img class="avatar" src="<%= company.logo_url -%>">
+						</a>
+						<strong><%= company.name -%></strong> <br>
+						<strong><%= company.industries.map(&:name).join(", ") -%></strong> <br>
+						<strong><%= company.competences.map(&:name).join(", ") -%></strong> <br> 
+					</li>
+				</ul>
+			</div>
+		</div>
+	<% end %>
+</div>
+
+<% end %>
+
+
 <p id="notice"><%= notice %></p>
 
 <p>

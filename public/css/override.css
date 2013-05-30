@@ -15,4 +15,19 @@ body.passwords.new {
           	box-shadow: none;
 }
 
+.matrices.show .box-content {
+  border: 1px solid #f1f1f1;
+}
+.matrices.show .box-content:before {
+  border: none;
+}
+.matrices.show .box-content:after {
+  border: none;
+}
+
+.matrices.show ul.dashboard-list li {
+	height:120px;
+	overflow:hidden;
+}
+
 #tc_notice, #tc_alert {display:none;}
