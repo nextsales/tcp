@@ -11,8 +11,8 @@
 						  <img class="avatar" src="<%= company.logo_url -%>">
 						<% end %>
 						<strong><%= company.name -%></strong> <br>
-						<strong><%= company.industries.map(&:name).join(", ") -%></strong> <br>
-						<strong><%= company.competences.map(&:name).join(", ") -%></strong> <br> 
+						<strong>Industry: </strong><%= company.industries.map(&:name).join(", ") -%><br>
+						<strong>Competence: </strong><%= company.competences.map(&:name).join(", ") -%><br> 
 						<p><%= company.description -%></p>
 					</li>
 				</ul>
