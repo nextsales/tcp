@@ -1,5 +1,5 @@
 namespace :crawl do
-  desc "import feeds"
+  desc "crawl Linkedin companies updates"
   task linkedin: :environment do
     linkedin_feeds
   end

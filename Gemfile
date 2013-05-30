@@ -12,6 +12,7 @@ gem "rolify"
 gem "json"
 gem "oauth"
 gem "whenever"
+gem "nokogiri"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
