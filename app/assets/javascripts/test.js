@@ -1,6 +1,10 @@
 $(document).ready(function() {
-	$("#tumblelog").imagesLoaded( function(){
-  		$("#tumblelog").masonry({columnWidth: 240});
-  	});
+	$('.masonry_feed').masonry({
+		itemSelector: '.box',
+		isAnimated: true,
+	  columnWidth: function( containerWidth ) {
+	    return containerWidth / 5;
+	  }
+	});
 });
 

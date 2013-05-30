@@ -1,4 +1,1 @@
-#tumblelog .col1 { width: 220px; }
-#tumblelog .col2 { width: 460px; }
-#tumblelog .col3 { width: 700px; }
-
+.masonry_feed .box {margin:5px 0;}
