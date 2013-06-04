@@ -3,7 +3,7 @@ $(document).ready(function() {
 		itemSelector: '.box',
 		isAnimated: true,
 	  columnWidth: function( containerWidth ) {
-	    return containerWidth / 5;
+	    return containerWidth / 6;
 	  }
 	});
 });

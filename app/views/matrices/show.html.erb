@@ -1,4 +1,10 @@
+<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-small", :style => "float:right;margin-top:10px"} do %>
+	<i class="icon-edit"></i> Edit
+<% end %>
 <h1><%= @matrix.name %></h1>
+<p><%= @matrix.description %></p>
+<hr>
+
 
 <% if @matrix.companies.any? %>
 <div class="row-fluid">
@@ -24,18 +30,12 @@
 
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Description:</b>
-  <%= @matrix.description %>
-</p>
-
-<%= link_to 'Edit', edit_matrix_path(@matrix) %>|
-<%= link_to 'Back', matrices_path %>
+<!-- 
 
 <% if @matrix.feeds.any? %>
 <div class="masonry_feed" class="clearfix fluid">
 	<% @matrix.feeds.each do |feed| -%>
-		<div class="box span4">
+		<div class="box">
 			<h2><%= link_to feed.title, feed.url %></h2>
 			<div><%= feed.content %></div>
 		  <span class="timestamp">
@@ -45,3 +45,4 @@
 	<% end %>
 </div>
 <% end %>
+-->
