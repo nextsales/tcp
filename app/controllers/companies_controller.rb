@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.json
   def new
+    5.times {@company.assets.build}
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @company }
@@ -32,6 +33,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    5.times {@company.assets.build}
   end
 
   # POST /companies

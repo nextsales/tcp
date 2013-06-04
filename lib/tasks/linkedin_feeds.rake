@@ -15,9 +15,10 @@ def linkedin_feeds
   consumer = OAuth::Consumer.new('62vxqawt0fy2', 'JiXFk6AaYLKBErM1')
   access_token = OAuth::AccessToken.new(consumer, 'a0d0d1f1-eb24-4dfe-8fd9-19d75fa2e984', 'dcbbc84d-b065-4b86-8d61-23d170126719')
   
-  json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates?count=99999&format=json").body
-  updates = JSON.parse(json_txt)
-  
+  json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates/key=UNIU-c1070-5740568913708597248-SHARE").body
+  #updates = JSON.parse(json_txt)
+  puts json_txt
+  return
   
   # Go through all the companies
   companies = Company.all
@@ -25,6 +26,7 @@ def linkedin_feeds
     puts "geting updates of " + company.name
     if company.linkedin_id?
       company_updates(access_token, company,'json')
+      return
     end
   end
 end
@@ -38,6 +40,8 @@ def company_updates (access_token, company, format)
     puts "No update in "+ company.linkedin_id.to_s
     return
   else
+    puts data["values"]
+    return
     updates = data["values"]
     updates.each do |update|
       updateContent = update["updateContent"]

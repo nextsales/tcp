@@ -5,12 +5,13 @@ namespace :crawl do
   end
 end
 
-def site_monitor
+def site_monitor(company)
   require 'open-uri'
   require 'nokogiri'
   
   # Perform a google search
-  doc = Nokogiri::HTML(open('http://www.google.com/search?ie=UTF-8&oe=UTF-8&as_sitesearch=nokia.com&tbs=qdr:w1,date:1'))
+  url = 'http://www.google.com/search?ie=UTF-8&oe=UTF-8&as_sitesearch=nokia.com&tbs=qdr:w1,date:1' % []
+  doc = Nokogiri::HTML(open())
   #puts doc
   html_parser(doc)
 end

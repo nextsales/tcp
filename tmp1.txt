@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<update>
+  <timestamp>1368658283642</timestamp>
+  <update-key>UNIU-c1070-5740568913708597248-SHARE</update-key>
+  <update-type>CMPY</update-type>
+  <update-content>
+    <company>
+      <id>1070</id>
+      <name>Nokia</name>
+    </company>
+    <company-status-update>
+      <share>
+        <id>s1438536582</id>
+        <timestamp>1368658283642</timestamp>
+        <visibility>
+          <code>anyone</code>
+        </visibility>
+        <comment>We have an exclusive @NokiaAtWork video to show you today. Find out why Benjamin Ellis thinks his Nokia Lumia 920 is an integral tool for his busy business life!</comment>
+        <content>
+          <submitted-url>http://www.youtube.com/watch?v=-3QBISAAWsk</submitted-url>
+          <shortened-url>http://lnkd.in/yHQ7Jb</shortened-url>
+          <title>Nokia Lumia 920 for business: Benjamin Ellis (Nokia@Work)</title>
+          <description>Benjamin Ellis explains why the Nokia Lumia 920 is an integral tool for his busy business life. Ben often has to travel for work so he needs a phone that is an extension of his office. He tested the Nokia Lumia 920 for 30 days...</description>
+          <submitted-image-url>http://i2.ytimg.com/vi/-3QBISAAWsk/hqdefault.jpg</submitted-image-url>
+          <thumbnail-url>http://m3.licdn.com/media-proxy/ext?w=80&amp;h=100&amp;hash=dSGMyVVizYVlsN9gLefA6ozBM1U%3D&amp;url=http%3A%2F%2Fi2.ytimg.com%2Fvi%2F-3QBISAAWsk%2Fhqdefault.jpg</thumbnail-url>
+          <eyebrow-url>http://www.linkedin.com/share?viewLink=&amp;sid=s1438536582&amp;url=http%3A%2F%2Flnkd%2Ein%2FyHQ7Jb&amp;urlhash=E12c&amp;uid=5740568913708597248</eyebrow-url>
+        </content>
+        <source>
+          <service-provider>
+            <name>LINKEDIN</name>
+          </service-provider>
+        </source>
+      </share>
+    </company-status-update>
+  </update-content>
+  <is-commentable>true</is-commentable>
+  <is-likable>true</is-likable>
+  <is-liked>false</is-liked>
+  <num-likes>17</num-likes>
+  <likes total="17" count="3" start="0">
+    <like>
+      <person>
+        <id>YqFjpesyQq</id>
+        <first-name>Manish</first-name>
+        <last-name>Ahuja</last-name>
+        <headline>Sales Executive in Nokia</headline>
+      </person>
+    </like>
+    <like>
+      <person>
+        <id>WMPyynuKAi</id>
+        <first-name>Mohammedalmakki Jr.</first-name>
+        <last-name>Alhaj</last-name>
+        <headline>Chairman</headline>
+        <picture-url>http://m3.licdn.com/mpr/mprx/0_yths_Kz-uy6hKgXvpzFL_-vA2VPut4qvYvqL_1XS1JbySyizrNrnDPK_Gt1PA0zMglGkuNs8uTKT</picture-url>
+      </person>
+    </like>
+    <like>
+      <person>
+        <id>vNEguwoBdE</id>
+        <first-name>Ralph</first-name>
+        <last-name>Johnson</last-name>
+        <headline>Customer Service at Bulova Corporation</headline>
+        <picture-url>http://m3.licdn.com/mpr/mprx/0_9-Hjc8824QUjPXElnPIGci6isCpjxbRlNKpCciT05XHD8i2Asq4AM_zAN7yGp8VgcAoi4kPKGnSD</picture-url>
+      </person>
+    </like>
+  </likes>
+</update>

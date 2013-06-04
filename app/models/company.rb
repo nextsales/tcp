@@ -22,7 +22,10 @@ class Company < ActiveRecord::Base
   has_many :linkedin_feeds, :dependent => :destroy
   
   attr_reader :competence_tokens, :industry_tokens, :matrix_tokens
-  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids
+  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids, :assets_attributes
+    
+  has_many :assets
+  accepts_nested_attributes_for :assets, :allow_destroy => true
   
   def competence_tokens=(ids)
     self.competence_ids = ids.split(",")
