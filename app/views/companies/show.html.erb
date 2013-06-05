@@ -25,6 +25,16 @@
 					<p><b>Linkedin: </b><%= @company.linkedin_id %></p>
 					<p><b>Industry: </b><%= @company.industries.map(&:name).join(", ") %></p>
 					<p><b>Competence: </b><%= @company.competences.map(&:name).join(", ") %></p>
+					
+					<% if @company.assets.any? %>
+				      <h3>Financial Documents (<%= @company.assets.count %>)</h3>
+				      <ol class="docs">
+				      	<% for asset in @company.assets %>
+							<div><%= link_to asset.document_file_name, asset.document.url %></div>
+						<% end %>
+				      </ol>
+			    	<% end %>
+				
 				</div>
 				
 				<div id="feed" class="tab-pane">
@@ -35,6 +45,8 @@
 			      </ol>
 			    <% end %>
 				</div>
+				
+				
 
 			</div>
 		</div>

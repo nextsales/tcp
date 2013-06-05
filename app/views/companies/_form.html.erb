@@ -132,7 +132,7 @@
 		
 				<% unless asset_fields.object.new_record? %>
 					<div class="controls">
-						<%= link_to asset_fields.object.document.url %>
+						<%= link_to asset_fields.object.document_file_name, asset_fields.object.document.url %>
 						<%= asset_fields.check_box :_destroy %>	
 					</div>
 		

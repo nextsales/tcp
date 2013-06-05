@@ -3,6 +3,7 @@ class Asset < ActiveRecord::Base
   belongs_to :company
   
   has_attached_file :document,
-                  :url  => "/assets/companies/:id/:basename.:extension",
-                  :path => ":rails_root/datafiles/assets/companies/:id/:basename.:extension"
+                  :url  => "/datafiles/:rails_env/assets/:id/:basename.:extension",
+                  :path => ":rails_root/datafiles/:rails_env/assets/:id/:basename.:extension"
+  
 end
