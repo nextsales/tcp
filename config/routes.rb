@@ -17,6 +17,8 @@ Tcp::Application.routes.draw do
   
   devise_for :users
   ActiveAdmin.routes(self)
+  
+  match 'assets/:id' => 'assets#download', :as => :download
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

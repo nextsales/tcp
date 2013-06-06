@@ -30,7 +30,7 @@
 				      <h3>Financial Documents (<%= @company.assets.count %>)</h3>
 				      <ol class="docs">
 				      	<% for asset in @company.assets %>
-							<div><%= link_to asset.document_file_name, asset.document.url %></div>
+							<div><%= link_to asset.document_file_name, download_path(asset) %></div>
 						<% end %>
 				      </ol>
 			    	<% end %>
