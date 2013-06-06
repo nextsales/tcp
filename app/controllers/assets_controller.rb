@@ -1,4 +1,5 @@
 class AssetsController < ApplicationController
+  before_filter :authenticate_user!
   def download
     @asset = Asset.find(params[:id])
 
