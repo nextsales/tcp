@@ -1,7 +1,5 @@
 Tcp::Application.routes.draw do
   resources :feeds
-
-
   resources :matrices
   resources :competences
   resources :industries
@@ -15,7 +13,7 @@ Tcp::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
-  devise_for :users
+  devise_for :users, controllers:{omniauth_callbacks: "omniauth_callbacks"}
   ActiveAdmin.routes(self)
 
   # The priority is based upon order of creation:

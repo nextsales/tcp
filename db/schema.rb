@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528204150) do
+ActiveRecord::Schema.define(:version => 20130608060427) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -141,6 +141,25 @@ ActiveRecord::Schema.define(:version => 20130528204150) do
     t.boolean  "is_approve"
   end
 
+  create_table "linkedin_auths", :force => true do |t|
+    t.string   "email"
+    t.string   "first_name"
+    t.string   "full_name"
+    t.string   "headline"
+    t.string   "industry"
+    t.string   "last_name"
+    t.string   "location"
+    t.string   "phone"
+    t.string   "photo"
+    t.string   "raw_auth"
+    t.string   "secret"
+    t.string   "token"
+    t.string   "uid"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
   create_table "linkedin_feeds", :force => true do |t|
     t.integer  "company_id"
     t.integer  "matrix_id"
@@ -244,6 +263,7 @@ ActiveRecord::Schema.define(:version => 20130528204150) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "linkedin_auth_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
