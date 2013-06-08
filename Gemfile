@@ -14,6 +14,7 @@ gem "oauth"
 gem "whenever"
 gem "nokogiri"
 gem "paperclip", :git => "git://github.com/thoughtbot/paperclip.git"
+gem "roo"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

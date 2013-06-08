@@ -19,6 +19,8 @@ Tcp::Application.routes.draw do
   ActiveAdmin.routes(self)
   
   match 'assets/:id' => 'assets#download', :as => :download
+  
+  resources :company_imports
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -117,7 +117,7 @@
 		</div>
 		
 		<div class="control-group">
-			<%= f.label :Document_upload, {:class => "control-label"} %>
+			<%= f.label :Upload_financial_documents, {:class => "control-label"} %>
 			<%= f.fields_for :assets do |asset_fields| %>
 				<% if asset_fields.object.new_record? %>
 					<div class="controls">
@@ -127,7 +127,7 @@
 			<% end %>
 		</div>
 		<div class="control-group">
-			<%= f.label :Attached_documents, {:class => "control-label"} %>
+			<%= f.label :Financial_documents, {:class => "control-label"} %>
 			<%= f.fields_for :assets do |asset_fields| %>
 		
 				<% unless asset_fields.object.new_record? %>

@@ -33,7 +33,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    5.times {@company.assets.build}
+    (5 - @company.assets.length).times {@company.assets.build}
   end
 
   # POST /companies
@@ -74,4 +74,9 @@ class CompaniesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def import
+    @company.import(params[:file])
+    redirect_to root_url, notice: "Products imported."
+  end 
 end
