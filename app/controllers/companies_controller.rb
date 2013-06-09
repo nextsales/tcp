@@ -23,7 +23,8 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   # GET /companies/new.json
-  def new
+  def new    
+    @company.user = current_user
     5.times {@company.assets.build}
     respond_to do |format|
       format.html # new.html.erb
@@ -75,8 +76,8 @@ class CompaniesController < ApplicationController
     end
   end
   
-  def import
-    @company.import(params[:file])
-    redirect_to root_url, notice: "Products imported."
-  end 
+  def with_user
+    @company.user_company_rs.build(user_id: current_user.id).save
+  end
+  
 end

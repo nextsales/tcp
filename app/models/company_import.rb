@@ -1,10 +1,12 @@
 class CompanyImport 
   # attr_accessible :title, :body
+  
   extend ActiveModel::Naming
   include ActiveModel::Conversion
   include ActiveModel::Validations
+  
 
-  attr_accessor :file
+  attr_accessor :file, :current_user
 
   def initialize(attributes = {})
     attributes.each { |name, value| send("#{name}=", value) }
@@ -13,13 +15,18 @@ class CompanyImport
   def persisted?
     false
   end
-
+  
   def save
     if imported_companies.map(&:valid?).all?
       imported_companies.each(&:save!)
+      #set the user of the imported company as the current user
+      imported_companies.each do |company|
+        company.user=current_user
+      end
+      
       true
     else
-      imported_companies.each_with_index do |product, index|
+      imported_companies.each_with_index do |company, index|
         company.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
@@ -39,8 +46,7 @@ class CompanyImport
       row = Hash[[header, spreadsheet.row(i)].transpose]
       company = Company.find_by_id(row["id"]) || Company.new
       company.attributes = row.to_hash.slice(*Company.accessible_attributes)
-      company.user_company_r.build(user_id: current_user.id).save
-      company
+      company      
     end
   end
 

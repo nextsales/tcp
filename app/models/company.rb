@@ -39,4 +39,5 @@ class Company < ActiveRecord::Base
     self.matrix_ids = ids.split(",")
   end
   
+  
 end
