@@ -76,8 +76,11 @@ class CompaniesController < ApplicationController
     end
   end
   
-  def with_user
-    @company.user_company_rs.build(user_id: current_user.id).save
+  def csv_template
+    respond_to do |format|
+      format.csv { send_data Company.to_csv }
+      format.xls # { send_data @products.to_csv(col_sep: "\t") }
+    end
   end
   
 end

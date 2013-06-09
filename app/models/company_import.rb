@@ -22,8 +22,7 @@ class CompanyImport
       #set the user of the imported company as the current user
       imported_companies.each do |company|
         company.user=current_user
-      end
-      
+      end      
       true
     else
       imported_companies.each_with_index do |company, index|

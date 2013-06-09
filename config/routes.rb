@@ -21,6 +21,7 @@ Tcp::Application.routes.draw do
   match 'assets/:id' => 'assets#download', :as => :download
   
   resources :company_imports
+  match 'csv_template' => 'companies#csv_template'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

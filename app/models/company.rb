@@ -1,6 +1,6 @@
 class Company < ActiveRecord::Base
   attr_accessible :address, :city, :country, :description, :email, :facebook_id, :linkedin_id, :name, :phone, :postcode, :twitter_id, :website, :logo_url
-  #validates :user_id, presence: true
+  validates_presence_of :name
   
   has_one :user_company_r
   has_one :user, :through => :user_company_r
@@ -39,5 +39,9 @@ class Company < ActiveRecord::Base
     self.matrix_ids = ids.split(",")
   end
   
-  
+  def self.to_csv_template(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+    end
+  end
 end
