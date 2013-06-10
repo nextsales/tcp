@@ -1,0 +1,9 @@
+Matrix.to_xlsx package: xlsx_package
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Companies') do |sheet|
+	sheet.add_row ['Company name', 'Description', 'Industries']
+    @companies.each do |company|
+    	sheet.add_row [company.name, company.description, company.industries.map(&:name).join(", ")]
+    end
+end

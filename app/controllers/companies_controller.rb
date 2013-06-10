@@ -76,12 +76,6 @@ class CompaniesController < ApplicationController
     end
   end
   
-  def csv_template
-    @companies = Company.all
-    respond_to do |format|
-      format.csv { send_data @companies.to_csv_template }
-      format.xls # { send_data @products.to_csv(col_sep: "\t") }
-    end
-  end
+  
   
 end
