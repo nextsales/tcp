@@ -39,9 +39,4 @@ class Company < ActiveRecord::Base
     self.matrix_ids = ids.split(",")
   end
   
-  def self.to_csv_template(options = {})
-    CSV.generate(options) do |csv|
-      csv << column_names
-    end
-  end
 end
