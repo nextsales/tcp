@@ -6,17 +6,28 @@ wb = xlsx_package.workbook
 # define the regular styles
 styles = wb.styles
 title = styles.add_style(:sz => 15, :b => true, :u => true)
-company_name     = styles.add_style :bg_color => "DD", :sz => 16, :numFmtId=> 20, :b => true, :border => { :style => :double, :color => "00" },:alignment => {:indent => 5, :vertical => :center}  
+company_name = styles.add_style :bg_color => "DD", 
+								:sz => 16, 
+								:numFmtId=> 20, 
+								:b => true, 
+								:border => { :style => :double, :color => "00" },
+								:alignment => {:indent => 5, :vertical => :center}  
 
 desc = styles.add_style :fg_color=> "00",
                             :sz => 10,
                             :border => { :style => :thin, :color => "00" },
-                            :alignment => {  :wrap_text => true}
+                            :alignment => {:vertical => :center,  :wrap_text => true}
 industry_text = styles.add_style :fg_color=> "00",
                             :sz => 12, 
                             :b => true,
                             :border => { :style => :thin, :color => "00" },
-                            :alignment => {  :wrap_text => true}                            
+                            :alignment => {  :wrap_text => true}  
+                            
+compentencies_text = styles.add_style :fg_color=> "00",
+                            :sz => 10, 
+                            :i => true,
+                            :border => { :style => :thin, :color => "00" },
+                            :alignment => {  :wrap_text => true}                           
   
 wb.add_worksheet(name: 'Companies') do |sheet|      
 	sheet.add_row @companies.map(&:name), :style => company_name, :height => 45
@@ -35,8 +46,9 @@ wb.add_worksheet(name: 'Companies') do |sheet|
     @companies.each do |company|
     	row << company.competences.map(&:name).join(", ")
     end
-	sheet.add_row row, :style => desc
+	sheet.add_row row, :style => compentencies_text
 	
+	#LOGO
 	i = 0
 	@companies.each do |company|
 		extname = File.extname(company.logo_url)
@@ -54,9 +66,26 @@ wb.add_worksheet(name: 'Companies') do |sheet|
       		image.hyperlink.tooltip = "Labeled Link"
 	      	image.start_at i,0
 	    end
+	    sheet.column_info[i].width = 40	    
 	    i = i+1
     end
 	
+	
+	
+	#REVENUES
+	sheet.add_row 
+	sheet.add_row 
+	
+	sheet.add_row ["LATEST REVENUE OF THE COMPANIES"]
+	names = []
+	revenues = []
+    @companies.each do |company| 
+    	names << company.name
+    	revenues << rand(24)+1
+    end
+    sheet.add_chart(Axlsx::Bar3DChart, :start_at => [0,10], :end_at => [@companies.count, 25]) do |chart|
+      chart.add_series :data => revenues, :labels => names, :title => "LATEST REVENUE OF THE COMPANIES", :colors => ["00FF00", "0000FF"]
+    end
 end
 
 if @feeds.any?
