@@ -1,9 +1,69 @@
+require 'open-uri'
+
 xlsx_package = Axlsx::Package.new
 wb = xlsx_package.workbook
 
-wb.add_worksheet(name: 'Companies') do |sheet|
-	sheet.add_row ['Company name', 'Description', 'Industries']
+# define the regular styles
+styles = wb.styles
+title = styles.add_style(:sz => 15, :b => true, :u => true)
+company_name     = styles.add_style :bg_color => "DD", :sz => 16, :numFmtId=> 20, :b => true, :border => { :style => :double, :color => "00" },:alignment => {:indent => 5, :vertical => :center}  
+
+desc = styles.add_style :fg_color=> "00",
+                            :sz => 10,
+                            :border => { :style => :thin, :color => "00" },
+                            :alignment => {  :wrap_text => true}
+industry_text = styles.add_style :fg_color=> "00",
+                            :sz => 12, 
+                            :b => true,
+                            :border => { :style => :thin, :color => "00" },
+                            :alignment => {  :wrap_text => true}                            
+  
+wb.add_worksheet(name: 'Companies') do |sheet|      
+	sheet.add_row @companies.map(&:name), :style => company_name, :height => 45
+    sheet.add_row @companies.map(&:description), :style => desc
+    
+    #INDUSTRIES
+    row = []
     @companies.each do |company|
-    	sheet.add_row [company.name, company.description, company.industries.map(&:name).join(", ")]
+    	row << company.industries.map(&:name).join(", ")
     end
+	sheet.add_row row, :style => industry_text
+	
+	
+	#COMPENTENCIES
+	row = []
+    @companies.each do |company|
+    	row << company.competences.map(&:name).join(", ")
+    end
+	sheet.add_row row, :style => desc
+	
+	i = 0
+	@companies.each do |company|
+		extname = File.extname(company.logo_url)
+    	img = File.expand_path("../../../../tmp/temp_company_logos/#{company.id}.#{extname}", __FILE__)
+	
+		open(img, 'wb') do |file|
+		  	file << open(company.logo_url).read
+			file.close
+		end
+	    # specifying the :hyperlink option will add a hyper link to your image.
+	    # @note - Numbers does not support this part of the specification.
+	   	sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://www.samsung.com") do |image|
+	      	image.width=60
+	      	image.height=60
+      		image.hyperlink.tooltip = "Labeled Link"
+	      	image.start_at i,0
+	    end
+	    i = i+1
+    end
+	
+end
+
+if @feeds.any?
+	wb.add_worksheet(name: 'Updates') do |sheet|
+		sheet.add_row ['Title', 'Content', 'Url']
+	    @feeds.each do |feed|
+	    	sheet.add_row [feed.title, feed.content, feed.url]
+	    end
+	end
 end
