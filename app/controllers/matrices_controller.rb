@@ -18,7 +18,7 @@ class MatricesController < ApplicationController
     @companies = @matrix.companies
     respond_to do |format|
       format.xlsx{
-        render xlsx: "show", disposition: "attachment", filename: "my_new_filename.xlsx"
+        render xlsx: "show", disposition: "attachment", filename: "show.xlsx"
       }
       format.html # show.html.erb
       format.json { render json: @matrix }

@@ -1,4 +1,4 @@
-Matrix.to_xlsx package: xlsx_package
+xlsx_package = Axlsx::Package.new
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: 'Companies') do |sheet|
