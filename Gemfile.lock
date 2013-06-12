@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/nextsales/linkedin.git
-  revision: 1659de2630568bde4d2615636aa4f43dbadd9a65
+  revision: dc47c6083f91a575671c23d353ac48a3db88b752
   specs:
     linkedin (0.4.1)
       hashie (>= 1.2, < 2.1)
