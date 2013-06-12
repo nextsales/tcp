@@ -8,7 +8,7 @@ class CompanyImportsController < ApplicationController
     @company_import = CompanyImport.new(params[:company_import])
     @company_import.current_user=current_user
     if @company_import.save
-      redirect_to root_url, notice: "Imported products successfully."
+      redirect_to root_url, notice: "Imported companies successfully."
     else
       render :new
     end
