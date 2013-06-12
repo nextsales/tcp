@@ -85,6 +85,10 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    linkedin (0.4.1)
+      hashie (>= 1.2, < 2.1)
+      multi_json (~> 1.0)
+      oauth (~> 0.4)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -189,6 +193,7 @@ DEPENDENCIES
   devise
   jquery-rails
   json
+  linkedin
   meta_search (>= 1.1.0.pre)
   nokogiri
   oauth

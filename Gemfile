@@ -13,8 +13,10 @@ gem "json"
 gem "oauth"
 gem "whenever"
 gem "nokogiri"
+
 gem 'omniauth'
 gem 'omniauth-linkedin'
+gem 'linkedin'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'

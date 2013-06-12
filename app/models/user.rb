@@ -22,4 +22,9 @@ class User < ActiveRecord::Base
   
   has_one :linkedin_auth
   
+  def linkedin_client
+    client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
+    client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
+    client
+  end
 end

@@ -7,6 +7,8 @@ Tcp::Application.routes.draw do
   
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"
+  match "testlinkedin" => "dashboard#testlinkedin"
+  
   
   root :to => 'dashboard#index'
 
