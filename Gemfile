@@ -16,7 +16,7 @@ gem "nokogiri"
 
 gem 'omniauth'
 gem 'omniauth-linkedin'
-gem 'linkedin'
+gem 'linkedin', :git => 'git://github.com/nextsales/linkedin.git'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
