@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130608060427) do
+ActiveRecord::Schema.define(:version => 20130613202824) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -170,6 +170,17 @@ ActiveRecord::Schema.define(:version => 20130608060427) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "linkedin_updates", :force => true do |t|
+    t.integer  "linkedin_company_id"
+    t.string   "update_key"
+    t.string   "update_type"
+    t.text     "raw_data"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "linkedin_updates", ["update_key"], :name => "index_linkedin_updates_on_update_key", :unique => true
 
   create_table "manual_feeds", :force => true do |t|
     t.integer  "company_id"
