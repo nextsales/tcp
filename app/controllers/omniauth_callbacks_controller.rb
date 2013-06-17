@@ -1,5 +1,5 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  def all
+  def all2
     # raise request.env["omniauth.auth"].to_yaml
     user = User.from_omniauth(request.env["omniauth.auth"])
 
@@ -29,8 +29,8 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to edit_user_registration_url
   end
 
-  def linkedin
-    #raise request.env["omniauth.auth"].to_yaml
+  def linkedin1
+    raise request.env["omniauth.auth"].to_yaml
 
     auth = request.env["omniauth.auth"]
     if !current_user.linkedin_auth
@@ -43,6 +43,20 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     redirect_to edit_user_registration_url
     
   end
+  
+  
+  def linkedin
+    user = User.from_linkedin_auth(request.env["omniauth.auth"])
+    
+    if user.persisted?
+      flash.notice = "Signed in!"
+      sign_in_and_redirect user
+    else
+      session["devise.user_attributes"] = user.attributes
+      redirect_to new_user_registration_url
+    end
+  end
+  
 
   # alias_method :facebook, :all
   # alias_method :linkedin, :all
