@@ -74,7 +74,12 @@ class User < ActiveRecord::Base
        break if (start > query.total) 
     end
     
-    company
+    company_data = []
+    company.each do |company|
+      company_data.push( linkedin_client.company(:id => company.id, :fields => %w{ id name logo-url}) )
+    end
+    
+    company_data
     
   end
 end
