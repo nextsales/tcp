@@ -24,6 +24,15 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.json
   def new
+    @company.name = params[:name]
+    @companies = []
+    @linkedin_companies = []
+    
+    if (!@company.name.blank?)
+      @companies = Company.find_all_by_name(params[:name])
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => params[:name]}, "company").companies.all
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @company }

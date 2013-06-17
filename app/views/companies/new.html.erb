@@ -1,9 +1,19 @@
+<% @companies.each do |company| %>
+	<p><%= link_to company.name, company %></p>
+<% end %>
+
+<% @linkedin_companies.each do |company| %>
+	<p><%= company.name %></p>
+<% end %>
+
 <h1>New Company</h1>
 <div class="row-fluid sortable">
 	<div class="box span12">
 		<div class="box-content">
 			<%= render 'form' %>
 		</div>
-
 	</div><!--/span-->
 </div><!--/row-->
+
+
+
