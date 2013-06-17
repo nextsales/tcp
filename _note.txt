@@ -11,3 +11,8 @@ Do not use "chosen" for Competence
 Test CheckList
 - Depedent Destroy
 
+u.linkedin_client.search("company-name" => "apple", "current-company" => true, :count => 25, :title => "Director", :sort => "connections").people.all
+
+http://api.linkedin.com/v1/people/~/following/companies
+
+u.linkedin_client.following_companies
