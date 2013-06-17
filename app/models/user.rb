@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
   has_many :matrix_follower_rs, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_matrices, :through => :matrix_follower_rs, source: :matrix
   
-  has_one :linkedin_auth
+  has_one :linkedin_auth, dependent: :destroy
   
   def linkedin_client
     client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")

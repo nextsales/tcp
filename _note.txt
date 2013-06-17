@@ -8,3 +8,6 @@
 
 Do not use "chosen" for Competence
 
+Test CheckList
+- Depedent Destroy
+
