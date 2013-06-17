@@ -59,4 +59,22 @@ class User < ActiveRecord::Base
     end
   end
   
+  def test
+    client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
+    client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
+    
+    company = []
+    start = 0
+    count = 25
+    
+    while (true)
+       query = client.following_companies(:start => start, :count => count)
+       company = company + query.all
+       start = start + count
+       break if (start > query.total) 
+    end
+    
+    company
+    
+  end
 end
