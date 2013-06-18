@@ -85,6 +85,6 @@ class User < ActiveRecord::Base
   def test_suggestions
     client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
     client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
-    client.following_companies_suggestions
+    client.following_companies_suggestions(count: 25)
   end
 end
