@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
     end
   end
   
-  def test
+  def test_following_companies
     client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
     client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
     
@@ -80,6 +80,11 @@ class User < ActiveRecord::Base
     end
     
     company_data
-    
+  end
+  
+  def test_suggestions
+    client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
+    client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
+    client.following_companies_suggestions
   end
 end
