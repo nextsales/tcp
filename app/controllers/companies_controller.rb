@@ -5,8 +5,9 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
+    @suggested_companies = current_user.suggested_companies
     
-    @linkedin_following_companies = current_user.test
+    #@linkedin_following_companies = current_user.test_following_companies
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @companies }
