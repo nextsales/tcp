@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   has_many :user_company_rs
   has_many :companies, :through => :user_company_rs
   
+  has_many :suggested_companies, dependent: :destroy
+  
   has_many :user_matrix_rs
   has_many :matrices, :through => :user_matrix_rs
   
