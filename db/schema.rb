@@ -239,7 +239,7 @@ ActiveRecord::Schema.define(:version => 20130619195702) do
   create_table "suggested_companies", :force => true do |t|
     t.string   "name"
     t.string   "country"
-    t.string   "linkedin_id"
+    t.integer   "linkedin_id"
     t.string   "logo_url"
     t.text     "raw_data"
     t.integer  "rank"

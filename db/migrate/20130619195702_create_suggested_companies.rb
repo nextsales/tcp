@@ -3,7 +3,7 @@ class CreateSuggestedCompanies < ActiveRecord::Migration
     create_table :suggested_companies do |t|
       t.string :name
       t.string :country
-      t.string :linkedin_id
+      t.integer :linkedin_id
       t.string :logo_url
       t.text :raw_data
       t.integer :rank

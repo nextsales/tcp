@@ -93,12 +93,9 @@ class CrawlerController < ApplicationController
   
   def save_suggested_company(user, companies, rank)
     companies.each do |c|
+      next if SuggestedCompany.where(user_id: user.id, linkedin_id: c.id)
       detail_data = user.linkedin_client.company(:id => c.id, :fields => %w{id name logo-url})
-      suggested_com = SuggestedCompany.find_or_create_by_user_id_and_linkedin_id(user_id: user.id, linkedin_id: detail_data.id)
-      suggested_com.name = detail_data.name
-      suggested_com.logo_url = detail_data.logo_url
-      suggested_com.rank = rank
-      suggested_com.save
+      suggested_com = SuggestedCompany.create(user_id: user.id, linkedin_id: detail_data.id, name: detail_data.name, logo_url: detail_data.logo_url, rank: rank)
     end
   end
   
