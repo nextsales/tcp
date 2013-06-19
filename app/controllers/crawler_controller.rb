@@ -75,7 +75,7 @@ class CrawlerController < ApplicationController
       count = 25
       while (true)
          query = linkedin_client.following_companies(:start => start, :count => count)
-         save_suggested_company(user, query.all, 10) if !query
+         save_suggested_company(user, query.all, 10) if query
          start = start + count
          break if (start > query.total) 
       end
@@ -83,7 +83,7 @@ class CrawlerController < ApplicationController
       
       # Start crawling suggested companies by linkedin
       query = linkedin_client.following_companies_suggestions(count: 25)
-      save_suggested_company(user, query.all, 1) if !query
+      save_suggested_company(user, query.all, 1) if query
       # End crawling suggested companies by linkedin
       
     end
