@@ -60,33 +60,4 @@ class User < ActiveRecord::Base
       super
     end
   end
-  
-  def test_following_companies
-    client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
-    client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
-    
-    company = []
-    start = 0
-    count = 25
-    
-    while (true)
-       query = client.following_companies(:start => start, :count => count)
-       company = company + query.all
-       start = start + count
-       break if (start > query.total) 
-    end
-    
-    company_data = []
-    company.each do |company|
-      company_data.push( linkedin_client.company(:id => company.id, :fields => %w{ id name logo-url}) )
-    end
-    
-    company_data
-  end
-  
-  def test_suggestions
-    client = LinkedIn::Client.new("mky987r927xk", "J6mdxQRCxLzFylVG")
-    client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
-    client.following_companies_suggestions(count: 25)
-  end
 end

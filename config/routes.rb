@@ -8,6 +8,7 @@ Tcp::Application.routes.draw do
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"
   match "testlinkedin" => "crawler#testlinkedin"
+  match "crawl" => "crawler#crawl_suggested_companies"
   
   
   root :to => 'dashboard#index'

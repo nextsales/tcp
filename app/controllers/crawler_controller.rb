@@ -63,4 +63,44 @@ class CrawlerController < ApplicationController
       LinkedinUpdate.create(:linkedin_company_id => linkedin_company_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
     end
   end
+  
+  def crawl_suggested_companies
+    a = []
+    User.all.each do |user|
+      next if !user.linkedin_uid
+      linkedin_client = user.linkedin_client
+      
+      # Start crawling following companies
+      start = 0
+      count = 25
+      while (true)
+         query = linkedin_client.following_companies(:start => start, :count => count)
+         save_suggested_company(user, query.all, 10)
+         start = start + count
+         break if (start > query.total) 
+      end
+      # End crawling following companies
+      
+      # Start crawling suggested companies by linkedin
+      query = linkedin_client.following_companies_suggestions(count: 25)
+      save_suggested_company(user, query.all, 10)
+      # End crawling suggested companies by linkedin
+      
+    end
+    
+    raise a.to_yaml
+  end
+  
+  def save_suggested_company(user, companies, rank)
+    companies.each do |c|
+      detail_data = user.linkedin_client.company(:id => c.id, :fields => %w{id name logo-url})
+      suggested_com = SuggestedCompany.find_or_create_by_user_id_and_linkedin_id(user_id: user.id, linkedin_id: detail_data.id)
+      suggested_com.name = detail_data.name
+      suggested_com.logo_url = detail_data.logo_url
+      suggested_com.rank = rank
+      suggested_com.save
+    end
+  end
+  
+  
 end
