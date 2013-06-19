@@ -16,3 +16,9 @@ u.linkedin_client.search("company-name" => "apple", "current-company" => true, :
 http://api.linkedin.com/v1/people/~/following/companies
 
 u.linkedin_client.following_companies
+
+c.profile(:id => "2xw_PlJwSv",:fields => %w(following))
+c.profile(:fields => %w(following))
+
+c.profile(:fields => %w(following)).following.companies
+c.profile(:fields => %w(following), :start => 16).following.companies
