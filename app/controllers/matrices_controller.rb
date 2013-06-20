@@ -17,6 +17,9 @@ class MatricesController < ApplicationController
     @feeds = @matrix.feeds.order("origin_created_time DESC")
     @companies = @matrix.companies
     respond_to do |format|
+      format.xlsx{
+        render xlsx: "show", disposition: "attachment", filename: "#{@matrix.name}.xlsx"
+      }
       format.html # show.html.erb
       format.json { render json: @matrix }
     end
