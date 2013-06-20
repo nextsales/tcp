@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
-    @suggested_companies = current_user.suggested_companies
+    @suggested_companies = current_user.suggested_companies.where(is_enable: true)
     
     #@linkedin_following_companies = current_user.test_following_companies
     respond_to do |format|
