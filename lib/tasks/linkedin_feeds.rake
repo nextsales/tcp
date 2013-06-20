@@ -3,6 +3,42 @@ namespace :crawl do
   task linkedin: :environment do
     linkedin_feeds
   end
+  
+  task suggested_companies: :environment do
+    get_suggested_companies_from_linkedin
+  end
+end
+
+def get_suggested_companies_from_linkedin
+  User.all.each do |user|
+    next if !user.linkedin_uid
+    linkedin_client = user.linkedin_client
+    
+    # Start crawling following companies
+    start = 0
+    count = 25
+    while (true)
+       query = linkedin_client.following_companies(:start => start, :count => count)
+       save_suggested_company(user, query.all, 10) if query.all
+       start = start + count
+       break if (start > query.total) 
+    end
+    # End crawling following companies
+    
+    # Start crawling suggested companies by linkedin
+    query = linkedin_client.following_companies_suggestions(count: 25)
+    save_suggested_company(user, query.all, 1) if query.all
+    # End crawling suggested companies by linkedin
+    
+  end
+end
+
+def save_suggested_company(user, companies, rank)
+  companies.each do |c|
+    next if !SuggestedCompany.where(user_id: user.id, linkedin_id: c.id).empty?
+    detail_data = user.linkedin_client.company(:id => c.id, :fields => %w{id name logo-url})
+    suggested_com = SuggestedCompany.create(user_id: user.id, linkedin_id: detail_data.id, name: detail_data.name, logo_url: detail_data.logo_url, rank: rank)
+  end
 end
 
 def linkedin_feeds
