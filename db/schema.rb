@@ -249,6 +249,11 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.boolean  "is_enable",   :default => true
   end
 
+  add_index "suggested_companies", ["is_enable"], :name => "index_suggested_companies_on_is_enable"
+  add_index "suggested_companies", ["linkedin_id"], :name => "index_suggested_companies_on_linkedin_id"
+  add_index "suggested_companies", ["rank"], :name => "index_suggested_companies_on_rank"
+  add_index "suggested_companies", ["user_id"], :name => "index_suggested_companies_on_user_id"
+
   create_table "twitter_feeds", :force => true do |t|
     t.integer  "company_id"
     t.integer  "matrix_id"
