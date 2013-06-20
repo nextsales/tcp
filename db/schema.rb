@@ -236,8 +236,18 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
-# Could not dump table "suggested_companies" because of following StandardError
-#   Unknown type 'bool' for column 'is_enable'
+  create_table "suggested_companies", :force => true do |t|
+    t.string   "name"
+    t.string   "country"
+    t.integer  "linkedin_id"
+    t.string   "logo_url"
+    t.text     "raw_data"
+    t.integer  "rank"
+    t.integer  "user_id"
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
+    t.boolean  "is_enable",   :default => true
+  end
 
   create_table "twitter_feeds", :force => true do |t|
     t.integer  "company_id"
