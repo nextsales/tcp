@@ -4,6 +4,11 @@
 
 <% @linkedin_companies.each do |company| %>
 	<p><%= company.name %></p>
+	<p><%= company.specialties.all.join(", ") if company.specialties %></p>
+	<p><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") if company.locations %></p>
+	<p><%= company.logo_url %></p>
+	<p><%= company.industries.all.map(&:name).join(", ") %></p>
+	<p>------------------</p>
 <% end %>
 
 <h1>New Company</h1>
