@@ -1,6 +1,6 @@
-<%= link_to new_company_path, {:class => "btn btn-small", :style => "float:right;margin-top:10px"} do %>
+<a href="#new_company_modal" role="button" class="btn btn-small" data-toggle="modal" style="float:right;margin-top:10px">
 	<i class="icon-plus"></i> New
-<% end %>
+</a>
 <h1>Company</h1>
 
 <div class="row-fluid sortable">
@@ -52,6 +52,33 @@
 		</div>
 	</div><!--/span-->
 </div><!--/row-->
+ 
+<!-- Modal -->
+<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">New Company</h3>
+	</div>
+
+	<div class="modal-body">
+		<form accept-charset="UTF-8" action="/companies/new" class="form-horizontal" method="get">
+			<fieldset>
+				 <div class="control-group">
+					<label class="control-label" for="name">Company Name</label>
+					<div class="controls">
+						<input type="text" name="name" placeholder="" class="input-xlarge">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
 
 
 <% @suggested_companies.each do |company| %>
