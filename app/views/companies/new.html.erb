@@ -1,24 +1,86 @@
-<% @companies.each do |company| %>
-	<p><%= link_to company.name, company %></p>
-<% end %>
+<ul class="nav nav-tabs" id="myTab" style="display:none">
+	<% if !@companies.empty? %>
+	<li><a href="#exist_from_db">exist_from_db</a></li>
+	<% end %>
+	
+	<% if @linkedin_companies %>
+	<li><a href="#exist_from_linkedin">exist_from_linkedin</a></li>
+	<% end %>
+	
+	<li><a href="#new">new</a></li>
+</ul>
+ 
+<div class="tab-content">
+	<% if !@companies.empty? %>
+	<div class="tab-pane active" id="exist_from_db">
+		<div>We found similar company in our database. Do you mean this?</div>
+		<% @companies.each do |company| -%>
+			<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
+				<div class="box-content">
+					<ul class="dashboard-list">
+						<li>
+							<%= link_to company, :class => "logo" do %>
+							  <img class="avatar" src="<%= company.logo_url -%>">
+							<% end %>
+							<strong><%= company.name -%></strong> <br>
+							<strong>Industry: </strong><%= company.industries.map(&:name).join(", ") -%><br>
+							<strong>Competence: </strong><%= company.competences.map(&:name).join(", ") -%><br> 
+							<p><%= company.description -%></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+		<% end %>
+		<button onclick="$('a[href=#exist_from_linkedin]').tab('show');">No. I want to create new company</button> 
+	</div>
+	<% end %>
+	
+	<% if @linkedin_companies %>
+	<div class="tab-pane" id="exist_from_linkedin">
+		<div class="row-fluid">
+			<div class="box span12">We found some similar companies in Linkedin. Do you mean this</div>
+			<% @linkedin_companies.each do |company| -%>
+				<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
+					<div class="box-content">
+						<ul class="dashboard-list">
+							<li>
+								<img class="avatar" src="<%= company.logo_url -%>">
+								<strong><%= company.name -%></strong> <br>
 
-<% @linkedin_companies.each do |company| %>
-	<p><%= company.name %> <%= company.id %></p>
-	<p><%= company.specialties.all.join(", ") if company.specialties %></p>
-	<p><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") if company.locations %></p>
-	<p><%= company.logo_url if company.logo_url %></p>
-	<p><%= company.industries.all.map(&:name).join(", ") if company.industries %></p>
-	<p>------------------</p>
-<% end %>
+								<% if company.industries %>
+								<strong>Industry: </strong><%= company.industries.all.map(&:name).join(", ") %><br> 
+								<% end %>
 
-<h1>New Company</h1>
-<div class="row-fluid sortable">
-	<div class="box span12">
-		<div class="box-content">
-			<%= render 'form' %>
+								<% if company.specialties %>
+								<strong>Competence: </strong><%= company.specialties.all.join(", ") %><br> 
+								<% end %>
+
+								<% if company.locations %>
+								<strong>Location: </strong><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") %><br> 
+								<% end %>
+								
+								<button class="btn btn-primary">Create this company</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			<% end %>
 		</div>
-	</div><!--/span-->
-</div><!--/row-->
+		<button class="btn btn-success" onclick="$('a[href=#new]').tab('show');">No. I want to create new company</button> 
+	</div>
+	<% end %>
+	
+	<div class="tab-pane" id="new">
+		<h1>New Company</h1>
+		<div class="row-fluid sortable">
+			<div class="box span12">
+				<div class="box-content">
+					<%= render 'form' %>
+				</div>
+			</div><!--/span-->
+		</div><!--/row-->
+	</div>
+</div>
 
 
 
