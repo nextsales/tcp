@@ -8,3 +8,9 @@
 .sessions.new .widget {
   margin: 0 auto;
 }
+
+.f_test {
+	margin-bottom:10px;
+	background-color: rgba(51, 51, 51, 0.25);
+}
+

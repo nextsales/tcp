@@ -1,3 +1,129 @@
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="page-title"><%= @matrix.name %></h2>
+		<p><%= @matrix.description %></p>
+	</div>
+</div>
+
+<% if @matrix.companies.any? %>
+<div class="row-fluid">
+	<div class="span12">
+		<section class="widget">
+			<header>
+				<h4><i class="icon-list-ol"></i> List</h4>
+			</header>
+			
+			<div class="body">
+				<table class="table table-striped table-images">
+					<thead style="display:none">
+						<tr>
+							<th>#</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Industry</th>
+              <th>Competence</th>
+              <th>Country</th>
+							<th>City</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						<% @matrix.companies.each_with_index do |company, index| %>
+								<%
+									span_num = 4
+									@span_class = "f_test span"+span_num.to_s
+									@span_class += " no-margin" if (index%(12/span_num)==0)
+								%>
+								<tr class="<%= @span_class %>">
+									
+									<td>
+										<%= link_to company, :class => "logo" do %>
+										  <img class="avatar" src="<%= company.logo_url -%>">
+										<% end %>
+									</td>
+		              <td><%= company.name -%></td>
+		              <td><%= company.industries.map(&:name).join(", ") -%></td>
+		              <td><%= company.competences.map(&:name).join(", ") -%></td>
+		              <td><%= company.competences.map(&:name).join(", ") %></td>
+		              <td><%= company.description -%></td>
+									<td><%= company.country %></td>
+								</tr>
+							<% end %>
+					</tbody>
+				</table>
+				
+				<div class="clearfix">
+					<div class="pull-right">
+						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-success"} do %>
+							<i class="icon-edit"></i> Edit
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<% end %>
+
+<!-- ########## -->
+<hr>
+<% if @matrix.companies.any? %>
+<div class="row-fluid">
+	<div class="span12">
+		<section class="widget">
+			<header>
+				<h4><i class="icon-list-ol"></i> List</h4>
+			</header>
+			
+			<div class="body">
+				<table class="table table-striped table-images">
+					<thead>
+						<tr>
+							<th class="hidden-phone-portrait">#</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Industry</th>
+              <th>Competence</th>
+              <th>Country</th>
+							<th class="hidden-phone">City</th>
+						</tr>
+					</thead>
+					
+					<tbody>
+						
+						<% @matrix.companies.each do |company| %>
+								<tr>
+									<td class="hidden-phone-portrait">
+										<%= link_to company, :class => "logo" do %>
+										  <img class="avatar" src="<%= company.logo_url -%>">
+										<% end %>
+									</td>
+		              <td><%= company.name -%></td>
+		              <td><%= company.industries.map(&:name).join(", ") -%></td>
+		              <td><%= company.competences.map(&:name).join(", ") -%></td>
+		              <td><%= company.competences.map(&:name).join(", ") %></td>
+		              <td><%= company.description -%></td>
+									<td class="hidden-phone"><%= company.country %></td>
+								</tr>
+							<% end %>
+					</tbody>
+				</table>
+				
+				<div class="clearfix">
+					<div class="pull-right">
+						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-success"} do %>
+							<i class="icon-edit"></i> Edit
+						<% end %>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</div>
+<% end %>
+<!-- ########## -->
+<hr>
+
 <%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-small", :style => "float:right;margin-top:10px"} do %>
 	<i class="icon-edit"></i> Edit
 <% end %>

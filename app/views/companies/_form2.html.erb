@@ -1,0 +1,175 @@
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="page-title">Company</h2>
+	</div>
+</div>
+
+<%= form_for (@company), :html => {:class => "form-horizontal", :novalidate => "novalidate", "data-validate" => "parsley"} do |f| %>
+<div class="row-fluid">
+    <div class="span6">
+        <section class="widget">
+            <header>
+                <h4><i class="icon-file-alt"></i> Company <small> Create new or edit existing company</small></h4>
+            </header>
+            <div class="body">
+							
+								<% if @company.errors.any? %>
+								<div id="error_explanation">
+									<h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+									<ul>
+									<% @company.errors.full_messages.each do |msg| %>
+										<li><%= msg %></li>
+									<% end %>
+									</ul>
+								</div>
+								<% end %>
+								
+								<fieldset>
+									
+									<div class="control-group">
+										<%= f.label :name, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :name, {:class => "input-block-level"} %>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<%= f.label :description, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_area :description, {:class => "input-xlarge"} %>
+										</div>
+									</div>
+
+									
+
+									<div class="control-group">
+										<%= f.label :website, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :website, {:class => "input-block-level"} %>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<%= f.label :address, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :address, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :city, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :city, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :email, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :email, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :phone, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :phone, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :postcode, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :postcode, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									
+
+									<div class="control-group">
+										<%= f.label :logo_url, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :logo_url, {:class => "input-block-level"} %>
+										</div>
+									</div>
+									
+									
+									<div class="form-actions">
+										<%= f.submit "Save  changes", :class => "btn btn-primary" %>
+										<%= link_to 'Cancel', companies_path, :class => "btn" %>
+									</div>
+
+								</fieldset>
+            </div>
+        </section>
+    </div>
+
+		<div class="span6">
+			<section class="widget">
+				<header>
+					<h4><i class="icon-key"></i> Industry</h4>
+				</header>
+
+				<div class="body">
+					<fieldset>
+						
+						<div class="control-group">
+							<%= f.label :industry_ids, {:class => "control-label", :for => "multiple"} %>
+							<div class="controls">
+								<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select industries", "tabindex" => "-1"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :competence_ids, {:class => "control-label", :for => "multiple"} %>
+							<div class="controls">
+								<%= f.collection_select :competence_ids, Competence.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select competences", "tabindex" => "-1"} %>
+							</div>
+						</div>
+						
+						<div class="control-group">
+							<%= f.label :matrix_ids, {:class => "control-label", :for => "multiple"} %>
+							<div class="controls">
+								<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select matrix", "tabindex" => "-1"} %>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+      </section>
+		</div>
+
+		<div class="span6">
+			<section class="widget">
+				<header>
+					<h4><i class="icon-key"></i> Social media</h4>
+				</header>
+
+				<div class="body">
+					<fieldset>
+						<div class="control-group">
+							<%= f.label :facebook_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :facebook_id, {:class => "input-block-level"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :linkedin_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :linkedin_id, {:class => "input-block-level"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :twitter_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :twitter_id, {:class => "input-block-level"} %>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+      </section>
+		</div>
+		
+</div>
+<% end %>
