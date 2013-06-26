@@ -38,35 +38,33 @@
 	<% if @linkedin_companies %>
 	<div class="tab-pane" id="exist_from_linkedin">
 		<div class="row-fluid">
-			<div class="box span12">We found some similar companies in Linkedin. Do you mean this</div>
+			<div>We found some similar companies in Linkedin. Do you mean this</div>
 			<% @linkedin_companies.each do |company| -%>
-				<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
-					<div class="box-content">
-						<ul class="dashboard-list">
-							<li>
-								<img class="avatar" src="<%= company.logo_url -%>">
-								<strong><%= company.name -%></strong> <br>
+				<ul class="dashboard-list" style="margin-bottom:10px">
+					<li>
+						<% if company.logo_url %>
+						<img class="avatar" src="<%= company.logo_url -%>">
+						<% end %>
+						
+						<strong><%= company.name -%></strong> <br>
 
-								<% if company.industries %>
-								<strong>Industry: </strong><%= company.industries.all.map(&:name).join(", ") %><br> 
-								<% end %>
+						<% if company.industries %>
+						<strong>Industry: </strong><%= company.industries.all.map(&:name).join(", ") %><br> 
+						<% end %>
 
-								<% if company.specialties %>
-								<strong>Competence: </strong><%= company.specialties.all.join(", ") %><br> 
-								<% end %>
+						<% if company.specialties %>
+						<strong>Competence: </strong><%= company.specialties.all.join(", ") %><br> 
+						<% end %>
 
-								<% if company.locations %>
-								<strong>Location: </strong><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") %><br> 
-								<% end %>
-								
-								<button class="btn btn-primary">Create this company</button>
-							</li>
-						</ul>
-					</div>
-				</div>
+						<% if company.locations %>
+						<strong>Location: </strong><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") %><br> 
+						<% end %>
+						<button class="btn">Create this company</button>
+					</li>
+				</ul>
 			<% end %>
 		</div>
-		<button class="btn btn-success" onclick="$('a[href=#new]').tab('show');">No. I want to create new company</button> 
+		<button class="btn btn-success" onclick="$('a[href=#new]').tab('show');" style="float:right">No. I want to create new company</button> 
 	</div>
 	<% end %>
 	
