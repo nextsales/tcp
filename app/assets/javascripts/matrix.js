@@ -1,3 +1,3 @@
-$(document).ready(function() {
-	$("#matrix_company_ids").chosen();
-});
+// $(document).ready(function() {
+// 	$("#matrix_company_ids").chosen();
+// });

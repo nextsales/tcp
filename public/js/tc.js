@@ -1,20 +1,7 @@
-jQuery(document).ready(function($){
-	if ($("#tc_alert").html() !="") {
-		$.gritter.add({
-			// (string | mandatory) the heading of the notification
-			title: 'Alert',
-			// (string | mandatory) the text inside the notification
-			text: $("#tc_alert").html()
-		});
-	}
-	
-	if ($("#tc_notice").html() !="") {
-		$.gritter.add({
-			// (string | mandatory) the heading of the notification
-			title: 'Notice',
-			// (string | mandatory) the text inside the notification
-			text: $("#tc_notice").html()
-		});
-	}
-	
+// Menu active
+$(document).ready(function(){
+	$('ul#side-nav li a').each(function(){
+		if (String(window.location).indexOf($($(this))[0].href) >= 0)
+			$(this).parent().addClass('active');
+	});
 });

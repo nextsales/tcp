@@ -1,0 +1,47 @@
+<nav id="sidebar" class="sidebar nav-collapse collapse">
+    <ul id="side-nav" class="side-nav">
+				<li>
+				<%= link_to dashboard_path do %>
+					<i class="icon-bar-chart"></i><span class="hidden-tablet"> Dashboard</span>
+				<% end %>
+				</li>
+
+				<li>
+				<%= link_to companies_path do %>
+					<i class="icon-briefcase"></i><span class="hidden-tablet"> Company</span>
+				<% end %>
+				</li>
+
+				<li>
+				<%= link_to matrices_path do %>
+					<i class="icon-sitemap"></i><span class="hidden-tablet"> Matrix</span>
+				<% end %>
+				</li>
+
+				<li>
+				<%= link_to industries_path do %>
+					<i class="icon-plus"></i><span class="hidden-tablet"> Industry</span>
+				<% end %>
+				</li>
+
+				<li>
+				<%= link_to competences_path do %>
+					<i class="icon-globe"></i><span class="hidden-tablet"> Competence</span>
+				<% end %>
+				</li>
+
+				<li>
+				<%= link_to feeds_path do %>
+					<i class="icon-bullhorn"></i><span class="hidden-tablet"> Feed</span>
+				<% end %>
+				</li>
+    </ul>
+    <div id="sidebar-settings" class="settings">
+        <button type="button"
+                data-value="icons"
+                class="btn-icons btn btn-transparent btn-small">Icons</button>
+        <button type="button"
+                data-value="auto"
+                class="btn-auto btn btn-transparent btn-small">Auto</button>
+    </div>
+</nav>

@@ -1,0 +1,517 @@
+<div class="row-fluid">
+	<div class="span12">
+		<h2 class="page-title">Article Demo <small>Out of the box form</small></h2>
+	</div>
+</div>
+
+<%= form_for (@company), :html => {:class => "form-horizontal", :novalidate => "novalidate", "data-validate" => "parsley"} do |f| %>
+<div class="row-fluid">
+    <div class="span8">
+        <section class="widget">
+            <header>
+                <h4><i class="icon-file-alt"></i> Article <small>Create new or edit existing article</small></h4>
+            </header>
+            <div class="body">
+							
+								<% if @company.errors.any? %>
+								<div id="error_explanation">
+									<h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+									<ul>
+									<% @company.errors.full_messages.each do |msg| %>
+										<li><%= msg %></li>
+									<% end %>
+									</ul>
+								</div>
+								<% end %>
+								
+								<fieldset>
+									
+									<div class="control-group">
+										<%= f.label :name, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :name, {:class => "input-block-level"} %>
+										</div>
+									</div>
+									
+									<div class="control-group">
+										<%= f.label :description, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_area :description, {:class => "input-xlarge"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :address, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :address, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :city, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :city, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :email, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :email, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :phone, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :phone, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :postcode, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :postcode, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :website, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :website, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :facebook_id, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :facebook_id, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :linkedin_id, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :linkedin_id, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :twitter_id, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :twitter_id, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :logo_url, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.text_field :logo_url, {:class => "input-block-level"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :industry_ids, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :competence_ids, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.collection_select :competence_ids, Competence.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<%= f.label :matrix_ids, {:class => "control-label"} %>
+										<div class="controls">
+											<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+										</div>
+									</div>
+								</fieldset>
+						
+								
+								
+                
+            </div>
+        </section>
+    </div>
+		<div class="span4">
+        <section class="widget">
+            <header>
+                <h4><i class="icon-cog"></i> Social media <small>, categories</small></h4>
+            </header>
+            <div class="body">
+                    <fieldset>
+                        <legend class="section">Publishing</legend>
+                        <div class="control-group">
+                            <label for="article-status" class="control-label">Status</label>
+                            <div class="controls">
+                                <select id="article-status" name="article-status"
+                                        data-style="btn-success"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Draft</option>
+                                    <option value="1">Published</option>
+                                    <option value="2">Pending Review</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="publish-date" class="control-label">Publish at</label>
+                            <div class="controls">
+                                <input type="text" id="publish-date" name="publish-date" class="input-block-level date-picker">
+                            </div>
+                            <div class="controls">
+                                <input type="text" id="publish-time" name="publish-time" class="input-block-level">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-language" class="control-label">Language</label>
+                            <div class="controls">
+                                <select id="article-language" name="article-language"
+                                        data-style="btn-success"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">All Languages</option>
+                                    <option value="1">English</option>
+                                    <option value="2">Belarusian</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="section">Category & Tags</legend>
+                        <div class="control-group">
+                            <label for="article-category" class="control-label">Category</label>
+                            <div class="controls">
+                                <select id="article-category" name="article-category"
+                                        data-style="btn-warning"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Design</option>
+                                    <option value="1">Bootstrap</option>
+                                    <option value="2">ThemeForest</option>
+                                    <option value="3">Personal Developement</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-tags" class="control-label">Tags</label>
+                            <div class="controls">
+                                <input type="text" id="article-tags" name="article-tags"
+                                       class="input-block-level">
+                                <span class="help-block">Write or select a tag and press "Enter" to add it.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+            </div>
+        </section>
+        <section class="widget">
+            <header>
+                <h4><i class="icon-key"></i> Access</h4>
+            </header>
+            <div class="body">
+                <form id="article-access" class="form-horizontal form-condensed label-left"
+                      method="post">
+                    <fieldset>
+                        <div class="control-group">
+                            <label for="article-visibility" class="control-label">Visibility</label>
+                            <div class="controls">
+                                <select id="article-visibility" name="article-visibility"
+                                        data-style="btn-warning"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Everyone</option>
+                                    <option value="1">Registered</option>
+                                    <option value="2">Editors</option>
+                                    <option value="3">Admins</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-password" class="control-label">Password</label>
+                            <div class="controls">
+                                <input type="text" id="article-password" class="input-block-level" name="article-password">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </div>
+		
+</div>
+<% end %>
+
+<div class="row-fluid">
+    <div class="span8">
+        <section class="widget">
+            <header>
+                <h4><i class="icon-file-alt"></i> Article <small>Create new or edit existing article</small></h4>
+            </header>
+            <div class="body">
+                <form class="form-horizontal" method="post" novalidate="novalidate" data-validate="parsley">
+                    <fieldset>
+                        <div class="control-group">
+                            <label for="title" class="control-label">Title <span class="required">*</span></label>
+                            <div class="controls">
+                                <input type="text" id="title" name="title" class="input-block-level"
+                                        required="required">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="text" class="control-label">Content</label>
+                            <div class="controls">
+                                <textarea id="text" rows="10" name="text" class="input-block-level"></textarea>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="description" class="control-label">Description</label>
+                            <div class="controls">
+                                <textarea id="description" rows="3" name="text" class="input-block-level"></textarea>
+                                <span class="help-block">Optional summary of your article that can be used in previews</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                        <button type="button" class="btn">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <div class="span4">
+        <section class="widget">
+            <header>
+                <h4><i class="icon-cog"></i> Options <small>Publishing, categories</small></h4>
+            </header>
+            <div class="body">
+                <form id="article-options" class="form-horizontal form-condensed label-left"
+                      method="post">
+                    <fieldset>
+                        <legend class="section">Publishing</legend>
+                        <div class="control-group">
+                            <label for="article-status" class="control-label">Status</label>
+                            <div class="controls">
+                                <select id="article-status" name="article-status"
+                                        data-style="btn-success"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Draft</option>
+                                    <option value="1">Published</option>
+                                    <option value="2">Pending Review</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="publish-date" class="control-label">Publish at</label>
+                            <div class="controls">
+                                <input type="text" id="publish-date" name="publish-date" class="input-block-level date-picker">
+                            </div>
+                            <div class="controls">
+                                <input type="text" id="publish-time" name="publish-time" class="input-block-level">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-language" class="control-label">Language</label>
+                            <div class="controls">
+                                <select id="article-language" name="article-language"
+                                        data-style="btn-success"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">All Languages</option>
+                                    <option value="1">English</option>
+                                    <option value="2">Belarusian</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend class="section">Category & Tags</legend>
+                        <div class="control-group">
+                            <label for="article-category" class="control-label">Category</label>
+                            <div class="controls">
+                                <select id="article-category" name="article-category"
+                                        data-style="btn-warning"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Design</option>
+                                    <option value="1">Bootstrap</option>
+                                    <option value="2">ThemeForest</option>
+                                    <option value="3">Personal Developement</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-tags" class="control-label">Tags</label>
+                            <div class="controls">
+                                <input type="text" id="article-tags" name="article-tags"
+                                       class="input-block-level">
+                                <span class="help-block">Write or select a tag and press "Enter" to add it.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+        <section class="widget">
+            <header>
+                <h4><i class="icon-key"></i> Access</h4>
+            </header>
+            <div class="body">
+                <form id="article-access" class="form-horizontal form-condensed label-left"
+                      method="post">
+                    <fieldset>
+                        <div class="control-group">
+                            <label for="article-visibility" class="control-label">Visibility</label>
+                            <div class="controls">
+                                <select id="article-visibility" name="article-visibility"
+                                        data-style="btn-warning"
+                                        class="selectpicker select-block-level">
+                                    <option value="0">Everyone</option>
+                                    <option value="1">Registered</option>
+                                    <option value="2">Editors</option>
+                                    <option value="3">Admins</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="article-password" class="control-label">Password</label>
+                            <div class="controls">
+                                <input type="text" id="article-password" class="input-block-level" name="article-password">
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </section>
+    </div>
+
+</div>
+
+
+<%= form_for (@company), :html => {:class => "form-horizontal"} do |f| %>
+	<% if @company.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+		<ul>
+		<% @company.errors.full_messages.each do |msg| %>
+			<li><%= msg %></li>
+		<% end %>
+		</ul>
+	</div>
+	<% end %>
+
+	<fieldset>
+		<div class="control-group">
+			<%= f.label :name, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :name, {:class => "input-xlarge focused"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :description, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_area :description, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :address, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :address, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :city, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :city, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :email, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :email, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :phone, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :phone, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :postcode, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :postcode, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :website, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :website, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :facebook_id, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :facebook_id, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :linkedin_id, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :linkedin_id, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :twitter_id, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :twitter_id, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :logo_url, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.text_field :logo_url, {:class => "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :industry_ids, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :competence_ids, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.collection_select :competence_ids, Competence.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="control-group">
+			<%= f.label :matrix_ids, {:class => "control-label"} %>
+			<div class="controls">
+				<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "input-xlarge"} %>
+			</div>
+		</div>
+		
+		<div class="form-actions">
+			<%= f.submit "Save  changes", :class => "btn btn-primary" %>
+			<%= link_to 'Cancel', companies_path, :class => "btn" %>
+		</div>
+	
+	</fieldset>
+	
+<% end %>
+
+

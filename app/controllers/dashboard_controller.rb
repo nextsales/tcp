@@ -6,6 +6,9 @@ class DashboardController < ApplicationController
   def test
   end
   
+  def test_masonry
+  end
+  
   
   
 end

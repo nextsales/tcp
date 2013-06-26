@@ -1,0 +1,36 @@
+body.sessions.new,
+body.registrations.new,
+body.passwords.new { 
+	background: url(../img/bg-login.jpg) !important; 
+}
+
+.login-box input[type="text"],
+.login-box input[type="email"],
+.login-box input[type="password"] {
+	border: 1px solid #eee !important;
+	color: #aaa;
+	border-left: none !important;
+	-webkit-box-shadow: none;
+       -moz-box-shadow: none;
+          	box-shadow: none;
+}
+
+.matrices.show .box-content {
+  	border: 1px solid #f1f1f1;
+	height:120px;
+	overflow:hidden;
+}
+.matrices.show .box-content:before {
+  border: none;
+}
+.matrices.show .box-content:after {
+  border: none;
+}
+
+.matrices.show ul.dashboard-list li {
+	border:none;
+}
+
+.matrices.show ul.dashboard-list li a.logo {display:block;width:70px;float:left;height:100%;}
+
+#tc_notice, #tc_alert {display:none;}

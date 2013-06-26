@@ -1,0 +1,88 @@
+<a href="#new_company_modal" role="button" class="btn btn-small" data-toggle="modal" style="float:right;margin-top:10px">
+	<i class="icon-plus"></i> New
+</a>
+<h1>Company</h1>
+
+<div class="row-fluid sortable">
+  <div class="box span12">
+    <div class="box-content">
+			<table class="table table-striped table-bordered bootstrap-datatable datatable">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Industry</th>
+						<th>Competence</th>
+						<th>City</th>
+						<th>Country</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @companies.each do |company| %>
+					<tr>
+						<% if can? :read, company%>
+						<td><%= link_to company.name, company %></td>
+						<td class="center"><%= company.description %></td>
+						<td class="center"><%= company.industries.map(&:name).join(", ") %></td>
+						<td class="center"><%= company.competences.map(&:name).join(", ") %></td>
+						<td class="center"><%= company.city %></td>
+						<td class="center"><%= company.country %></td>
+						<td class="center">
+							<div class="btn-group">
+								<% if can? :update, company%>
+									<%= link_to edit_company_path(company), :class => "btn" do %>
+									<i class="icon-edit"></i>
+									<% end %>
+								<% end %>
+								
+								<% if can? :update, company%>
+									<%= link_to company, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" do %>
+									<i class="icon-trash"></i>
+									<% end %>
+								<% end %>
+							</div>
+						</td>
+						<% end %>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div><!--/span-->
+</div><!--/row-->
+ 
+<!-- Modal -->
+<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">New Company</h3>
+	</div>
+
+	<div class="modal-body">
+		<form accept-charset="UTF-8" action="/companies/new" class="form-horizontal" method="get">
+			<fieldset>
+				 <div class="control-group">
+					<label class="control-label" for="name">Company Name</label>
+					<div class="controls">
+						<input type="text" name="name" placeholder="" class="input-xlarge">
+					</div>
+				</div>
+				
+				<div class="control-group">
+					<div class="controls">
+						<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
+
+
+<% @suggested_companies.each do |company| %>
+<p><%= company.id %>: <%= company.name %> - <%= company.logo_url %></p>
+<% end %>
+
+
