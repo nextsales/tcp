@@ -8,7 +8,7 @@
 <% if @matrix.companies.any? %>
 <div class="row-fluid masonry_feed">
 	<% @matrix.companies.each_with_index do |company, index| %>
-  <div class="span4 box">
+  <div class="span6 box">
     <div class="body">
         <div class="row-fluid">
             <div class="span4">
@@ -30,4 +30,8 @@
   </div>
 	<% end %>
 </div>
+<% end %>
+
+<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-success"} do %>
+	<i class="icon-edit"></i> Edit
 <% end %>

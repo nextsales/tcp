@@ -6,6 +6,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
     @suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
+    @matrices = current_user.matrices
     
     #@linkedin_following_companies = current_user.test_following_companies
     respond_to do |format|
