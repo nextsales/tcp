@@ -14,57 +14,77 @@
 	<% if !@companies.empty? %>
 	<div class="tab-pane active" id="exist_from_db">
 		<div>We found similar company in our database. Do you mean this?</div>
-		<% @companies.each do |company| -%>
-			<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
-				<div class="box-content">
-					<ul class="dashboard-list">
-						<li>
-							<%= link_to company, :class => "logo" do %>
-							  <img class="avatar" src="<%= company.logo_url -%>">
-							<% end %>
-							<strong><%= company.name -%></strong> <br>
-							<strong>Industry: </strong><%= company.industries.map(&:name).join(", ") -%><br>
-							<strong>Competence: </strong><%= company.competences.map(&:name).join(", ") -%><br> 
-							<p><%= company.description -%></p>
-						</li>
-					</ul>
-				</div>
-			</div>
-		<% end %>
-		<button onclick="$('a[href=#exist_from_linkedin]').tab('show');">No. I want to create new company</button> 
+		
+		<div class="row-fluid masonry_feed">
+			<% @companies.each_with_index do |company, index| %>
+		  <div class="span4 box">
+		    <div class="body">
+		        <div class="row-fluid">
+		            <div class="span4">
+		                <div class="text-align-center">
+		                    <img src="<%= company.logo_url -%>">
+		                </div>
+		            </div>
+		            <div class="span8">
+		                <h3 class="no-margin"><%= company.name -%></h3>
+										<p><%= company.name -%></p>
+										<p><%= company.industries.map(&:name).join(", ") -%></p>
+										<p><%= company.competences.map(&:name).join(", ") -%></p>
+										<p><%= company.competences.map(&:name).join(", ") %></p>
+										<p><%= company.description -%></p>
+										<p><%= company.country %></p>
+		            </div>
+		        </div>
+		    </div>
+		  </div>
+			<% end %>
+		</div>
+		
+		<button onclick="$('a[href=#exist_from_linkedin]').tab('show');$('.masonry_feed').masonry();">No. I want to create new company</button> 
 	</div>
 	<% end %>
 	
 	<% if @linkedin_companies %>
 	<div class="tab-pane" id="exist_from_linkedin">
-		<div class="row-fluid">
-			<div>We found some similar companies in Linkedin. Do you mean this</div>
-			<% @linkedin_companies.each do |company| -%>
-				<ul class="dashboard-list" style="margin-bottom:10px">
-					<li>
-						<% if company.logo_url %>
-						<img class="avatar" src="<%= company.logo_url -%>">
-						<% end %>
-						
-						<strong><%= company.name -%></strong> <br>
+		
+		<div>We found some similar companies in Linkedin. Do you mean this</div>
+		
+		<div class="row-fluid masonry_feed">
+			<% @linkedin_companies.each_with_index do |company, index| %>
+		  <div class="span4 box">
+		    <div class="body">
+		        <div class="row-fluid">
+		            <div class="span4">
+		                <div class="text-align-center">
+												<% if company.logo_url %>
+		                    <img src="<%= company.logo_url -%>">
+												<% end %>
+		                </div>
+		            </div>
+		            <div class="span8">
+		                <h3 class="no-margin"><%= company.name -%></h3>
+										<p>
+										<% if company.industries %>
+										<strong>Industry: </strong><%= company.industries.all.map(&:name).join(", ") %><br> 
+										<% end %>
 
-						<% if company.industries %>
-						<strong>Industry: </strong><%= company.industries.all.map(&:name).join(", ") %><br> 
-						<% end %>
+										<% if company.specialties %>
+										<strong>Competence: </strong><%= company.specialties.all.join(", ") %><br> 
+										<% end %>
 
-						<% if company.specialties %>
-						<strong>Competence: </strong><%= company.specialties.all.join(", ") %><br> 
-						<% end %>
-
-						<% if company.locations %>
-						<strong>Location: </strong><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") %><br> 
-						<% end %>
-						<button class="btn">Create this company</button>
-					</li>
-				</ul>
+										<% if company.locations %>
+										<strong>Location: </strong><%= company.locations.all.map(&:address).map(&:city).uniq.join(", ") %><br> 
+										<% end %>
+										</p>
+		            </div>
+		        </div>
+		    </div>
+		  </div>
 			<% end %>
 		</div>
-		<button class="btn btn-success" onclick="$('a[href=#new]').tab('show');" style="float:right">No. I want to create new company</button> 
+		
+		<button onclick="$('a[href=#new]').tab('show');">No. I want to create new company</button> 
+
 	</div>
 	<% end %>
 	
