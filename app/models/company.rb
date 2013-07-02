@@ -25,7 +25,7 @@ class Company < ActiveRecord::Base
   attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids
   
   def competence_tokens=(ids)
-    self.competence_ids = ids.split(",")
+    self.competence_ids = (ids.split(",")).uniq
   end
   
   def industry_tokens=(ids)

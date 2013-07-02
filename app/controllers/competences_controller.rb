@@ -6,7 +6,7 @@ class CompetencesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @competences }
+      format.json { render json: Competence.order(:name).where("name like ?", "%#{params[:q]}%") }
     end
   end
 
