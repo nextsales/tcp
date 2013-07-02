@@ -11,6 +11,8 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 
+//= require jquery-2.0.2.min
+//= require jquery-migrate-1.2.1.min
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require_directory .
