@@ -12,4 +12,5 @@
 //
 
 //= require jquery_ujs
+//= require jquery.tokeninput
 //= require_directory .
