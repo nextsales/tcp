@@ -5,6 +5,8 @@ Tcp::Application.routes.draw do
   resources :industries
   resources :companies
   
+  get 'companies/search/:keyword', to: 'companies#search'
+  
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"
   match "test_masonry" => "dashboard#test_masonry"

@@ -14,6 +14,10 @@ class CompaniesController < ApplicationController
       format.json { render json: @companies }
     end
   end
+  
+  def search
+    @test = "search"
+  end
 
   # GET /companies/1
   # GET /companies/1.json
