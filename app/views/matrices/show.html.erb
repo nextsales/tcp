@@ -18,10 +18,8 @@
             </div>
             <div class="span8">
                 <h3 class="no-margin"><%= company.name -%></h3>
-								<p><%= company.name -%></p>
 								<p><%= company.industries.map(&:name).join(", ") -%></p>
 								<p><%= company.competences.map(&:name).join(", ") -%></p>
-								<p><%= company.competences.map(&:name).join(", ") %></p>
 								<p><%= company.description -%></p>
 								<p><%= company.country %></p>
             </div>
@@ -32,6 +30,10 @@
 </div>
 <% end %>
 
-<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-success"} do %>
+<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
 	<i class="icon-edit"></i> Edit
+<% end %>
+
+<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+	<i class="icon-trash"></i> Delete
 <% end %>
