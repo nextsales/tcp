@@ -15,7 +15,7 @@ class CompanyImport
   def persisted?
     false
   end
-  
+    
   def save
     if imported_companies.map(&:valid?).all?
       imported_companies.each(&:save!)

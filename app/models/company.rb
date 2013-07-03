@@ -36,4 +36,19 @@ class Company < ActiveRecord::Base
     self.matrix_ids = ids.split(",")
   end
   
+  def exist?
+    if self.linkedin_id
+      company = Company.find_by_linkedin_id(self.linkedin_id)
+      if company
+        return true
+      end
+    end
+    if self.name
+      company = Company.find_by_name(self.name)
+      if company
+        return true
+      end
+    end
+    return false
+  end
 end
