@@ -1,0 +1,11 @@
+development:
+  linkedin_app_id: mky987r927xk
+  linkedin_app_secret: J6mdxQRCxLzFylVG
+
+test:
+  linkedin_app_id: mky987r927xk
+  linkedin_app_secret: J6mdxQRCxLzFylVG
+
+production:
+  linkedin_app_id: mky987r927xk
+  linkedin_app_secret: J6mdxQRCxLzFylVG
