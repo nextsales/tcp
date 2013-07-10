@@ -11,7 +11,7 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:nextsales/#{application}.git"
-set :branch,      "omni"
+set :branch,      "production"
 set :rvm_type,    :system
 
 ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", user)]
@@ -45,8 +45,8 @@ namespace :deploy do
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/omni`
-      puts "WARNING: HEAD is not the same as origin/omni"
+    unless `git rev-parse HEAD` == `git rev-parse origin/production`
+      puts "WARNING: HEAD is not the same as origin/production"
       puts "Run `git push` to sync changes."
       exit
     end
