@@ -22,3 +22,11 @@ c.profile(:fields => %w(following))
 
 c.profile(:fields => %w(following)).following.companies
 c.profile(:fields => %w(following), :start => 16).following.companies
+
+
+### Deploy
+
+509  cap deploy:assets:precompile
+510  cap deploy:migrate
+511  cap deploy:restart
+ 488  cap deploy:setup
