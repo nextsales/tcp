@@ -19,9 +19,10 @@ gem 'omniauth-linkedin'
 gem 'linkedin', :git => 'git://github.com/nextsales/linkedin.git'
 #gem 'linkedin'
 
+gem 'activeadmin'
+
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
-	gem 'activeadmin'
 end
 
 

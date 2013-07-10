@@ -11,7 +11,10 @@ set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:nextsales/#{application}.git"
-set :branch, "omni"
+set :branch,      "omni"
+set :rvm_type,    :system
+
+ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", user)]
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
