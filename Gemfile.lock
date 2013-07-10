@@ -68,6 +68,7 @@ GEM
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
+    fastimage (1.5.0)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     has_scope (0.5.1)
@@ -94,6 +95,7 @@ GEM
       polyamorous (~> 0.5.0)
     mime-types (1.23)
     multi_json (1.7.3)
+    nokogiri (1.5.9)
     nokogiri (1.5.9-x86-mingw32)
     oauth (0.4.7)
     orm_adapter (0.4.0)
@@ -177,6 +179,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
+  fastimage
   jquery-rails
   json
   meta_search (>= 1.1.0.pre)
