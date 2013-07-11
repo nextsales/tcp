@@ -42,3 +42,7 @@
 ul.token-input-list-facebook {
 	clear:none;
 }
+
+.companies.search .table-images td img {
+	height: auto;
+}
