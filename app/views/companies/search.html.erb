@@ -46,6 +46,9 @@
 								<% end %>
 							</td>
 							<td>
+								<a href="#new_company_modal" role="button" class="btn btn-success btn-small" data-toggle="modal">
+									<i class="icon-plus"></i> Add
+								</a>
 								<a href="/companies/new?linkedin_id=<%= company.id %>" class="btn btn-small btn-primary">Add</a>
 							</td>
 						</tr>
@@ -59,4 +62,8 @@
 </div>
 
 
-<button class="btn btn-success btn-large" onclick="$('a[href=#new]').tab('show');"><i class="icon-file-text"></i> No. I want to create new company</button> 
+<button class="btn btn-success btn-large" onclick="$('a[href=#new]').tab('show');"><i class="icon-file-text"></i> No. I want to create new company</button>
+
+
+
+<%= render 'form_with_linkedin_id.html.erb' %>

@@ -22,7 +22,7 @@ class CompaniesController < ApplicationController
     end
     
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
     end
   end
 
