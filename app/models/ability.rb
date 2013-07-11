@@ -10,6 +10,7 @@ class Ability
       
       # Company rule
       can :read, Company
+      can :search, Company
       can :create, Company
       can :update, Company do |company|
         company.try(:user) == user

@@ -3,9 +3,13 @@ Tcp::Application.routes.draw do
   resources :matrices
   resources :competences
   resources :industries
-  resources :companies
+  resources :companies do
+    collection do
+      get :search, :action => 'search'
+    end
+  end
   
-  get 'companies/search/:keyword', to: 'companies#search'
+
   
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"

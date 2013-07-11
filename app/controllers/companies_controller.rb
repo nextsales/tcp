@@ -16,7 +16,14 @@ class CompaniesController < ApplicationController
   end
   
   def search
-    @test = "search"
+    keyword = params[:keyword]
+    if (!keyword.blank?)
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => keyword}, "company").companies.all
+    end
+    
+    respond_to do |format|
+      format.html # new.html.erb
+    end
   end
 
   # GET /companies/1
