@@ -11,15 +11,19 @@ def site_monitor
   require 'fastimage'
   
   # Perform a google search
-  #doc = Nokogiri::HTML(open('http://www.google.com/search?ie=UTF-8&oe=UTF-8&as_sitesearch=nokia.com&tbs=qdr:w1,date:1'))
-  #puts doc
-  #html_parser(doc)
-  url2thumbnail ("http://www.starzik.com/")
+  requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=Lumia&as_sitesearch=nokia.com&tbs=qdr:h10,sbd:1"
+  page = url_fetcher(requested_url)
+  #puts page
+  #return
+  return nil unless page
+  
+  html_parser(page, requested_url)
+  #url2thumbnail ("http://www.starzik.com/")
 end
 
 
 
-def html_parser(doc)
+def html_parser(doc, query_url)
   # Print out each link using a CSS selector
   doc.css('li.g').each do |hit|
     h3 = hit.at_css('h3.r a')
@@ -30,7 +34,21 @@ def html_parser(doc)
     st = hit.at_css('span.st')
     
   end 
-  
+  doc.css('td.b a').each do |tag|
+    content = tag.content
+    if content == "Next"
+      tmp = tag[:href] 
+      start = tmp[/start=\d+/,0]
+      requested_url = "%s&%s" % [query_url, start]
+      puts requested_url
+      page = url_fetcher(requested_url)
+      #puts page
+      if page
+        html_parser(page, query_url)
+      end
+    end 
+  end
+ 
 end
 
 def url_fetcher(url)

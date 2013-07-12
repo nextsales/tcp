@@ -14,6 +14,7 @@ gem "oauth"
 gem "whenever"
 gem "nokogiri"
 gem "fastimage"
+gem "certified"
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
