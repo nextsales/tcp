@@ -1,5 +1,6 @@
 $('#create_company_modal').modal("hide");
 
 var loc = window.location.toString();
-window.location = loc.slice(0, loc.indexOf("add?keyword="));
-
+if (loc.indexOf("/matrices/")) {
+	window.location = loc.slice(0, loc.indexOf("add?keyword="));
+}
