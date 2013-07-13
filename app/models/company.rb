@@ -21,8 +21,8 @@ class Company < ActiveRecord::Base
   has_many :twitter_feeds, :dependent => :destroy
   has_many :linkedin_feeds, :dependent => :destroy
   
-  attr_reader :competence_tokens, :industry_tokens, :matrix_tokens
-  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids
+  attr_reader :competence_tokens, :industry_tokens, :matrix_tokens, :add_matrix
+  attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids, :add_matrix
   
   def competence_tokens=(tokens)
     self.competence_ids = Competence.ids_from_tokens(tokens).uniq
@@ -34,6 +34,10 @@ class Company < ActiveRecord::Base
   
   def matrix_tokens=(ids)
     self.matrix_ids = ids.split(",")
+  end
+  
+  def add_matrix=(id)
+    self.matrix_ids = self.matrix_ids.push(id)
   end
   
 end

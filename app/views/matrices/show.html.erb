@@ -34,6 +34,10 @@
 	<i class="icon-edit"></i> Edit
 <% end %>
 
+<%= link_to add_matrix_path(@matrix) , {:class => "btn btn-success"} do %>
+	<i class="icon-plus"></i> Add
+<% end %>
+
 <%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
 	<i class="icon-trash"></i> Delete
 <% end %>

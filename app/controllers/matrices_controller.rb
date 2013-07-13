@@ -76,5 +76,14 @@ class MatricesController < ApplicationController
   end
   
   def add
+    @company = Company.new
+    keyword = params[:keyword]
+    if (!keyword.blank?)
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => keyword}, "company").companies.all
+    end
+    
+    respond_to do |format|
+      format.html
+    end
   end
 end
