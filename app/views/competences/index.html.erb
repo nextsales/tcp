@@ -47,7 +47,7 @@
 				
 				<div class="clearfix">
 					<div class="pull-right">
-						<%= link_to new_competence_path, {:class => "btn btn-success", remote: true, id: "create_competence_modal_button", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
+						<%= link_to new_competence_path, {:class => "btn btn-success", remote: true, "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
 							<i class="icon-plus"></i> Create New Competence
 						<% end %>
 						<%= render("ajax_form") %>
