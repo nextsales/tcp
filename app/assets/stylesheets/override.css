@@ -50,3 +50,12 @@ ul.token-input-list-facebook {
 .modal-body textarea {
 	height:200px;
 }
+
+.companies.search ul.token-input-list-facebook {
+	width:350px;
+}
+
+.companies.search .token-input-dropdown-facebook {
+	width:350px;
+	z-index:10000;
+}

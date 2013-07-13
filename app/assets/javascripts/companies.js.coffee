@@ -10,4 +10,9 @@ jQuery ->
 	$('#myTab a').click (e) -> 
 		e.preventDefault()
 		$(this).tab('show')
+		
+	$(document).on "click", ".open-CreateCompanyDialog", ->
+		$("#company_name").val $(this).data("cname")
+		$("#company_linkedin_id").val $(this).data("lid")
+		$("#create_company_modal_label").html $(this).data("cname")
 	

@@ -46,10 +46,9 @@
 								<% end %>
 							</td>
 							<td>
-								<a href="#new_company_modal" role="button" class="btn btn-success btn-small" data-toggle="modal">
+								<a href="#create_company_modal" role="button" class="btn btn-success btn-small open-CreateCompanyDialog" data-toggle="modal" data-lid="<%= company.id %>" data-cname="<%= company.name %>">
 									<i class="icon-plus"></i> Add
 								</a>
-								<a href="/companies/new?linkedin_id=<%= company.id %>" class="btn btn-small btn-primary">Add</a>
 							</td>
 						</tr>
 						<% end %>
