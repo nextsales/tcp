@@ -2,6 +2,7 @@ class CompetencesController < ApplicationController
   # GET /competences
   # GET /competences.json
   def index
+    @competence = Competence.new
     @competences = Competence.all
 
     respond_to do |format|
