@@ -51,11 +51,13 @@ ul.token-input-list-facebook {
 	height:200px;
 }
 
-.companies.search ul.token-input-list-facebook {
+.companies.search ul.token-input-list-facebook,
+.matrices.add ul.token-input-list-facebook {
 	width:350px;
 }
 
-.companies.search .token-input-dropdown-facebook {
+.companies.search .token-input-dropdown-facebook,
+.matrices.add .token-input-dropdown-facebook {
 	width:350px;
 	z-index:10000;
 }

@@ -22,6 +22,7 @@ class Ability
       # Competence rule
       can :read, Competence
       
+      
       # Industry rule
       can :read, Industry
       
@@ -36,6 +37,7 @@ class Ability
       can :destroy, Matrix do |matrix|
         matrix.try(:user) == user
       end
+      can :add, Matrix
       
       # Feed rule
       can :read, Feed

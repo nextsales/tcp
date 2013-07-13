@@ -1,6 +1,12 @@
 Tcp::Application.routes.draw do
+  resources :matrices do
+    member do
+      get :add, :action => 'add'
+    end
+  end
+  
   resources :feeds
-  resources :matrices
+
   resources :competences
   resources :industries
   resources :companies do
