@@ -11,28 +11,55 @@ def site_monitor
   require 'fastimage'
   
   # Perform a google search
-  requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=Lumia&as_sitesearch=nokia.com&tbs=qdr:h10,sbd:1"
-  page = url_fetcher(requested_url)
-  #puts page
-  #return
-  return nil unless page
+  #requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=Lumia&as_sitesearch=nokia.com&tbs=qdr:d1,sbd:1"
+  keywords = []
+  keywords << "lumia"
+  keywords << "applications"
+  hits = site_search_with_keywords("nokia.com", keywords, "d1", "date", 1)
   
-  html_parser(page, requested_url)
-  #url2thumbnail ("http://www.starzik.com/")
 end
 
-
-
-def html_parser(doc, query_url)
+def site_search_with_keywords(site, keywords, past, sort_by, is_ontitle)
+  if sort_by == "date" 
+    sort_by_tmp = "sbd:1"
+  elsif sort_by == "relevance"
+    sort_by_tmp = "sbr:1"
+  else
+    return nil
+  end
+  if is_ontitle == 1
+    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_occt=title&as_sitesearch=%s&tbs=qdr:%s,%s" % [keywords.join("%20OR%20"), site, past, sort_by_tmp]
+  else
+    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_sitesearch=%s&tbs=qdr:%s,%s" % [keywords.join("%20OR%20"), site, past, sort_by_tmp]
+  end
+  #puts requested_url
+  #Sending query to Google
+  page = url_fetcher(requested_url)
+  return nil unless page
+  
+  google_hits = []
+  #parse Google search results
+  html_parser(page, requested_url, google_hits)
+  google_hits
+end
+def html_parser(doc, query_url, hits)
   # Print out each link using a CSS selector
-  doc.css('li.g').each do |hit|
-    h3 = hit.at_css('h3.r a')
-    title= h3.content
+  doc.css('li.g').each do |hit_tag|
+    hit = Hash.new
+    h3 = hit_tag.at_css('h3.r a')
+    hit["title"]= h3.content
+    
     url_tmp=h3[:href]
-    url = url_tmp[/q=(.*?)\&/,1]
+    hit["url"] = url_tmp[/q=(.*?)\&/,1]
     
-    st = hit.at_css('span.st')
-    
+    hit["content"] = hit_tag.at_css('span.st').text
+    hit["feed_type"] = "media_site_feed"
+    thumbnail = url2thumbnail(hit["url"])
+    if thumbnail
+      hit["photo_url"] = thumbnail
+    end
+    #puts hit
+    hits.push(hit)
   end 
   doc.css('td.b a').each do |tag|
     content = tag.content
@@ -40,11 +67,11 @@ def html_parser(doc, query_url)
       tmp = tag[:href] 
       start = tmp[/start=\d+/,0]
       requested_url = "%s&%s" % [query_url, start]
-      puts requested_url
+      #puts requested_url
+      sleep rand(4) + 2 # uniform random number [2,5]
       page = url_fetcher(requested_url)
-      #puts page
       if page
-        html_parser(page, query_url)
+        html_parser(page, query_url, hits)
       end
     end 
   end
@@ -118,8 +145,11 @@ def opengraph_parse(page)
     end
   end
   return nil unless object["image"]
-  
-  object_url = object["image"] 
+  if object["image"].start_with?('//')
+    object_url = "http:%s" % [object["image"]]
+  else
+    object_url = object["image"]
+  end 
   page = url_fetcher(object_url)
   return nil unless page
   object_url
