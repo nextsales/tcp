@@ -29,4 +29,4 @@ c.profile(:fields => %w(following), :start => 16).following.companies
 509  cap deploy:assets:precompile
 510  cap deploy:migrate
 511  cap deploy:restart
- 488  cap deploy:setup
+488  cap deploy:setup
