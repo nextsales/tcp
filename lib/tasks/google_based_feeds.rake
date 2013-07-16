@@ -12,14 +12,53 @@ def site_monitor
   
   # Perform a google search
   #requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=Lumia&as_sitesearch=nokia.com&tbs=qdr:d1,sbd:1"
-  keywords = []
-  keywords << "lumia"
-  keywords << "applications"
-  hits = site_search_with_keywords("nokia.com", keywords, "d1", "date", 1)
+  #keywords = []
+  #keywords << "lumia"
+  #keywords << "applications"
+  #hits = site_search_with_keywords("nokia.com", keywords, "d1", "date", 1)
+  matrix1 = Matrix.first
+  matrix_media_monitor(matrix1, "m1", "date")
+end
+
+def matrix_media_monitor(matrix, past, sort_by)
+  media_sites = matrix.media_sites.all
+  keywords = matrix.matrix_keywords.map(&:name)
+  
+  companies = matrix.companies
+  
+  
+  if companies.any?
+    companies.each do |company|
+      
+      #Monitor the websites of the companies with keywords
+      website_hits = site_search_with_keywords(company.website, keywords, past, sort_by, 0)
+      #puts website_hits
+      
+      # monitor public media about the companies
+      # Get all the hits whose title contain the company's name
+      company_name = company_name_processing(company.name)
+      media_sites.each do |site|
+        #puts "site: %s" % [site.name]
+        hits = site_search_with_keywords(site.name, company_name, past, sort_by, 1)
+        puts hits
+      end
+    end
+  end 
   
 end
 
+def company_name_processing(name)
+  array = ["oy", "ay", "ky", "oyj", "ok", "ry", "inc", "inc.", "ltd", "ltd.", "corp.", "corp", "corporation", "incorporation"]
+  name1 = name.split.delete_if{|x| array.include?(x.downcase)}.join(' ')
+  
+  names = []
+  names << name1.gsub(/ /, "%20AND%20")
+  names
+end
+
 def site_search_with_keywords(site, keywords, past, sort_by, is_ontitle)
+  return nil unless site
+  
   if sort_by == "date" 
     sort_by_tmp = "sbd:1"
   elsif sort_by == "relevance"
@@ -27,13 +66,14 @@ def site_search_with_keywords(site, keywords, past, sort_by, is_ontitle)
   else
     return nil
   end
+  kw_str = keywords.join(" OR ").gsub(/ /,'%20')
   if is_ontitle == 1
-    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_occt=title&as_sitesearch=%s&tbs=qdr:%s,%s" % [keywords.join("%20OR%20"), site, past, sort_by_tmp]
+    puts keywords
+    puts kw_str
+    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_occt=title&as_sitesearch=%s&tbs=qdr:%s,%s" % [kw_str, site, past, sort_by_tmp]
   else
-    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_sitesearch=%s&tbs=qdr:%s,%s" % [keywords.join("%20OR%20"), site, past, sort_by_tmp]
+    requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_sitesearch=%s&tbs=qdr:%s,%s" % [kw_str, site, past, sort_by_tmp]
   end
-  #puts requested_url
-  #Sending query to Google
   page = url_fetcher(requested_url)
   return nil unless page
   
@@ -115,6 +155,7 @@ def custom(page)
   
   if img_size_list.count <= 1
      biggest_img = img_size_list.first
+     return nil unless biggest_img
      biggest_img_url = biggest_img["url"]
   else
     img_size_list_sorted = img_size_list.sort{|a,b| b["size"] <=> a["size"]}

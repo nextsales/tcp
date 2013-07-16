@@ -9,6 +9,9 @@ class Matrix < ActiveRecord::Base
   has_many :feed_matrix_rs, dependent: :destroy
   has_many :feeds, :through => :feed_matrix_rs
   
+  has_many :media_matrix_rs, dependent: :destroy
+  has_many :media_sites, :through => :media_matrix_rs
+  
   has_many :media_feeds, :dependent => :destroy
   has_many :manual_feeds, :dependent => :destroy
   has_many :facebook_feeds, :dependent => :destroy

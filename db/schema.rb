@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130528204150) do
+ActiveRecord::Schema.define(:version => 20130716125000) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -45,6 +45,16 @@ ActiveRecord::Schema.define(:version => 20130528204150) do
 
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
+
+  create_table "assets", :force => true do |t|
+    t.integer  "company_id"
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+  end
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -92,6 +102,11 @@ ActiveRecord::Schema.define(:version => 20130528204150) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.boolean  "is_approve"
+  end
+
+  create_table "datafiles", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "facebook_feeds", :force => true do |t|
@@ -191,6 +206,19 @@ ActiveRecord::Schema.define(:version => 20130528204150) do
     t.text     "content"
     t.string   "url"
     t.boolean  "is_top"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "media_matrix_rs", :force => true do |t|
+    t.integer  "matrix_id"
+    t.integer  "media_site_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  create_table "media_sites", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
