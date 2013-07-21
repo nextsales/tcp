@@ -40,9 +40,6 @@ class Ability
       can :add, Matrix
       can :feed, Matrix
       
-      # Feed rule
-      can :read, Feed
-      
     end
 
   end
