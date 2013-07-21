@@ -27,4 +27,12 @@ class Matrix < ActiveRecord::Base
   def company_tokens=(ids)
     self.company_ids = ids.split(",")
   end
+    
+  def crawl_feed
+    self.companies.each do |company|
+      company.crawl_linkedin_update
+    end
+  end
+  
+
 end

@@ -40,4 +40,13 @@ class Company < ActiveRecord::Base
     self.matrix_ids = self.matrix_ids.push(id)
   end
   
+  def crawl_linkedin_update
+    self.user.linkedin_client.company_updates({:id => self.linkedin_id, :count => 9999, :start => 0}).all.each do |update|
+      if LinkedinUpdate.find_by_update_key(update.update_key)
+        return
+      end
+      LinkedinUpdate.create(:linkedin_company_id => self.linkedin_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
+    end
+  end
+  
 end
