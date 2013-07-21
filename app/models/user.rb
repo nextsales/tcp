@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
       user.linkedin_uid = auth.uid
       user.email = auth.info.email
       user.linkedin_auth = LinkedinAuth.new(:uid => auth.uid, :full_name => auth.info.name, :first_name => auth.info.first_name, :last_name => auth.info.last_name, :email =>auth.info.email, :photo => auth.info.image, :headline =>auth.info.headline, :industry =>auth.info.industry, :location =>auth.info.location, :phone =>auth.info.phone, :token => auth.credentials.token, :secret => auth.credentials.secret, :raw_auth => auth.extra.raw_info)
-      u.matrices.push(Matrix.create(name: "Customers"), Matrix.create(name: "Competitors"))
+      user.matrices.push(Matrix.create(name: "Customers"), Matrix.create(name: "Competitors"))
     end
   end
   
