@@ -94,17 +94,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.boolean  "is_approve"
   end
 
-  create_table "facebook_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "feed_matrix_rs", :force => true do |t|
     t.integer  "feed_id"
     t.integer  "matrix_id"
@@ -160,17 +149,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.integer  "user_id"
   end
 
-  create_table "linkedin_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "linkedin_updates", :force => true do |t|
     t.integer  "linkedin_company_id"
     t.string   "update_key"
@@ -181,17 +159,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
   end
 
   add_index "linkedin_updates", ["update_key"], :name => "index_linkedin_updates_on_update_key", :unique => true
-
-  create_table "manual_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "matrices", :force => true do |t|
     t.string   "name"
@@ -210,17 +177,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
   create_table "matrix_keywords", :force => true do |t|
     t.integer  "matrix_id"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "media_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -253,17 +209,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
   add_index "suggested_companies", ["linkedin_id"], :name => "index_suggested_companies_on_linkedin_id"
   add_index "suggested_companies", ["rank"], :name => "index_suggested_companies_on_rank"
   add_index "suggested_companies", ["user_id"], :name => "index_suggested_companies_on_user_id"
-
-  create_table "twitter_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
 
   create_table "user_company_rs", :force => true do |t|
     t.integer  "user_id"

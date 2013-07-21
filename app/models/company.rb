@@ -15,11 +15,6 @@ class Company < ActiveRecord::Base
   has_many :matrices, :through => :company_matrix_rs
   
   has_many :feeds, :dependent => :destroy
-  has_many :media_feeds, :dependent => :destroy
-  has_many :manual_feeds, :dependent => :destroy
-  has_many :facebook_feeds, :dependent => :destroy
-  has_many :twitter_feeds, :dependent => :destroy
-  has_many :linkedin_feeds, :dependent => :destroy
   
   attr_reader :competence_tokens, :industry_tokens, :matrix_tokens, :add_matrix
   attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids, :add_matrix
