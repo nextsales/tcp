@@ -2,6 +2,7 @@ Tcp::Application.routes.draw do
   resources :matrices do
     member do
       get :add, :action => 'add'
+      get :feed, :action => 'feed'
     end
   end
   

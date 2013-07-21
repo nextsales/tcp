@@ -86,4 +86,7 @@ class MatricesController < ApplicationController
       format.html
     end
   end
+  
+  def feed
+  end
 end
