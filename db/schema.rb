@@ -111,6 +111,10 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.datetime "origin_created_time"
     t.text     "content"
     t.string   "feed_type"
+    t.integer  "linkedin_company_id"
+    t.string   "update_key"
+    t.string   "update_type"
+    t.text     "raw_data"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
@@ -148,17 +152,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.datetime "updated_at", :null => false
     t.integer  "user_id"
   end
-
-  create_table "linkedin_updates", :force => true do |t|
-    t.integer  "linkedin_company_id"
-    t.string   "update_key"
-    t.string   "update_type"
-    t.text     "raw_data"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
-  add_index "linkedin_updates", ["update_key"], :name => "index_linkedin_updates_on_update_key", :unique => true
 
   create_table "matrices", :force => true do |t|
     t.string   "name"

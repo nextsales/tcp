@@ -11,7 +11,10 @@ class CreateFeeds < ActiveRecord::Migration
       t.datetime :origin_created_time
       t.text :content
       t.string :feed_type
-
+      t.integer :linkedin_company_id
+      t.string :update_key
+      t.string :update_type
+      t.text :raw_data
       t.timestamps
     end
   end
