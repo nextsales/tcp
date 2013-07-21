@@ -30,7 +30,6 @@ class CompaniesController < ApplicationController
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @feeds = @company.feeds
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @company }

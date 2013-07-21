@@ -158,20 +158,3 @@
 <% end %>
 
 <p id="notice"><%= notice %></p>
-
-<!-- 
-
-<% if @matrix.feeds.any? %>
-<div class="masonry_feed" class="clearfix fluid">
-	<% @matrix.feeds.each do |feed| -%>
-		<div class="box">
-			<h2><%= link_to feed.title, feed.url %></h2>
-			<div><%= feed.content %></div>
-		  <span class="timestamp">
-		    Posted <%= time_ago_in_words(feed.origin_created_time) %> ago.
-		  </span>
-	  </div>
-	<% end %>
-</div>
-<% end %>
--->

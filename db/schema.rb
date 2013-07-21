@@ -94,31 +94,6 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.boolean  "is_approve"
   end
 
-  create_table "feed_matrix_rs", :force => true do |t|
-    t.integer  "feed_id"
-    t.integer  "matrix_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "feeds", :force => true do |t|
-    t.string   "title"
-    t.string   "photo_url"
-    t.integer  "company_id"
-    t.string   "url"
-    t.integer  "shares"
-    t.integer  "likes"
-    t.datetime "origin_created_time"
-    t.text     "content"
-    t.string   "feed_type"
-    t.integer  "linkedin_company_id"
-    t.string   "update_key"
-    t.string   "update_type"
-    t.text     "raw_data"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
-
   create_table "follower_matrix_rs", :force => true do |t|
     t.integer  "user_id"
     t.integer  "matrix_id"

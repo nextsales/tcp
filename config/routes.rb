@@ -5,8 +5,6 @@ Tcp::Application.routes.draw do
       get :feed, :action => 'feed'
     end
   end
-  
-  resources :feeds
 
   resources :competences
   resources :industries
