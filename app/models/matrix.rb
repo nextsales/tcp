@@ -18,8 +18,6 @@ class Matrix < ActiveRecord::Base
   attr_reader :company_tokens
   attr_accessible :company_tokens, :company_ids
   
-  
-  
   def company_tokens=(ids)
     self.company_ids = ids.split(",")
   end
@@ -31,12 +29,13 @@ class Matrix < ActiveRecord::Base
       crawl_linkedin_update(linkedin_client, company)
     end
   end
-  # 
+  
+  # Should move to company crawl #
   def crawl_linkedin_update(linkedin_client, company)
     if (crawl_results = linkedin_client.company_updates({:id => company.linkedin_id, :count => 9999, :start => 0}).all)
       crawl_results.each do |update|
         linkedin_update = Feed.where(update_key: update.update_key).first_or_create(:raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
-        #MatrixFeedR.first_or_create(matrix_id: self.id, feed_id: linkedin_update.id)
+        MatrixFeedR.find_or_create_by_matrix_id_and_feed_id(matrix_id: self.id, feed_id: linkedin_update.id)
       end
     end
   end

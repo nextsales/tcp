@@ -87,5 +87,11 @@ class MatricesController < ApplicationController
   end
   
   def feed
+    #raise @matrix.feeds.first.raw_data.to_json
+    @feeds = @matrix.feeds.order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: @feeds }
+    end
   end
 end
