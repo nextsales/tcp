@@ -55,14 +55,14 @@ class CrawlerController < ApplicationController
     company_updates
   end
   
-  def crawl_linkedin_update(linkedin_company_id)
-    current_user.linkedin_client.company_updates({:id => linkedin_company_id, :count => 9999, :start => 0}).all.each do |update|
-      if LinkedinUpdate.find_by_update_key(update.update_key)
-        return
-      end
-      LinkedinUpdate.create(:linkedin_company_id => linkedin_company_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
-    end
-  end
+  # def crawl_linkedin_update(linkedin_company_id)
+  #   current_user.linkedin_client.company_updates({:id => linkedin_company_id, :count => 9999, :start => 0}).all.each do |update|
+  #     if LinkedinUpdate.find_by_update_key(update.update_key)
+  #       return
+  #     end
+  #     LinkedinUpdate.create(:linkedin_company_id => linkedin_company_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
+  #   end
+  # end
   
   def crawl_suggested_companies
     a = []

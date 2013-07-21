@@ -32,7 +32,7 @@ class Matrix < ActiveRecord::Base
   def crawl_linkedin_update(linkedin_client, company_linkedin_id)
     if (crawl_results = linkedin_client.company_updates({:id => company_linkedin_id, :count => 9999, :start => 0}).all)
       crawl_results.each do |update|
-        linkedin_update = LinkedinUpdate.where(update_key: update.update_key).first_or_create(:linkedin_company_id => company_linkedin_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
+        linkedin_update = Feed.where(update_key: update.update_key).first_or_create(:linkedin_company_id => company_linkedin_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
       end
     end
   end
