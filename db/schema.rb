@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130620122746) do
+ActiveRecord::Schema.define(:version => 20130721215449) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -94,6 +94,16 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.boolean  "is_approve"
   end
 
+  create_table "feeds", :force => true do |t|
+    t.string   "update_key"
+    t.string   "update_type"
+    t.text     "raw_data"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "feeds", ["update_key"], :name => "index_feeds_on_update_key"
+
   create_table "follower_matrix_rs", :force => true do |t|
     t.integer  "user_id"
     t.integer  "matrix_id"
@@ -133,6 +143,13 @@ ActiveRecord::Schema.define(:version => 20130620122746) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "matrix_feed_rs", :force => true do |t|
+    t.integer  "matrix_id"
+    t.integer  "feed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "matrix_follower_rs", :force => true do |t|

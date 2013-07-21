@@ -12,26 +12,33 @@ class Matrix < ActiveRecord::Base
   has_many :matrix_follower_rs, dependent: :destroy
   has_many :followers, :through => :matrix_follower_rs
   
+  has_many :matrix_feed_rs
+  has_many :feeds, :through => :matrix_feed_rs
+  
   attr_reader :company_tokens
   attr_accessible :company_tokens, :company_ids
+  
+  
   
   def company_tokens=(ids)
     self.company_ids = ids.split(",")
   end
     
-  # def crawl_feed
-  #   linkedin_client = self.user.linkedin_client
-  #   self.companies.each do |company|
-  #     crawl_linkedin_update(linkedin_client, company.linkedin_id)
-  #   end
-  # end
+  def crawl_feed
+    linkedin_client = self.user.linkedin_client
+    
+    self.companies.each do |company|
+      crawl_linkedin_update(linkedin_client, company)
+    end
+  end
   # 
-  # def crawl_linkedin_update(linkedin_client, company_linkedin_id)
-  #   if (crawl_results = linkedin_client.company_updates({:id => company_linkedin_id, :count => 9999, :start => 0}).all)
-  #     crawl_results.each do |update|
-  #       linkedin_update = Feed.where(update_key: update.update_key).first_or_create(:linkedin_company_id => company_linkedin_id, :raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
-  #     end
-  #   end
-  # end
+  def crawl_linkedin_update(linkedin_client, company)
+    if (crawl_results = linkedin_client.company_updates({:id => company.linkedin_id, :count => 9999, :start => 0}).all)
+      crawl_results.each do |update|
+        linkedin_update = Feed.where(update_key: update.update_key).first_or_create(:raw_data => update.to_json, :update_key => update.update_key, :update_type => update.update_type, :created_at => update.timestamp)
+        #MatrixFeedR.first_or_create(matrix_id: self.id, feed_id: linkedin_update.id)
+      end
+    end
+  end
   
 end
