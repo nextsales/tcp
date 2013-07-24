@@ -8,43 +8,85 @@ end
 def site_monitor
   require 'open-uri'
   require 'nokogiri'
-  require 'fastimage'
+  require 'fastimage' # Used to check the size of an image from its uri without downloading the whole image
   
-  # Perform a google search
-  #requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=Lumia&as_sitesearch=nokia.com&tbs=qdr:d1,sbd:1"
-  #keywords = []
-  #keywords << "lumia"
-  #keywords << "applications"
-  #hits = site_search_with_keywords("nokia.com", keywords, "d1", "date", 1)
-  matrix1 = Matrix.first
-  matrix_media_monitor(matrix1, "m1", "date")
+  puts "monitoring companies' websites"
+  company_website_monitor("d1", "date")
+  
+  puts "monitoring public media"
+  media_monitor("m1", "date")
 end
 
-def matrix_media_monitor(matrix, past, sort_by)
-  media_sites = matrix.media_sites.all
-  keywords = matrix.matrix_keywords.map(&:name)
-  
-  companies = matrix.companies
-  
-  
-  if companies.any?
-    companies.each do |company|
-      
-      #Monitor the websites of the companies with keywords
-      website_hits = site_search_with_keywords(company.website, keywords, past, sort_by, 0)
-      #puts website_hits
-      
-      # monitor public media about the companies
-      # Get all the hits whose title contain the company's name
-      company_name = company_name_processing(company.name)
-      media_sites.each do |site|
-        #puts "site: %s" % [site.name]
-        hits = site_search_with_keywords(site.name, company_name, past, sort_by, 1)
-        puts hits
+#Monitor the websites of the companies with keywords
+def company_website_monitor(past, sort_by)
+  matrices = Matrix.all
+  if matrices.any?
+    matrices.each do |matrix|
+      keywords = matrix.matrix_keywords.map(&:name)
+      companies = matrix.companies
+      companies.each do |company|
+        hits = site_search_with_keywords(company.website, keywords, past, sort_by, 0)
+        
+        #create feeds
+        if hits.any?
+          hits.each do |hit|   
+            feed = Feed.new()                 
+            feed.company = company
+            feed.feed_type = "company_website_monitor"
+            feed.company = company
+            feed.title = hit["title"]
+            feed.url = hit["url"]
+            feed.content = hit["content"]
+            feed.photo_url = hit["photo_url"]
+            feed.origin_created_time = DateTime.now.strftime("%Y-%m-%d %H:%M:%S") 
+            feed.save
+            matrix.feed_matrix_rs.build(feed_id: feed.id).save      
+          end
+        end
       end
     end
-  end 
-  
+  end
+end
+
+# Monitor companies in public media sites
+# All the page whose title contains the company's name
+def media_monitor(past, sort_by)
+  media_sites = MediaSite.all
+  if media_sites.any?
+    media_sites.each do |site|
+      followed_companies = site.companies
+      if followed_companies.any?
+        followed_companies.each do |company|
+          # Delete words like inc., corp, oy ... from the company name
+          company_name = company_name_processing(company.name)
+          #puts company_name
+          #puts site.name
+          hits = site_search_with_keywords(site.name, company_name, past, sort_by, 1)
+          
+          #create feeds
+          if hits.any?
+            com_matrices = site.matrices & company.matrices #matrices where the feeds should be
+            hits.each do |hit|                    
+              com_matrices.each do |mtrx|
+                puts mtrx.name
+                feed = Feed.new()
+                feed.company = company
+                feed.feed_type = site.name
+                feed.company = company
+                feed.title = hit["title"]
+                feed.url = hit["url"]
+                feed.content = hit["content"]
+                feed.photo_url = hit["photo_url"]
+                feed.origin_created_time = DateTime.now.strftime("%Y-%m-%d %H:%M:%S") 
+                feed.save
+                mtrx.feed_matrix_rs.build(feed_id: feed.id).save                
+              end       
+            end
+          end
+        end
+      end
+    end
+  end
 end
 
 def company_name_processing(name)
@@ -68,12 +110,13 @@ def site_search_with_keywords(site, keywords, past, sort_by, is_ontitle)
   end
   kw_str = keywords.join(" OR ").gsub(/ /,'%20')
   if is_ontitle == 1
-    puts keywords
-    puts kw_str
+    #puts keywords
+    #puts kw_str
     requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_occt=title&as_sitesearch=%s&tbs=qdr:%s,%s" % [kw_str, site, past, sort_by_tmp]
   else
     requested_url = "https://www.google.com/search?ie=UTF-8&oe=UTF-8&as_q=%s&as_sitesearch=%s&tbs=qdr:%s,%s" % [kw_str, site, past, sort_by_tmp]
   end
+  #puts requested_url
   page = url_fetcher(requested_url)
   return nil unless page
   
