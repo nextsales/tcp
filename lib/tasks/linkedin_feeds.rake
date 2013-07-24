@@ -11,14 +11,36 @@ def linkedin_feeds
   require 'json'
   require 'date'
   
+  
   # get your api keys at https://www.linkedin.com/secure/developer
-  consumer = OAuth::Consumer.new('62vxqawt0fy2', 'JiXFk6AaYLKBErM1')
-  access_token = OAuth::AccessToken.new(consumer, 'a0d0d1f1-eb24-4dfe-8fd9-19d75fa2e984', 'dcbbc84d-b065-4b86-8d61-23d170126719')
+  #consumer = OAuth::Consumer.new('62vxqawt0fy2', 'JiXFk6AaYLKBErM1')
+  #access_token = OAuth::AccessToken.new(consumer, 'a0d0d1f1-eb24-4dfe-8fd9-19d75fa2e984', 'dcbbc84d-b065-4b86-8d61-23d170126719')
+  api_key = '62vxqawt0fy2'
+  api_secret = 'JiXFk6AaYLKBErM1'
+  configuration = { :site => 'https://api.linkedin.com',
+                    :authorize_path =>   'https://www.linkedin.com/uas/oauth/authenticate',
+                    :request_token_path => 'https://api.linkedin.com/uas/oauth/requestToken',
+                    :access_token_path => 'https://api.linkedin.com/uas/oauth/accessToken' }
+
+  consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
+
+  #Request token
+  request_token = consumer.get_request_token
+
+  # Output request URL to console
+  puts "Please visit this URL: https://api.linkedin.com/uas/oauth/authenticate?oauth_token=" + request_token.token  + " in your browser and then input the numerical code you are provided here: "
+
+  # Set verifier code
+  verifier = $stdin.gets.strip
+
+  # Retrieve access token object
+  access_token = request_token.get_access_token(:oauth_verifier => verifier)
   
-  json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates?count=99999&format=json").body
-  updates = JSON.parse(json_txt)
   
-  
+  #json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates?count=99999&format=json").body
+  #updates = JSON.parse(json_txt)
+  #puts "hello"
+  #
   # Go through all the companies
   companies = Company.all
   companies.each do |company|
@@ -39,6 +61,8 @@ def company_updates (access_token, company, format)
     return
   else
     updates = data["values"]
+    puts updates unless updates
+    return unless updates
     updates.each do |update|
       updateContent = update["updateContent"]
       

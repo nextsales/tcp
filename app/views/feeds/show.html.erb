@@ -32,7 +32,7 @@
 
 <p>
   <b>Matrix:</b>
-  <%= @feed.matrix_id %>
+  <%= @feed.matrices.map(&:name).join(', ') %>
 </p>
 
 <p>

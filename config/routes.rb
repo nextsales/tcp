@@ -19,6 +19,7 @@ Tcp::Application.routes.draw do
   ActiveAdmin.routes(self)
 
   resources :company_imports
+  resources :industry_imports
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

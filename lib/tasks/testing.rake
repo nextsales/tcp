@@ -5,6 +5,6 @@ namespace :cron do
   end
 end
 
-def linkedin_feeds
+def linkedin_feeds1
   puts "hung"
 end
