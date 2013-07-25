@@ -1,0 +1,40 @@
+<h1>Competence Import</h1>
+
+<p>A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed.</p>
+
+<ul>
+  <% Competence.columns.each do |column| %>
+    <% if column.name.in? [*Competence.accessible_attributes] %>
+      <li>
+      	<% if column.name.in? ["name"] %>
+      		<strong><%= column.name %></strong> -
+        	<%= column.type.to_s.titleize %> type (*)
+      	<% else %>
+        	<strong><%= column.name %></strong> -
+        	<%= column.type.to_s.titleize %> type
+        <% end %>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<p><strong>(*)</strong> Do not leave blank</p>
+<p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+<%= form_for @competence_import do |f| %>
+  <% if @competence_import.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@competence_import.errors.count, "error") %> prohibited this import from completing:</h2>
+      <ul>
+      <% @competence_import.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.file_field :file %>
+  </div>
+  <div class="buttons"><%= f.submit "Import" %></div>
+<% end %>
