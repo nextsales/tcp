@@ -13,11 +13,11 @@ class CompetenceImport
   end   
   
   def save
-    if imported_competencies.map(&:valid?).all?
-      imported_competencies.each(&:save!)
+    if imported_competences.map(&:valid?).all?
+      imported_competences.each(&:save!)
       true
     else
-      imported_competencies.each_with_index do |competence, index|
+      imported_competences.each_with_index do |competence, index|
         competence.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
@@ -25,11 +25,11 @@ class CompetenceImport
       false
     end
   end
-  def imported_competencies
-    @imported_competencies ||= load_imported_competencies
+  def imported_competences
+    @imported_competences ||= load_imported_competences
   end
   
-  def load_imported_competencies
+  def load_imported_competences
     spreadsheet = open_spreadsheet
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
