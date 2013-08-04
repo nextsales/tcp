@@ -25,13 +25,15 @@
 						<i class="icon-edit"></i> Edit
 					<% end %>
 					
-					<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-small"} %>
+					
 					
 					<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
 					
 					<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
 						<i class="icon-trash"></i> Delete
 					<% end %>
+					
+					<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn"} %>
 				</div>	
 			
 			
