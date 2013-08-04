@@ -23,10 +23,20 @@ class User < ActiveRecord::Base
   has_many :followed_matrices, :through => :matrix_follower_rs, source: :matrix
   
   has_one :linkedin_auth, dependent: :destroy
+  has_one :twitter_auth, dependent: :destroy
   
   def linkedin_client
     client = LinkedIn::Client.new(OMNI_AUTH_CONFIG['linkedin_app_id'], OMNI_AUTH_CONFIG['linkedin_app_secret'])
     client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
+    client
+  end
+  
+  def twitter_client
+    return nil unless twitter_auth
+    client = Twitter::Client.new(
+      :oauth_token => twitter_auth.token,
+      :oauth_token_secret => twitter_auth.secret
+    )
     client
   end
   
@@ -39,10 +49,33 @@ class User < ActiveRecord::Base
     end
   end
   
+  def self.from_twitter_auth(auth)
+    where(:twitter_uid => auth.uid).first_or_create do |user|
+      user.twitter_uid = auth.uid
+      user.twitter_auth = TwitterAuth.new(:uid => auth.uid, :name => auth.info.name, :nickname => auth.info.nickname, :provider => auth.provider, 
+        :image => auth.info.image, :description =>auth.description, :location =>auth.info.location, :token => auth.credentials.token, 
+        :secret => auth.credentials.secret, :origin_created_at => auth.extra.raw_info.created_at.to_datetime,:lang => auth.extra.raw_info.lang,
+        :favourites_count => auth.extra.raw_info.favourites_count, :followers_count => auth.extra.raw_info.followers_count, :friends_count => auth.extra.raw_info.friends_count,
+        :id_str => auth.extra.raw_info.id_str, :listed_count => auth.extra.raw_info.listed_count, :time_zone => auth.extra.raw_info.time_zone)
+    end
+  end
+  
+  
   def self.new_with_session(params, session)
-    if session["devise.user_attributes"]
+    if session["devise.twitter_auth"]
+      super.tap do |user|
+        auth = session["devise.twitter_auth"]
+        user.twitter_uid = auth.uid
+        user.twitter_auth = TwitterAuth.new(:uid => auth.uid, :name => auth.name, :nickname => auth.nickname, :provider => auth.provider, :image => auth.image, 
+        :description =>auth.description, :location =>auth.location, :token => auth.token, :secret => auth.secret, :origin_created_at => auth.created_at,
+        :favourites_count => auth.favourites_count, :followers_count => auth.followers_count, :friends_count => auth.friends_count, :lang => auth.lang,
+        :id_str => auth.id_str, :listed_count => auth.listed_count, :time_zone => auth.time_zone)        
+        user.attributes = params        
+        user.valid?
+      end
+    elsif session["devise.user_attributes"]
       new(session["devise.user_attributes"], without_protection: true) do |user|
-        user.attributes = params
+        user.attributes = params        
         user.valid?
       end
     else
@@ -51,7 +84,7 @@ class User < ActiveRecord::Base
   end
   
   def password_required?
-    super && linkedin_uid.blank?
+    super && (linkedin_uid.blank?&&twitter_uid.blank?)
   end
   
   def update_with_password(params, *options)

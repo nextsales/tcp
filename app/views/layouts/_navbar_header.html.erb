@@ -142,6 +142,28 @@
                                     Profile
                                 </a>
                             </li>
+                            <% unless current_user.linkedin_auth%>
+	                            <li role="presentation">
+	                                <a href="/users/auth/linkedin" class="link">
+	                                    <i class="icon-linkedin-sign"></i>
+	                                    Add Linkedin
+	                                </a>
+	                            </li>
+	                        <% end %>
+	                        <% unless current_user.twitter_auth%>
+		                        <li role="presentation">
+		                            <a href="/users/auth/twitter" class="link">
+		                                <i class="icon-twitter-sign"></i>
+		                                Add Twitter
+		                            </a>
+		                        </li>		                    
+                            <% end %>
+	                            <li role="presentation">
+	                                <a href="form_account.html" class="link">
+	                                    <i class="icon-facebook-sign"></i>
+	                                    Add Facebook
+	                                </a>
+	                            </li>
                             <li role="presentation">
                                 <a href="component_calendar.html" class="link">
                                     <i class="icon-calendar"></i>

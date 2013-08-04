@@ -13,11 +13,16 @@ gem "json"
 gem "oauth"
 gem "whenever"
 gem "nokogiri"
+gem "certified" # pass OpenSSL::Error
 
 gem 'omniauth'
 gem 'omniauth-linkedin'
 gem 'linkedin', :git => 'git://github.com/nextsales/linkedin.git'
 #gem 'linkedin'
+
+
+gem 'omniauth-twitter'
+gem 'twitter'
 
 gem 'activeadmin'
 
@@ -47,11 +52,11 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
-gem 'capistrano'
-gem 'rvm-capistrano'
+#gem 'capistrano'
+#gem 'rvm-capistrano'
 
 # To use debugger
 # gem 'debugger'

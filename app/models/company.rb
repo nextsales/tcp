@@ -14,6 +14,8 @@ class Company < ActiveRecord::Base
   has_many :company_matrix_rs, :dependent => :destroy
   has_many :matrices, :through => :company_matrix_rs
   
+  has_many :twitter_tweet_last_ids
+  
   attr_reader :competence_tokens, :industry_tokens, :matrix_tokens, :add_matrix
   attr_accessible :competence_tokens, :industry_tokens, :matrix_tokens, :matrix_ids, :industry_ids, :competence_ids, :add_matrix
   

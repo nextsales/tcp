@@ -52,18 +52,13 @@ GEM
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (3.0.2)
-    bcrypt-ruby (3.1.1)
+    bcrypt-ruby (3.1.1-x86-mingw32)
     bourbon (3.1.8)
       sass (>= 3.2.0)
       thor
     builder (3.0.4)
     cancan (1.6.10)
-    capistrano (2.15.5)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
+    certified (0.1.1)
     chronic (0.9.1)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -72,21 +67,22 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.3)
-    devise (2.2.4)
+    devise (3.0.0)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (~> 3.1)
-      warden (~> 1.2.1)
+      railties (>= 3.2.6, < 5)
+      warden (~> 1.2.3)
     diff-lcs (1.1.3)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     fastercsv (1.5.5)
     formtastic (2.2.1)
       actionpack (>= 3.0)
     has_scope (0.5.1)
     hashie (2.0.5)
-    highline (1.6.19)
     hike (1.2.3)
     i18n (0.6.1)
     inherited_resources (1.4.0)
@@ -100,7 +96,6 @@ GEM
     kaminari (0.14.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.8.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -112,14 +107,8 @@ GEM
     mime-types (1.23)
     mini_portile (0.5.1)
     multi_json (1.7.7)
-    net-scp (1.1.2)
-      net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.6.8)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
-    nokogiri (1.6.0)
+    multipart-post (1.2.0)
+    nokogiri (1.6.0-x86-mingw32)
       mini_portile (~> 0.5.0)
     oauth (0.4.7)
     omniauth (1.1.4)
@@ -130,6 +119,9 @@ GEM
     omniauth-oauth (1.0.1)
       oauth
       omniauth (~> 1.0)
+    omniauth-twitter (1.0.0)
+      multi_json (~> 1.3)
+      omniauth-oauth (~> 1.0)
     orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
@@ -156,7 +148,6 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.11.0)
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -176,45 +167,44 @@ GEM
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec (~> 2.11.0)
-    rvm-capistrano (1.4.1)
-      capistrano (>= 2.0.0)
-    sass (3.2.9)
+    sass (3.2.10)
     sass-rails (3.2.6)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
+    simple_oauth (0.2.0)
     sprockets (2.2.2)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
-    sqlite3 (1.3.7)
+    sqlite3 (1.3.7-x86-mingw32)
     thor (0.18.1)
     tilt (1.4.1)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
+    twitter (4.8.1)
+      faraday (~> 0.8, < 0.10)
+      multi_json (~> 1.0)
+      simple_oauth (~> 0.2)
     tzinfo (0.3.37)
     uglifier (2.1.2)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    unicorn (4.6.3)
-      kgio (~> 2.6)
-      rack
-      raindrops (~> 0.7)
-    warden (1.2.2)
+    warden (1.2.3)
       rack (>= 1.0)
-    whenever (0.8.3)
+    whenever (0.8.4)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
 
 PLATFORMS
-  ruby
+  x86-mingw32
 
 DEPENDENCIES
   activeadmin
   cancan
-  capistrano
+  certified
   coffee-rails (~> 3.2.1)
   devise
   jquery-rails
@@ -225,12 +215,12 @@ DEPENDENCIES
   oauth
   omniauth
   omniauth-linkedin
+  omniauth-twitter
   rails (= 3.2.13)
   rolify
   rspec-rails (= 2.11.0)
-  rvm-capistrano
   sass-rails (~> 3.2.3)
   sqlite3
+  twitter
   uglifier (>= 1.0.3)
-  unicorn
   whenever

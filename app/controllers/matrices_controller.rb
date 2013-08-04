@@ -15,6 +15,7 @@ class MatricesController < ApplicationController
   # GET /matrices/1.json
   def show
     @companies = @matrix.companies
+    @feeds = @matrix.crawl_feed(10)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @matrix }
