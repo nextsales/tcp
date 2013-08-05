@@ -14,6 +14,10 @@ gem "oauth"
 gem "whenever"
 gem "nokogiri"
 gem "certified" # pass OpenSSL::Error
+#gem "haml", "~> 4.0.3"
+
+gem 'will_paginate', '~> 3.0.0' #infinite scroll
+
 
 gem 'omniauth'
 gem 'omniauth-linkedin'
