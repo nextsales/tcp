@@ -117,13 +117,15 @@
 								<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select industries", "tabindex" => "-1"} %>
 							</div>
 						</div>
-
+						
+						<!-- 
 						<div class="control-group">
 							<%= f.label :competence_ids, {:class => "control-label", :for => "multiple"} %>
 							<div class="controls">
 								<%= f.collection_select :competence_ids, Competence.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select competences", "tabindex" => "-1"} %>
 							</div>
 						</div>
+						-->
 						
 						<div class="control-group">
 							<%= f.label :competence_tokens, {:class => "control-label"} %>
