@@ -37,7 +37,7 @@
     },
 
     /** @property */
-    template: _.template('<tr><td colspan="<%= colspan %>"><ul><% _.each(handles, function (handle) { %><li <% if (handle.className) { %>class="<%= handle.className %>"<% } %>><a href="#" <% if (handle.title) {%> title="<%= handle.title %>"<% } %>><%= handle.label %></a></li><% }); %></ul></td></tr>'),
+    template: _.template('<tr><td colspan="{{= colspan }}"><ul>{{ _.each(handles, function (handle) { }}<li {{ if (handle.className) { }}class="{{= handle.className }}"{{ } }}><a href="#" {{ if (handle.title) {}} title="{{= handle.title }}"{{ } }}>{{= handle.label }}</a></li>{{ }); }}</ul></td></tr>'),
 
     /** @property */
     events: {

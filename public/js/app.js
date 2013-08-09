@@ -70,9 +70,10 @@ $(function(){
     });
 
     $(window).resize(function(){
-       closeNavigation()
+        closeNavigation()
     });
 
+    //class-switch for button-groups
     $(".btn-group > .btn[data-toggle-class]").click(function(){
         var $this = $(this),
             $parent = $this.parent();
@@ -88,9 +89,37 @@ $(function(){
             $this.toggleClass($(this).data("toggle-passive-class")).toggleClass($this.data("toggle-class"));
         }
     });
-});
 
-// _.templateSettings = {
-//     interpolate: /\{\{\=(.+?)\}\}/g,
-//     evaluate: /\{\{(.+?)\}\}/g
-// };
+    var $sidebar = $('#sidebar');
+
+    $("#search-toggle").click(function(){
+        //first hide menu if open
+
+        if ($sidebar.data('collapse')){
+            $sidebar.collapse('hide');
+        }
+
+        var $notifications = $('.notifications'),
+            notificationsPresent = !$notifications.is(':empty');
+
+        $("#search-form").css('height', function(){
+            var $this = $(this);
+            if ($this.height() == 0){
+                $this.css('height', 40);
+                notificationsPresent && $notifications.css('top', 86);
+            } else {
+                $this.css('height', 0);
+                notificationsPresent && $notifications.css('top', '');
+            }
+        });
+    });
+
+
+    //hide search field if open
+    $sidebar.on('show', function () {
+        var $notifications = $('.notifications'),
+            notificationsPresent = !$notifications.is(':empty');
+        $("#search-form").css('height', 0);
+        notificationsPresent && $notifications.css('top', '');
+    })
+});
