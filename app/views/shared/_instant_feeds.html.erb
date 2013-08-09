@@ -1,5 +1,5 @@
 <div class="row-fluid masonry_feed">
-		<% @feeds.each do |feed| -%>
+		<% @feeds.sort_by(&:origin_created_time).reverse.each do |feed| -%>
 		  <div class="span6 box">
 		    <div class="body">
 		        <div class="row-fluid">

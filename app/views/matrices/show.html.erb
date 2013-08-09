@@ -73,5 +73,7 @@
 	<div id="feeds">
 	  <%= render partial: 'shared/instant_feeds' %>
 	</div>
+	
+	<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
 <% end %>
 

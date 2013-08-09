@@ -14,11 +14,25 @@ class MatricesController < ApplicationController
   # GET /matrices/1
   # GET /matrices/1.json
   def show
+    puts params
     @companies = @matrix.companies
-    @feeds = @matrix.crawl_feed(10)
+    if params[:twitter_last_ids]
+      if params[:linkedin_next_start_ids] 
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], nil)
+      end
+    else
+      if params[:linkedin_next_start_ids]
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(5, nil, params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(10, nil,nil)
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @matrix }
+      format.js
     end
   end
 
