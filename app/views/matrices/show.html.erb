@@ -1,79 +1,82 @@
-<div class="row-fluid">
-	<div class="span12">
-		<h2 class="page-title"><%= @matrix.name %></h2>
-		<p><%= @matrix.description %></p>
-	</div>
-</div>
-
-<% if @matrix.companies.any? %>
-<div class="row-fluid masonry_feed">
-	<% @matrix.companies.each_with_index do |company, index| %>
-  <div class="span6 box">
-    <div class="body">
-        <div class="row-fluid">
-            <div class="span4">
-                <div class="text-align-center">
-                    <img src="<%= company.logo_url -%>">
-                </div>
-            </div>
-            <div class="span8">
-                <h3 class="no-margin"><%= company.name -%></h3>
-								<p><%= company.industries.map(&:name).join(", ") -%></p>
-								<p><%= company.competences.map(&:name).join(", ") -%></p>
-								<p><%= company.description -%></p>
-								<p><%= company.country %></p>
-            </div>
-        </div>
-    </div>
-  </div>
-	<% end %>
-</div>
-<% end %>
-
-<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
-	<i class="icon-edit"></i> Edit
-<% end %>
-
-<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
-
-<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
-	<i class="icon-trash"></i> Delete
-<% end %>
-
-
-
-<!-- Modal -->
-<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Create New Company</h3>
-	</div>
-
-	<div class="modal-body">
-		<form accept-charset="UTF-8" action="<%= add_matrix_path(@matrix) %>" class="form-horizontal" method="get">
-			<fieldset>
-				 <div class="control-group">
-					<label class="control-label" for="keyword">Company Name</label>
-					<div class="controls">
-						<input type="text" name="keyword" placeholder="" class="input-xlarge">
-					</div>
+<section class="widget widget-tabs">
+	<header>
+        <ul class="nav nav-tabs">
+            <li>
+                <a href="#profiles" data-toggle="tab">Profiles</a>
+            </li>
+            <li class="active">
+                <a href="#updates" data-toggle="tab">Updates</a>
+            </li>
+        </ul>
+    </header>
+    <div class="body tab-content">
+    	<div id="profiles" class="tab-pane">
+            <h2 class="tab-header"><%= @matrix.name %></h2>
+            <p><%= @matrix.description %></p>
+                    
+			<% if @matrix.companies.any? %>
+				<div id="Companies">
+				  	<%= render partial: 'shared/companies' %>
 				</div>
 				
-				<div class="control-group">
-					<div class="controls">
-						<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
-					</div>
+			<% end %>
+			<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
+				<i class="icon-edit"></i> Edit
+			<% end %>
+			
+			<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
+			
+			<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+				<i class="icon-trash"></i> Delete
+			<% end %>
+			
+			
+			
+			<!-- Modal -->
+			<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Create New Company</h3>
 				</div>
-			</fieldset>
-		</form>
-	</div>
-</div>
+			
+				<div class="modal-body">
+					<form accept-charset="UTF-8" action="<%= add_matrix_path(@matrix) %>" class="form-horizontal" method="get">
+						<fieldset>
+							 <div class="control-group">
+								<label class="control-label" for="keyword">Company Name</label>
+								<div class="controls">
+									<input type="text" name="keyword" placeholder="" class="input-xlarge">
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<div class="controls">
+									<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
 
-<% if @feeds.any? %>
-	<div id="feeds">
-	  <%= render partial: 'shared/instant_feeds' %>
-	</div>
-	
-	<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
-<% end %>
+        </div>
+        <div id="updates" class="tab-pane active clearfix">
+        	<h2 class="tab-header"><i class="icon-star"></i> Feeds</h2>
+        	
+			<% if @feeds.any? %>
+				<div id="feeds">
+				  <%= render partial: 'shared/instant_feeds' %>
+				</div>
+				
+				<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
+			
+			<% end %>
+        </div>
+    </div>
+</section>
+
+
+
+
+
 
