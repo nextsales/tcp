@@ -10,25 +10,26 @@
         </ul>
     </header>
     <div class="body tab-content">
-    	<div id="profiles" class="tab-pane">
-            <h2 class="tab-header"><%= @matrix.name %></h2>
-            <p><%= @matrix.description %></p>
-                    
-			<% if @matrix.companies.any? %>
-				<div id="Companies">
-				  	<%= render partial: 'shared/companies' %>
-				</div>
-				
-			<% end %>
-			<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
-				<i class="icon-edit"></i> Edit
-			<% end %>
-			
-			<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
-			
-			<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
-				<i class="icon-trash"></i> Delete
-			<% end %>
+    	<div id="profiles" class="tab-pane active clearfix">
+	            <h2 class="tab-header"><%= @matrix.name %></h2>
+	            <p><%= @matrix.description %></p>
+	            
+    			<div class="span12">
+					<% if @matrix.companies.any? %>
+						<div id="Companies">
+						  	<%= render partial: 'shared/companies' %>
+						</div>
+						
+					<% end %>
+					<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
+						<i class="icon-edit"></i> Edit
+					<% end %>
+					<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
+					
+					<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+						<i class="icon-trash"></i> Delete
+					<% end %>
+				</div>	
 			
 			
 			
@@ -60,17 +61,17 @@
 			</div>
 
         </div>
-        <div id="updates" class="tab-pane active clearfix">
-        	<h2 class="tab-header"><i class="icon-star"></i> Feeds</h2>
-        	
-			<% if @feeds.any? %>
-				<div id="feeds">
-				  <%= render partial: 'shared/instant_feeds' %>
-				</div>
+        <div id="updates" class="tab-pane  active">
+			<div class="span12">
+                <% if @feeds.any? %>
+					<div id="feeds">
+					  <%= render partial: 'shared/instant_feeds' %>
+					</div>
+					
+					<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
 				
-				<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
-			
-			<% end %>
+				<% end %>
+		    </div>				
         </div>
     </div>
 </section>

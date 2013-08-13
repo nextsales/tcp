@@ -1,24 +1,15 @@
-<div class="row-fluid">
-	<div class="row-fluid masonry_feed">
+<div class="row-fluid masonry_feed">
+	<ul class="thumbnails">	
 		<% @companies.each do |company| %>
-	  <div class="span6 box">
-	    <div class="body">
-	        <div class="row-fluid">
-	            <div class="span4">
-	                <div class="text-align-center">
-	                    <img src="<%= company.logo_url -%>">
-	                </div>
-	            </div>
-	            <div class="span8">
-	                <h3 class="no-margin"><%= company.name -%></h3>
-									<p><%= company.industries.map(&:name).join(", ") -%></p>
-									<p><%= company.competences.map(&:name).join(", ") -%></p>
-									<p><%= company.description -%></p>
-									<p><%= company.country %></p>
-	            </div>
-	        </div>
-	    </div>
-	  </div>
+		  	<div class="span6 box">
+			  	<img src="<%= company.logo_url -%>">
+			  	<div class="caption">
+				  	<p><%= company.industries.map(&:name).join(", ") -%></p>
+					<p><%= company.competences.map(&:name).join(", ") -%></p>
+					<p><%= company.description -%></p>
+					<p><%= company.country %></p>
+				</div>
+			</div>		    
 		<% end %>
-	</div>
+	</ul>
 </div>
