@@ -13,11 +13,12 @@ class CompanyImportsController < ApplicationController
       #render :new
     #end
     case File.extname(@company_import.file.original_filename)
-    when ".csv" then spreadsheet = Roo::Csv.new(@company_import.file.path, nil, :ignore)
-    when ".xls" then spreadsheet = Roo::Excel.new(@company_import.file.path, nil, :ignore)
-    when ".xlsx" then spreadsheet = Roo::Excelx.new(@company_import.file.path, nil, :ignore)
-    else raise "Unknown file type: #{@company_import.file.original_filename}"
+      when ".csv" then spreadsheet = Roo::Csv.new(@company_import.file.path, nil, :ignore)
+      when ".xls" then spreadsheet = Roo::Excel.new(@company_import.file.path, nil, :ignore)
+      when ".xlsx" then spreadsheet = Roo::Excelx.new(@company_import.file.path, nil, :ignore)
+      else raise "Unknown file type: #{@company_import.file.original_filename}"
     end
+    
     @imported_companies =Array.new
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
