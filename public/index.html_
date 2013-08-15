@@ -2,8 +2,6 @@
 <html>
 <head>
     <title>Light Blue - Admin Template</title>
-		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link href="css/application.min.css" rel="stylesheet">
     <link rel="shortcut icon" href="img/favicon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,6 +26,7 @@
                 <li><a href="form_article.html">Article</a></li>
                 <li><a href="form_elements.html">Elements</a></li>
                 <li><a href="form_validation.html">Validation</a></li>
+                <li><a href="form_wizard.html">Wizard</a></li>
             </ul>
         </li>
         <li class="accordion-group">
@@ -96,8 +95,12 @@
     <header class="page-header">
         <div class="navbar">
             <div class="navbar-inner">
-
                 <ul class="nav pull-right">
+                    <li class="visible-phone-landscape">
+                        <a href="#" id="search-toggle">
+                            <i class="icon-search"></i>
+                        </a>
+                    </li>
                     <li class="dropdown">
                         <a href="#" title="Messages" id="messages"
                            class="dropdown-toggle"
@@ -261,6 +264,9 @@
                     </li>
                     <li class="hidden-phone"><a href="login.html"><i class="icon-signout"></i></a></li>
                 </ul>
+                <form id="search-form" class="navbar-search pull-right">
+                    <input type="search" class="search-query" placeholder="Search...">
+                </form>
                 <div class="notifications pull-right">
                     <div class="alert pull-right">
                         <a href="#" class="close" data-dismiss="alert">&times;</a>
@@ -891,7 +897,7 @@
 <script src="js/bootstrap/bootstrap-tooltip.js"></script>
 <script src="js/bootstrap/bootstrap-popover.js"></script>
 <script src="js/bootstrap/bootstrap-button.js"></script>
-<script src="js/bootstrap/bootstrap-tab.js"></script>
+<script src="js/bootstrap/bootstrap-tab.js"> </script>
 <script src="js/bootstrap/bootstrap-dropdown.js"></script>
 
 <!-- basic application js-->
@@ -915,7 +921,7 @@
             <span class="arrow"></span>
             <div class="sender">Tikhon Laninga</div>
             <div class="text">
-                {{= text }}
+                <%- text %>
             </div>
         </div>
 </script>
@@ -924,43 +930,43 @@
     <div class="setting clearfix">
         <div>Background</div>
         <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            {{ dark = background == 'dark'; light = background == 'light';}}
-            <button type="button" data-value="dark" class="btn btn-small btn-transparent {{= dark? 'active' : '' }}">Dark</button>
-            <button type="button" data-value="light" class="btn btn-small btn-transparent {{= light? 'active' : '' }}">Light</button>
+            <% dark = background == 'dark'; light = background == 'light';%>
+            <button type="button" data-value="dark" class="btn btn-small btn-transparent <%= dark? 'active' : '' %>">Dark</button>
+            <button type="button" data-value="light" class="btn btn-small btn-transparent <%= light? 'active' : '' %>">Light</button>
         </div>
     </div>
     <div class="setting clearfix">
         <div>Sidebar on the</div>
         <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            {{ onRight = sidebar == 'right'}}
-            <button type="button" data-value="left" class="btn btn-small btn-transparent {{= onRight? '' : 'active' }}">Left</button>
-            <button type="button" data-value="right" class="btn btn-small btn-transparent {{= onRight? 'active' : '' }}">Right</button>
+            <% onRight = sidebar == 'right'%>
+            <button type="button" data-value="left" class="btn btn-small btn-transparent <%= onRight? '' : 'active' %>">Left</button>
+            <button type="button" data-value="right" class="btn btn-small btn-transparent <%= onRight? 'active' : '' %>">Right</button>
         </div>
     </div>
     <div class="setting clearfix">
         <div>Sidebar</div>
         <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
-            {{ display = displaySidebar}}
-            <button type="button" data-value="true" class="btn btn-small btn-transparent {{= display? 'active' : '' }}">Show</button>
-            <button type="button" data-value="false" class="btn btn-small btn-transparent {{= display? '' : 'active' }}">Hide</button>
+            <% display = displaySidebar%>
+            <button type="button" data-value="true" class="btn btn-small btn-transparent <%= display? 'active' : '' %>">Show</button>
+            <button type="button" data-value="false" class="btn btn-small btn-transparent <%= display? '' : 'active' %>">Hide</button>
         </div>
     </div>
 </script>
 
 <script type="text/template" id="sidebar-settings-template">
-    {{ auto = sidebarState == 'auto'}}
-    {{ if (auto) {}}
+    <% auto = sidebarState == 'auto'%>
+    <% if (auto) {%>
     <button type="button"
             data-value="icons"
             class="btn-icons btn btn-transparent btn-small">Icons</button>
     <button type="button"
             data-value="auto"
             class="btn-auto btn btn-transparent btn-small">Auto</button>
-    {{} else {}}
+    <%} else {%>
     <button type="button"
             data-value="auto"
             class="btn btn-transparent btn-small">Auto</button>
-    {{ } }}
+    <% } %>
 </script>
 
 </body>

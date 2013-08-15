@@ -46,16 +46,6 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "assets", :force => true do |t|
-    t.integer  "company_id"
-    t.datetime "created_at",            :null => false
-    t.datetime "updated_at",            :null => false
-    t.string   "document_file_name"
-    t.string   "document_content_type"
-    t.integer  "document_file_size"
-    t.datetime "document_updated_at"
-  end
-
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.text     "description"
@@ -104,42 +94,15 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
     t.boolean  "is_approve"
   end
 
-  create_table "datafiles", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "facebook_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "feed_matrix_rs", :force => true do |t|
-    t.integer  "feed_id"
-    t.integer  "matrix_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "feeds", :force => true do |t|
-    t.string   "title"
-    t.string   "photo_url"
-    t.integer  "company_id"
-    t.string   "url"
-    t.integer  "shares"
-    t.integer  "likes"
-    t.datetime "origin_created_time"
-    t.text     "content"
-    t.string   "feed_type"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.string   "update_key"
+    t.string   "update_type"
+    t.text     "raw_data"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
+
+  add_index "feeds", ["update_key"], :name => "index_feeds_on_update_key"
 
   create_table "follower_matrix_rs", :force => true do |t|
     t.integer  "user_id"
@@ -188,33 +151,18 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
     t.integer  "user_id"
   end
 
-  create_table "linkedin_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "manual_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
   create_table "matrices", :force => true do |t|
     t.string   "name"
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "matrix_feed_rs", :force => true do |t|
+    t.integer  "matrix_id"
+    t.integer  "feed_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "matrix_follower_rs", :force => true do |t|
@@ -226,37 +174,6 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
 
   create_table "matrix_keywords", :force => true do |t|
     t.integer  "matrix_id"
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "media_company_rs", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "media_site_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "media_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "media_matrix_rs", :force => true do |t|
-    t.integer  "matrix_id"
-    t.integer  "media_site_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  create_table "media_sites", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -312,17 +229,6 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
     t.string   "lang"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
-  end
-
-  create_table "twitter_feeds", :force => true do |t|
-    t.integer  "company_id"
-    t.integer  "matrix_id"
-    t.string   "title"
-    t.text     "content"
-    t.string   "url"
-    t.boolean  "is_top"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "twitter_tweet_last_ids", :force => true do |t|
