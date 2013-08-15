@@ -1,0 +1,15 @@
+<div class="row-fluid masonry_feed">
+	<ul class="thumbnails">	
+		<% @feeds.sort_by(&:origin_created_time).reverse.each do |feed| -%>
+	    	<li class="span4 box">
+        		<img src="<%= feed.photo_url -%>" alt="">
+        		<div class="caption">
+                    <h4 class="no-margin"><%= link_to feed.title , feed.url%></h4>
+                    <p><%= feed.content%></p>
+                    <i class=" icon-thumbs-up"></i> <%= feed.likes %> | <i class=" icon-share"></i>  <%=feed.shares%> | <%= time_ago_in_words(feed.origin_created_time) %> ago.
+                </div>
+			</li>
+		
+		<% end %>
+	</ul>
+</div>

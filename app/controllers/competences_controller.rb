@@ -2,11 +2,12 @@ class CompetencesController < ApplicationController
   # GET /competences
   # GET /competences.json
   def index
+    @competence = Competence.new
     @competences = Competence.all
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @competences }
+      format.json { render json: Competence.tokens(params[:q]) }
     end
   end
 

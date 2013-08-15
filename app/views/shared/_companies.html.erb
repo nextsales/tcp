@@ -1,0 +1,15 @@
+<div class="row-fluid masonry_feed">
+	<ul class="thumbnails">	
+		<% @companies.each do |company| %>
+		  	<div class="span6 box">
+			  	<img src="<%= company.logo_url -%>">
+			  	<div class="caption">
+				  	<p><%= company.industries.map(&:name).join(", ") -%></p>
+					<p><%= company.competences.map(&:name).join(", ") -%></p>
+					<p><%= company.description -%></p>
+					<p><%= company.country %></p>
+				</div>
+			</div>		    
+		<% end %>
+	</ul>
+</div>

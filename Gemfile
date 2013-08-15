@@ -13,11 +13,28 @@ gem "json"
 gem "oauth"
 gem "whenever"
 gem "nokogiri"
+
 gem "roo"
+
+gem "certified" # pass OpenSSL::Error
+#gem "haml", "~> 4.0.3"
+
+gem 'will_paginate', '~> 3.0.0' #infinite scroll
+
+
+gem 'omniauth'
+gem 'omniauth-linkedin'
+gem 'linkedin', :git => 'git://github.com/nextsales/linkedin.git'
+#gem 'linkedin'
+
+
+gem 'omniauth-twitter'
+gem 'twitter'
+
+gem 'activeadmin'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
-	gem 'activeadmin'
 end
 
 
@@ -42,10 +59,11 @@ gem 'jquery-rails'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-# gem 'unicorn'
+#gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+#gem 'capistrano'
+#gem 'rvm-capistrano'
 
 # To use debugger
 # gem 'debugger'

@@ -1,8 +1,5 @@
 class Feed < ActiveRecord::Base
-  attr_accessible :company_id, :content, :feed_type, :likes, :origin_created_time, :photo_url, :shares, :title, :url
-  
-  belongs_to :company
-  
-  has_many :feed_matrix_rs, :dependent => :destroy
-  has_many :matrices, :through => :feed_matrix_rs
+  attr_accessible :raw_data, :update_key, :update_type, :created_at
+  has_many :matrix_feed_rs
+  has_many :matrices, :through => :matrix_feed_rs
 end

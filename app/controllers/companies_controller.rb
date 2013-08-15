@@ -5,16 +5,31 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
+    @suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
+    @matrices = current_user.matrices
+    
+    #@linkedin_following_companies = current_user.test_following_companies
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @companies }
+    end
+  end
+  
+  def search
+    @company = Company.new
+    keyword = params[:keyword]
+    if (!keyword.blank?)
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => keyword}, "company").companies.all
+    end
+    
+    respond_to do |format|
+      format.html
     end
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
-    @feeds = @company.feeds
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @company }
@@ -24,6 +39,15 @@ class CompaniesController < ApplicationController
   # GET /companies/new
   # GET /companies/new.json
   def new
+    @company.name = params[:name]
+    @companies = []
+    @linkedin_companies = []
+    
+    if (!@company.name.blank?)
+      @companies = Company.find_all_by_name(params[:name])
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => params[:name]}, "company").companies.all
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @company }
@@ -42,6 +66,7 @@ class CompaniesController < ApplicationController
       if @company.save
         format.html { redirect_to companies_url, notice: @company.name + ' was successfully created.' }
         format.json { render json: @company, status: :created, location: @company }
+        format.js
       else
         format.html { render action: "new" }
         format.json { render json: @company.errors, status: :unprocessable_entity }

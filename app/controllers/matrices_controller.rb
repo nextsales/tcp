@@ -14,11 +14,25 @@ class MatricesController < ApplicationController
   # GET /matrices/1
   # GET /matrices/1.json
   def show
-    @feeds = @matrix.feeds.order("origin_created_time DESC")
+    puts params
     @companies = @matrix.companies
+    if params[:twitter_last_ids]
+      if params[:linkedin_next_start_ids] 
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], nil)
+      end
+    else
+      if params[:linkedin_next_start_ids]
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(5, nil, params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(10, nil,nil)
+      end
+    end
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @matrix }
+      format.js
     end
   end
 
@@ -72,6 +86,27 @@ class MatricesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to matrices_url }
       format.json { head :no_content }
+    end
+  end
+  
+  def add
+    @company = Company.new
+    keyword = params[:keyword]
+    if (!keyword.blank?)
+      @linkedin_companies = current_user.linkedin_client.search({:keywords => keyword}, "company").companies.all
+    end
+    
+    respond_to do |format|
+      format.html
+    end
+  end
+  
+  def feed
+    #raise @matrix.feeds.first.raw_data.to_json
+    @feeds = @matrix.feeds.order('created_at DESC')
+    respond_to do |format|
+      format.html
+      format.json { render json: @feeds }
     end
   end
 end
