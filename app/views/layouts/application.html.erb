@@ -1,104 +1,192 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Tcp</title>
+	<title>Tcp</title>
 	<%= csrf_meta_tags %>
 	<!-- start: Mobile Specific -->
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<!-- end: Mobile Specific -->
 	
-	<!-- start: CSS -->
-	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-	<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.min.css" rel="stylesheet">
-	<link href="/css/jquery-ui-1.8.21.custom.css" rel="stylesheet" />
-	<link href="//cdn.jsdelivr.net/fullcalendar/1.6.1/fullcalendar.css" rel="stylesheet" />
-	<link href="//cdn.jsdelivr.net/chosen/0.9.12/chosen.css" rel="stylesheet" />
-	<link href="/css/uniform.default.css" rel="stylesheet" />
-	<link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/select2/3.3.2/select2.css" />
-	<link href="//cdn.jsdelivr.net/cleditor/1.3.0/jquery.cleditor.css" rel="stylesheet" />
-	<link href="/css/jquery.noty.css" rel="stylesheet" />
-	<link href="/css/noty_theme_default.css" rel="stylesheet" />
-	<link href="/css/elfinder.min.css" rel="stylesheet" />
-	<link href="/css/elfinder.theme.css" rel="stylesheet" />
-	<link href="/css/jquery.iphone.toggle.css" rel="stylesheet" />
-	<link href="//cdn.jsdelivr.net/uploadify/3.2/uploadify.css" rel="stylesheet" />
-	<link href="//cdn.jsdelivr.net/jquery.gritter/1.7.4/css/jquery.gritter.css" rel="stylesheet" />
-	<link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/styles/token-input-facebook.css" />
-	<link type="text/css" rel="stylesheet" href="//cdn.jsdelivr.net/chosen/0.9.12/chosen.css" />
-	
-	<link id="base-style" href="/css/style.css" rel="stylesheet" />
-	<link id="base-style-responsive" href="/css/style-responsive.css" rel="stylesheet" />
-	<link href="http://clabs.co/projects/acme_less/css/retina.css" rel="stylesheet" />
-	<link href="/css/override.css" rel="stylesheet" />
-	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&subset=latin,cyrillic-ext,latin-ext' rel='stylesheet' type='text/css' />
-	
-	<!--[if lt IE 9]>
-		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-		<link id="ie-style" href="/css/ie.css" rel="stylesheet" />
-	<![endif]-->
-	
-	<!--[if IE 9]>
-		<link id="ie9style" href="/css/ie9.css" rel="stylesheet" />
-	<![endif]-->
-	
+  <link href="/css/application.min.css" rel="stylesheet">
+	<!-- 
+	<link href="/css/override.css" rel="stylesheet">
+	-->
 	<!--[if IE 7]>
-		<link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome-ie7.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome-ie7.min.css" rel="stylesheet">
 	<![endif]-->
-	
+
 	<%= stylesheet_link_tag "application", :media => "all" %>
 </head>
-	
-<body class="<%= controller_name -%> <%= action_name -%>">
-	
-	<div id="tc_notice"><%= notice %></div>
-	<div id="tc_alert"><%= alert %></div>
-	
+<body class="background-dark <%= controller_name -%> <%= action_name -%>">
+
 	<% if user_signed_in? %>
-		<%= render 'layouts/navbar' %>
-		<%= render 'layouts/header' %>
-			<%= yield %>
-		<%= render 'layouts/footer' %>
+		<div class="logo">
+		    <h4><a href="/">TopCompetitors</a></h4>
+		</div>
+		<%= render 'layouts/sidebar' %>
+		<%= render 'layouts/navbar_header' %>
+
+		<div class="wrap">
+			<div class="content container-fluid">
+				<%= yield %>
+			</div>
+		</div>
 	
 	<% else %>
 		<%= yield %>
 	<% end %>
 	
-	
-	<script src="//cdn.jsdelivr.net/jquery/2.0.0/jquery-2.0.0.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.2.1/jquery-migrate.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.tokeninput/1.6.0/jquery.tokeninput.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/chosen/0.9.12/chosen.jquery.min.js"></script>
-	<script src="/js/jquery-ui-1.8.21.custom.min.js"></script>
-	<script src="//cdn.jsdelivr.net/modernizr/2.6.2/modernizr.min.js"></script>
-	<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.cookie/1.3.1/jquery.cookie.js"></script>
-	<script src="//cdn.jsdelivr.net/fullcalendar/1.6.1/fullcalendar.min.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.datatables/1.9.4/js/jquery.dataTables.min.js"></script>
-	<script src="//cdn.jsdelivr.net/excanvas/r3/excanvas.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.flot/0.7/jquery.flot.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.flot/0.7/jquery.flot.pie.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.flot/0.7/jquery.flot.stack.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.flot/0.7/jquery.flot.resize.js"></script>
-	<script src="//cdn.jsdelivr.net/chosen/0.9.12/chosen.jquery.min.js"></script>
-	<script src="//cdn.jsdelivr.net/uniformjs/2.1.1/jquery.uniform.min.js"></script>
-	<script src="//cdn.jsdelivr.net/cleditor/1.3.0/jquery.cleditor.min.js"></script>
-	<script src="/js/jquery.noty.js"></script>
-	<script src="/js/jquery.elfinder.min.js"></script>
-	<script src="/js/jquery.raty.min.js"></script>
-	<script src="/js/jquery.iphone.toggle.js"></script>
-	<script src="//cdn.jsdelivr.net/uploadify/3.2/jquery.uploadify.min.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.gritter/1.7.4/js/jquery.gritter.min.js"></script>
-	<script src="//cdn.jsdelivr.net/imagesloaded/2.1.0/jquery.imagesloaded.min.js"></script>
-	<script src="//cdn.jsdelivr.net/masonry/2.1.08/jquery.masonry.min.js"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/select2/3.3.2/select2.min.js"></script>
-	<script src="/js/jquery.knob.modified.js"></script>
-	<script src="//cdn.jsdelivr.net/jquery.sparkline/2.1.1/jquery.sparkline.min.js"></script>
-	<script src="/js/counter.js"></script>
-	<script src="//cdn.jsdelivr.net/retinajs/0.0.2/retina.js"></script>
-	<script src="/js/custom.js"></script>
-	<script src="/js/tc.js"></script>
-	
 	<%= javascript_include_tag "application" %>
+
+
+<!-- jquery plugins -->
+
+<script src="/lib/uniform/js/jquery.uniform.js"></script>
+<script src="/lib/sparkline/jquery.sparkline.js"></script>
+<script src="/lib/jquery-ui-1.10.1.custom.js"></script>
+<script src="/lib/jquery.slimscroll.js"></script>
+<script src="/lib/jquery-maskedinput/jquery.maskedinput.js"></script>
+<script src="/lib/parsley/parsley.js"></script>
+<script src="/lib/select2.js"></script>
+<script src="/lib/jquery.autogrow-textarea.js"></script>
+<script src="//cdn.jsdelivr.net/masonry/2.1.08/jquery.masonry.min.js"></script>
+
+<script src="/lib/vendor/jquery.ui.widget.js"></script>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="/lib/blueimp/tmpl.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script> -->
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="/lib/blueimp/load-image.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script> -->
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="/lib/blueimp/canvas-to-blob.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script> -->
+
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="/lib/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="/lib/jquery.fileupload.js"></script>
+<!-- The File Upload file processing plugin -->
+<script src="/lib/jquery.fileupload-fp.js"></script>
+<!-- The File Upload user interface plugin -->
+<script src="/lib/jquery.fileupload-ui.js"></script>
+<script src="lib/jquery.dataTables.min.js"></script>
+
+<!-- d3, nvd3-->
+<!--
+<script src="/lib/nvd3/lib/d3.v2.js"></script>
+<script src="/lib/nvd3/nv.d3.custom.js"></script>
+<script src="/lib/nvd3/src/models/scatter.js"></script>
+<script src="/lib/nvd3/src/models/axis.js"></script>
+<script src="/lib/nvd3/src/models/legend.js"></script>
+<script src="/lib/nvd3/src/models/multiBar.js"></script>
+<script src="/lib/nvd3/src/models/multiBarChart.js"></script>
+<script src="/lib/nvd3/src/models/line.js"></script>
+<script src="/lib/nvd3/src/models/lineChart.js"></script>
+<script src="/lib/nvd3/stream_layers.js"></script>
+ -->
+
+<!--backbone and friends -->
+<!-- 
+<script src="/lib/backbone/underscore-min.js"></script>
+<script src="/lib/backbone/backbone-min.js"></script>
+<script src="/lib/backbone/backbone.localStorage-min.js"></script>
+ -->
+
+<!-- bootstrap default plugins -->
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
+<!-- bootstrap custom plugins -->
+<script src="/lib/bootstrap-datepicker.js"></script>
+<script src="/lib/bootstrap-select/bootstrap-select.js"></script>
+<script src="/lib/wysihtml5/wysihtml5-0.3.0_rc2.js"></script>
+<script src="/lib/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script src="/lib/bootstrap-switch.js"></script>
+<script src="/lib/bootstrap-colorpicker.js"></script>
+
+
+<!-- basic application js-->
+<script src="/js/app.js"></script>
+<!-- 
+<script src="/js/settings.js"></script>
+-->
+
+<!-- page specific -->
+<!-- 
+<script src="/js/forms.js"></script>
+<script src="/js/index.js"></script>
+<script src="/js/chat.js"></script>
+<script src="/js/forms-elemets.js"></script>
+-->
+<!-- QUANG Need to be fix/customize -->
+<!-- <script src="/js/fileupload.js"></script> -->
+
+<!-- 
+<script type="text/template" id="message-template">
+        <div class="sender pull-left">
+            <div class="icon">
+                <img src="img/2.jpg" class="img-circle" alt="">
+            </div>
+            <div class="time">
+                just now
+            </div>
+        </div>
+        <div class="chat-message-body">
+            <span class="arrow"></span>
+            <div class="sender">Tikhon Laninga</div>
+            <div class="text">
+                {{= text }}
+            </div>
+        </div>
+</script>
+
+<script type="text/template" id="settings-template">
+    <div class="setting clearfix">
+        <div>Background</div>
+        <div id="background-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+            {{ dark = background == 'dark'; light = background == 'light';}}
+            <button type="button" data-value="dark" class="btn btn-small btn-transparent {{= dark? 'active' : '' }}">Dark</button>
+            <button type="button" data-value="light" class="btn btn-small btn-transparent {{= light? 'active' : '' }}">Light</button>
+        </div>
+    </div>
+    <div class="setting clearfix">
+        <div>Sidebar on the</div>
+        <div id="sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+            {{ onRight = sidebar == 'right'}}
+            <button type="button" data-value="left" class="btn btn-small btn-transparent {{= onRight? '' : 'active' }}">Left</button>
+            <button type="button" data-value="right" class="btn btn-small btn-transparent {{= onRight? 'active' : '' }}">Right</button>
+        </div>
+    </div>
+    <div class="setting clearfix">
+        <div>Sidebar</div>
+        <div id="display-sidebar-toggle" class="pull-left btn-group" data-toggle="buttons-radio">
+            {{ display = displaySidebar}}
+            <button type="button" data-value="true" class="btn btn-small btn-transparent {{= display? 'active' : '' }}">Show</button>
+            <button type="button" data-value="false" class="btn btn-small btn-transparent {{= display? '' : 'active' }}">Hide</button>
+        </div>
+    </div>
+</script>
+
+<script type="text/template" id="sidebar-settings-template">
+    {{ auto = sidebarState == 'auto'}}
+    {{ if (auto) {}}
+    <button type="button"
+            data-value="icons"
+            class="btn-icons btn btn-transparent btn-small">Icons</button>
+    <button type="button"
+            data-value="auto"
+            class="btn-auto btn btn-transparent btn-small">Auto</button>
+    {{} else {}}
+    <button type="button"
+            data-value="auto"
+            class="btn btn-transparent btn-small">Auto</button>
+    {{ } }}
+</script>
+-->
+<!-- 
+<script src="/js/test.js"></script>
+-->
+
+
 </body>
 </html>

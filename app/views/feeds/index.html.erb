@@ -25,7 +25,7 @@
     <td><%= feed.url %></td>
     <td><%= feed.shares %></td>
     <td><%= feed.likes %></td>
-    <td><%= feed.matrix_id %></td>
+    <td><%= feed.matrices.map(&:name).join(', ') %></td>
     <td><%= feed.origin_created_time %></td>
     <td><%= feed.content %></td>
     <td><%= feed.feed_type %></td>

@@ -1,3 +1,5 @@
+OMNI_AUTH_CONFIG = YAML.load_file("#{::Rails.root}/config/omni_auth.yml")[::Rails.env]
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -220,7 +222,8 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-
+  config.omniauth :linkedin, OMNI_AUTH_CONFIG['linkedin_app_id'], OMNI_AUTH_CONFIG['linkedin_app_secret'], :scope => 'r_basicprofile w_messages r_fullprofile r_emailaddress r_contactinfo r_network rw_groups rw_nus'   
+  config.omniauth :twitter, OMNI_AUTH_CONFIG["TWITTER_CONSUMER_KEY"], OMNI_AUTH_CONFIG["TWITTER_CONSUMER_SECRET"]
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
   # change the failure app, you can configure them inside the config.warden block.

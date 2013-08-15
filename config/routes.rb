@@ -1,23 +1,43 @@
 Tcp::Application.routes.draw do
-  resources :feeds
+  resources :matrices do
+    member do
+      get :add, :action => 'add'
+      get :feed, :action => 'feed'
+    end
+  end
 
-
-  resources :matrices
   resources :competences
   resources :industries
-  resources :companies
+  resources :companies do
+    collection do
+      get :search, :action => 'search'
+    end
+  end
+  
+
   
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"
+  match "test_masonry" => "dashboard#test_masonry"
+  match "testlinkedin" => "crawler#testlinkedin"
+  match "crawl" => "crawler#crawl_suggested_companies"
+  
+
+
+  
   
   root :to => 'dashboard#index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   
-  devise_for :users
+  devise_for :users, controllers:{omniauth_callbacks: "omniauth_callbacks"}
   ActiveAdmin.routes(self)
 
+  resources :company_imports
+  resources :industry_imports
+  resources :competence_imports
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

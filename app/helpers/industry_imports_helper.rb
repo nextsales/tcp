@@ -1,0 +1,2 @@
+module IndustryImportsHelper
+end

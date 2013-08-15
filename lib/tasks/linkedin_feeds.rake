@@ -3,6 +3,42 @@ namespace :crawl do
   task linkedin: :environment do
     linkedin_feeds
   end
+  
+  task suggested_companies: :environment do
+    get_suggested_companies_from_linkedin
+  end
+end
+
+def get_suggested_companies_from_linkedin
+  User.all.each do |user|
+    next if !user.linkedin_uid
+    linkedin_client = user.linkedin_client
+    
+    # Start crawling following companies
+    start = 0
+    count = 25
+    while (true)
+       query = linkedin_client.following_companies(:start => start, :count => count)
+       save_suggested_company(user, query.all, 10) if query.all
+       start = start + count
+       break if (start > query.total) 
+    end
+    # End crawling following companies
+    
+    # Start crawling suggested companies by linkedin
+    query = linkedin_client.following_companies_suggestions(count: 25)
+    save_suggested_company(user, query.all, 1) if query.all
+    # End crawling suggested companies by linkedin
+    
+  end
+end
+
+def save_suggested_company(user, companies, rank)
+  companies.each do |c|
+    next if !SuggestedCompany.where(user_id: user.id, linkedin_id: c.id).empty?
+    detail_data = user.linkedin_client.company(:id => c.id, :fields => %w{id name logo-url})
+    suggested_com = SuggestedCompany.create(user_id: user.id, linkedin_id: detail_data.id, name: detail_data.name, logo_url: detail_data.logo_url, rank: rank)
+  end
 end
 
 def linkedin_feeds
@@ -11,14 +47,36 @@ def linkedin_feeds
   require 'json'
   require 'date'
   
+  
   # get your api keys at https://www.linkedin.com/secure/developer
-  consumer = OAuth::Consumer.new('62vxqawt0fy2', 'JiXFk6AaYLKBErM1')
-  access_token = OAuth::AccessToken.new(consumer, 'a0d0d1f1-eb24-4dfe-8fd9-19d75fa2e984', 'dcbbc84d-b065-4b86-8d61-23d170126719')
+  #consumer = OAuth::Consumer.new('62vxqawt0fy2', 'JiXFk6AaYLKBErM1')
+  #access_token = OAuth::AccessToken.new(consumer, 'a0d0d1f1-eb24-4dfe-8fd9-19d75fa2e984', 'dcbbc84d-b065-4b86-8d61-23d170126719')
+  api_key = '62vxqawt0fy2'
+  api_secret = 'JiXFk6AaYLKBErM1'
+  configuration = { :site => 'https://api.linkedin.com',
+                    :authorize_path =>   'https://www.linkedin.com/uas/oauth/authenticate',
+                    :request_token_path => 'https://api.linkedin.com/uas/oauth/requestToken',
+                    :access_token_path => 'https://api.linkedin.com/uas/oauth/accessToken' }
+
+  consumer = OAuth::Consumer.new(api_key, api_secret, configuration)
+
+  #Request token
+  request_token = consumer.get_request_token
+
+  # Output request URL to console
+  puts "Please visit this URL: https://api.linkedin.com/uas/oauth/authenticate?oauth_token=" + request_token.token  + " in your browser and then input the numerical code you are provided here: "
+
+  # Set verifier code
+  verifier = $stdin.gets.strip
+
+  # Retrieve access token object
+  access_token = request_token.get_access_token(:oauth_verifier => verifier)
   
-  json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates?count=99999&format=json").body
-  updates = JSON.parse(json_txt)
   
-  
+  #json_txt = access_token.get("http://api.linkedin.com/v1/companies/1070/updates?count=99999&format=json").body
+  #updates = JSON.parse(json_txt)
+  #puts "hello"
+  #
   # Go through all the companies
   companies = Company.all
   companies.each do |company|
@@ -39,6 +97,8 @@ def company_updates (access_token, company, format)
     return
   else
     updates = data["values"]
+    puts updates unless updates
+    return unless updates
     updates.each do |update|
       updateContent = update["updateContent"]
       

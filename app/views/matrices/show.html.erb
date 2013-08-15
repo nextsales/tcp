@@ -1,50 +1,80 @@
-<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-small", :style => "float:right;margin-top:10px"} %>
-
-<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-small", :style => "float:right;margin-top:10px"} do %>
-	<i class="icon-edit"></i> Edit
-<% end %>
-<h1><%= @matrix.name %></h1>
-<p><%= @matrix.description %></p>
-<hr>
-
-
-<% if @matrix.companies.any? %>
-<div class="row-fluid">
-	<% @matrix.companies.each do |company| -%>
-		<div class="box span6 <%= cycle('noMarginLeft', '') -%>" ontablet="span6" ondesktop="span6">
-			<div class="box-content">
-				<ul class="dashboard-list">
-					<li>
-						<%= link_to company, :class => "logo" do %>
-						  <img class="avatar" src="<%= company.logo_url -%>">
-						<% end %>
-						<strong><%= company.name -%></strong> <br>
-						<strong>Industry: </strong><%= company.industries.map(&:name).join(", ") -%><br>
-						<strong>Competence: </strong><%= company.competences.map(&:name).join(", ") -%><br> 
-						<p><%= company.description -%></p>
-					</li>
-				</ul>
+<section class="widget widget-tabs">
+	<header>
+        <ul class="nav nav-tabs">
+            <li>
+                <a href="#profiles" data-toggle="tab">Profiles</a>
+            </li>
+            <li class="active">
+                <a href="#updates" data-toggle="tab">Updates</a>
+            </li>
+        </ul>
+    </header>
+    <div class="body tab-content">
+    	<div id="profiles" class="tab-pane active clearfix">
+	            <h2 class="tab-header"><%= @matrix.name %></h2>
+	            <p><%= @matrix.description %></p>
+	            
+    			<div class="span12">
+					<% if @matrix.companies.any? %>
+						<div id="Companies">
+						  	<%= render partial: 'shared/companies' %>
+						</div>
+						
+					<% end %>
+					<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
+						<i class="icon-edit"></i> Edit
+					<% end %>
+					
+					<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-small"} %>
+					
+					<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
+					
+					<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+						<i class="icon-trash"></i> Delete
+					<% end %>
+				</div>	
+			
+			
+			
+			<!-- Modal -->
+			<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Create New Company</h3>
+				</div>
+			
+				<div class="modal-body">
+					<form accept-charset="UTF-8" action="<%= add_matrix_path(@matrix) %>" class="form-horizontal" method="get">
+						<fieldset>
+							 <div class="control-group">
+								<label class="control-label" for="keyword">Company Name</label>
+								<div class="controls">
+									<input type="text" name="keyword" placeholder="" class="input-xlarge">
+								</div>
+							</div>
+							
+							<div class="control-group">
+								<div class="controls">
+									<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
+								</div>
+							</div>
+						</fieldset>
+					</form>
+				</div>
 			</div>
-		</div>
-	<% end %>
-</div>
-<% end %>
 
-<p id="notice"><%= notice %></p>
-
-
-
-<% if @matrix.feeds.any? %>
-<div class="masonry_feed" class="clearfix fluid">
-	<% @matrix.feeds.each do |feed| -%>
-		<div class="box">
-			<h2><%= link_to feed.title, feed.url %></h2>
-			<div><%= feed.content %></div>
-		  <span class="timestamp">
-		    Posted <%= time_ago_in_words(feed.origin_created_time) %> ago.
-		  </span>
-	  </div>
-	<% end %>
-</div>
-<% end %>
-
+        </div>
+        <div id="updates" class="tab-pane  active">
+			<div class="span12">
+                <% if @feeds.any? %>
+					<div id="feeds">
+					  <%= render partial: 'shared/instant_feeds' %>
+					</div>
+					
+					<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
+				
+				<% end %>
+		    </div>				
+        </div>
+    </div>
+</section>
