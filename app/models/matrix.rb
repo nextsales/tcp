@@ -11,10 +11,7 @@ class Matrix < ActiveRecord::Base
   
   has_many :matrix_follower_rs, dependent: :destroy
   has_many :followers, :through => :matrix_follower_rs
-  
-  has_many :matrix_feed_rs
-  has_many :feeds, :through => :matrix_feed_rs
-  
+    
   has_many :twitter_tweet_last_ids
   
   attr_reader :company_tokens

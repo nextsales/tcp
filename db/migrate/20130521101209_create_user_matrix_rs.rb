@@ -6,5 +6,7 @@ class CreateUserMatrixRs < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:user_matrix_rs, :user_id)
+    add_index(:user_matrix_rs, :matrix_id)
   end
 end

@@ -7,5 +7,7 @@ class CreateCompanyMatrixRs < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index(:company_matrix_rs, :matrix_id)
+    add_index(:company_matrix_rs, :company_id)
   end
 end

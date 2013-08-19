@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130802203318) do
+ActiveRecord::Schema.define(:version => 20130814210630) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -127,19 +127,19 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "feed_matrix_rs", ["feed_id"], :name => "index_feed_matrix_rs_on_feed_id"
+  add_index "feed_matrix_rs", ["matrix_id"], :name => "index_feed_matrix_rs_on_matrix_id"
+
   create_table "feeds", :force => true do |t|
-    t.string   "title"
-    t.string   "photo_url"
-    t.integer  "company_id"
-    t.string   "url"
-    t.integer  "shares"
-    t.integer  "likes"
-    t.datetime "origin_created_time"
-    t.text     "content"
+    t.string   "feed_key"
     t.string   "feed_type"
+    t.datetime "origin_created_time"
+    t.text     "raw_content"
     t.datetime "created_at",          :null => false
     t.datetime "updated_at",          :null => false
   end
+
+  add_index "feeds", ["feed_key"], :name => "index_feeds_on_feed_key"
 
   create_table "follower_matrix_rs", :force => true do |t|
     t.integer  "user_id"
@@ -272,6 +272,28 @@ ActiveRecord::Schema.define(:version => 20130802203318) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "search_feed_matrix_keyword_rs", :force => true do |t|
+    t.integer  "search_feed_id"
+    t.integer  "matrix_keyword_id"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
+
+  add_index "search_feed_matrix_keyword_rs", ["matrix_keyword_id"], :name => "index_search_feed_matrix_keyword_rs_on_matrix_keyword_id"
+  add_index "search_feed_matrix_keyword_rs", ["search_feed_id"], :name => "index_search_feed_matrix_keyword_rs_on_search_feed_id"
+
+
+  create_table "search_feeds", :force => true do |t|
+    t.string   "feed_key"
+    t.string   "feed_type"
+    t.datetime "origin_created_time"
+    t.text     "raw_content"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
+
+  add_index "search_feeds", ["feed_key"], :name => "index_search_feeds_on_feed_key"
 
   create_table "suggested_companies", :force => true do |t|
     t.string   "name"
