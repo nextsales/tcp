@@ -1,0 +1,3 @@
+[submodule "vendor/assets/bluelight"]
+	path = vendor/assets/bluelight
+	url = git@github.com:quangpham/lightblue.git
