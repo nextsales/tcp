@@ -87,6 +87,10 @@ class User < ActiveRecord::Base
     super && (linkedin_uid.blank?&&twitter_uid.blank?)
   end
   
+  def email_required?
+    super && (linkedin_uid.blank?&&twitter_uid.blank?)
+  end
+  
   def update_with_password(params, *options)
     if encrypted_password.blank?
       update_attributes(params, *options)
