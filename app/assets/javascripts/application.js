@@ -16,7 +16,7 @@
 //= require jquery_ujs
 //= require jquery.tokeninput
 //= require_directory .
-//= require jquery.inview.min.js
+//= require jquery.inview.min
 
 $(document).ready(function() {
   $('a.hook').bind('inview', function(e,visible) {
