@@ -27,6 +27,7 @@
 //= require lib/parsley/parsley
 //= require lib/icheck.js/jquery.icheck
 //= require lib/select2
+//= require lib/jquery.dataTables.min.js
 //= require lib/jquery.bootstrap.wizard
 //= require lib/bootstrap-datepicker
 //= require lib/bootstrap-select/bootstrap-select
@@ -51,6 +52,9 @@
 //= require lib/backbone/underscore-min
 //= require lib/backbone/backbone-min
 //= require lib/backbone/backbone.localStorage-min
+//= require lib/backbone/backbone-pageable
+//= require lib/backgrid/backgrid
+//= require lib/backgrid/backgrid-paginator
 
 // bootstrap default plugins
 //= require js/bootstrap/bootstrap-transition
