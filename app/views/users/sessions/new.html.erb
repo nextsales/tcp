@@ -30,19 +30,28 @@
                     <span class="small-circle"><i class="icon-caret-right"></i></span>
                     <small>Sign In</small>
                 </button>
+
 								<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
 									<div class="forgot"><%= link_to "Forgot your password?", new_password_path(resource_name), :class => "forgot" %></div>
 								<% end -%>
+								
+								<a href="/users/auth/linkedin" class="btn btn-block btn-large btn-primary">
+									<span><i class="icon-linkedin-sign"></i> <small>Login with Linkedin</small></span>
+								</a>
+								
+								<a href="/users/auth/twitter" class="btn btn-block btn-large btn-info">
+									<span><i class="icon-twitter-sign"></i> <small>Login with Twitter</small></span>
+								</a>
+								
+								<div class="forgot">
+									<a href="#" class="forgot">Term of use</a>
+								</div>
+								
             </div>
 				<% end %>
     </div>
+
     <footer>
-        <div class="linkedin-login">
-            <a href="/users/auth/linkedin"><span><i class="icon-linkedin-sign icon-large"></i> Login with Linkedin</span></a>
-        </div>
-        <div class="twitter-login">
-            <a href="/users/auth/twitter"><span><i class="icon-twitter-sign icon-large"></i> Login with Twitter</span></a>
-        </div>
     </footer>
 </section>
 
