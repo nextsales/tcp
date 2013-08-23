@@ -27,6 +27,11 @@
 //= require lib/parsley/parsley
 //= require lib/icheck.js/jquery.icheck
 //= require lib/select2
+//= require lib/jquery.bootstrap.wizard
+//= require lib/bootstrap-datepicker
+//= require lib/bootstrap-select/bootstrap-select
+//= require lib/wysihtml5/wysihtml5-0.3.0_rc2
+//= require lib/bootstrap-wysihtml5/bootstrap-wysihtml5
 
 // d3, nvd3-->
 //= require lib/nvd3/lib/d3.v2
@@ -63,10 +68,7 @@
 //= require js/bootstrap/bootstrap-typeahead
 
 // bootstrap custom plugins
-//= require lib/bootstrap-datepicker
-//= require lib/bootstrap-select/bootstrap-select
-//= require lib/wysihtml5/wysihtml5-0.3.0_rc2
-//= require lib/bootstrap-wysihtml5/bootstrap-wysihtml5
+
 
 // basic application js
 
