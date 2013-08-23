@@ -20,6 +20,10 @@
 //= require lib/sparkline/jquery.sparkline
 //= require lib/jquery-ui-1.10.1.custom
 //= require lib/jquery.slimscroll
+//= require lib/jquery.dataTables.min
+
+//= require masonry.pkgd.min
+//= require lib/select2
 
 // d3, nvd3-->
 //= require lib/nvd3/lib/d3.v2
@@ -51,12 +55,8 @@
 //= require js/bootstrap/bootstrap-dropdown
 
 // basic application js
-//= require js/app
-//= require js/settings
 
 // page specific
-//= require js/index
-//= require js/chat
 
 //= require_tree .
 
