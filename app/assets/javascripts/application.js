@@ -23,6 +23,9 @@
 //= require lib/jquery.dataTables.min
 
 //= require masonry.pkgd.min
+//= require lib/jquery-maskedinput/jquery.maskedinput
+//= require lib/parsley/parsley
+//= require lib/icheck.js/jquery.icheck
 //= require lib/select2
 
 // d3, nvd3-->
@@ -46,13 +49,24 @@
 
 // bootstrap default plugins
 //= require js/bootstrap/bootstrap-transition
-//= require js/bootstrap/bootstrap-collapse
+//= require js/bootstrap/bootstrap-affix
 //= require js/bootstrap/bootstrap-alert
+//= require js/bootstrap/bootstrap-button
+//= require js/bootstrap/bootstrap-carousel
+//= require js/bootstrap/bootstrap-collapse
+//= require js/bootstrap/bootstrap-dropdown
+//= require js/bootstrap/bootstrap-modal
+//= require js/bootstrap/bootstrap-scrollspy
+//= require js/bootstrap/bootstrap-tab
 //= require js/bootstrap/bootstrap-tooltip
 //= require js/bootstrap/bootstrap-popover
-//= require js/bootstrap/bootstrap-button
-//= require js/bootstrap/bootstrap-tab
-//= require js/bootstrap/bootstrap-dropdown
+//= require js/bootstrap/bootstrap-typeahead
+
+// bootstrap custom plugins
+//= require lib/bootstrap-datepicker
+//= require lib/bootstrap-select/bootstrap-select
+//= require lib/wysihtml5/wysihtml5-0.3.0_rc2
+//= require lib/bootstrap-wysihtml5/bootstrap-wysihtml5
 
 // basic application js
 
