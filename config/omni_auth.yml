@@ -13,8 +13,3 @@ test:
 production:
   linkedin_app_id: 776lxo8io7pf
   linkedin_app_secret: 3yyNxefUTnVrMbUw
-  
-  
-staging:
-  linkedin_app_id: 8bzlmanzd6l4
-  linkedin_app_secret: 03XDpEwoMCSQKzmU
