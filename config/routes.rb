@@ -24,8 +24,6 @@ Tcp::Application.routes.draw do
   
   
   match "dashboard" => "dashboard#index"
-  match "test" => "dashboard#test"
-  match "test_masonry" => "dashboard#test_masonry"
   match "testlinkedin" => "crawler#testlinkedin"
   match "crawl" => "crawler#crawl_suggested_companies"
   
