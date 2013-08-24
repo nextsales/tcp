@@ -43,6 +43,9 @@ class CompanyImport
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
+      if row["linkedin_id"]
+        row["linkedin_id"] = row["linkedin_id"].to_i
+      end
       company = Company.find_by_id(row["id"]) || Company.new
       company.attributes = row.to_hash.slice(*Company.accessible_attributes)
       company      

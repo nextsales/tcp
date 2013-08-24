@@ -16,5 +16,9 @@ class CreateCompanies < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :companies, :name, :unique => true
+    add_index(:companies, :linkedin_id, :unique => true)
+    add_index(:companies, :facebook_id, :unique => true)
+    add_index(:companies, :twitter_id, :unique => true)
   end
 end

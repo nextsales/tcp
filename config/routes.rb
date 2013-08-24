@@ -14,7 +14,14 @@ Tcp::Application.routes.draw do
     end
   end
   
-
+  resources :company_imports do
+    collection do
+      get :save_imported, :action => 'save_imported'
+    end
+  end
+  resources :industry_imports
+  resources :competence_imports
+  
   
   match "dashboard" => "dashboard#index"
   match "test" => "dashboard#test"
@@ -34,9 +41,7 @@ Tcp::Application.routes.draw do
   devise_for :users, controllers:{omniauth_callbacks: "omniauth_callbacks"}
   ActiveAdmin.routes(self)
 
-  resources :company_imports
-  resources :industry_imports
-  resources :competence_imports
+
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
