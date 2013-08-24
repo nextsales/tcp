@@ -35,4 +35,5 @@ TEst
 
 rake db:migrate RAILS_ENV="production"
 rails s -e production
+
 rake assets:precompile
