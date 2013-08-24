@@ -61,25 +61,22 @@
 	</div><!--/span-->
 </div><!--/row-->
 
+<button id="Import_all">Import all anyway</button>
 
-<button>Import all anyway</button>
 <!--
 <%= link_to "Import all anyway",  save_imported_company_imports_path(file: @company_import.file), {:class => "btn btn-small", :style => "float:right;margin-top:10px"} %>
 -->
-<!-- Load Modal onClick -->
+
 <script>
-	$(function() {
-            $( "button").button();
-            $( "button" ).click(function() { 
-                    alert("clicked"); 
-                    $.ajax({
-                            type: "POST",
-                            url: save_imported_company_imports_path,
-                            data: {companies: "test"},
-                            success: function() { alert("Success!"); }
-                    });
-            });
+  $( "#Import_all" ).on( "click", function() {
+	alert("clicked"); 
+    $.ajax({
+            type: "POST",
+            url: save_imported_company_imports_path,
+            data: {companies: "test"},
+            success: function() { alert("Success!"); }
     });
+  });
 </script>
 
 
