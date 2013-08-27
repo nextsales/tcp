@@ -1,5 +1,5 @@
 class CompetencesDatatable
-  delegate :params, :h, :link_to, :number_to_currency, to: :@view
+  delegate :params, :h, :link_to, to: :@view
 
   def initialize(view)
     @view = view
@@ -20,8 +20,9 @@ private
     competences.map do |competence|
       [
         competence.id,
-        competence.name,
+        link_to(competence.name, competence),
         competence.description,
+        '<a href="/competences/'+competence.id.to_s+'/edit" class="btn btn-small btn-info"><i class="icon-edit"></i> Edit</a>',
       ]
     end
   end
