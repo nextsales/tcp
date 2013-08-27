@@ -59,9 +59,13 @@ class Matrix < ActiveRecord::Base
     [feeds, twitter_last_ids,linkedin_next_start_ids]
   end
   
-  
-  
-  
+  def contain?(company)
+    if self.company_matrix_rs.find_by_company_id(company.id)
+      return true
+    else
+      return false
+    end
+  end
   
   
 end
