@@ -5,17 +5,13 @@
 				<h4><i class="icon-file-alt"></i> Competence</h4>
 			</header>
 			<div class="body">
-				<blockquote>
-					Column sorting, live search, pagination. Built with
-					<a href="http://www.datatables.net/" target="_blank">jQuery DataTables</a>
-				</blockquote>
 				<table id="datatable-table" class="table table-striped">
 					<thead>
 						<tr>
-							<th class="no-sort">Id</th>
+							<th>Id</th>
 							<th>Name</th>
 							<th class="no-sort">Description</th>
-							<th class="no-sort">Info</th>
+							<th class="no-sort"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,7 +39,7 @@
 				</table>
 
 				<div>
-            <%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
+            <%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
 							<i class="icon-plus"></i> Add new
 						<% end %>
 						
@@ -52,7 +48,8 @@
 							<i class="icon-exchange"></i> Import
 						<% end %>
 						<% end %>
-						<%= render("ajax_form") %>
+						
+						<%= render("modal_form") %>
         </div>
 				
 			</div>

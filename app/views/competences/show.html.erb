@@ -1,15 +1,20 @@
-<p id="notice"><%= notice %></p>
+<div class="row-fluid">
+	<div class="span12">
+		<section class="widget">
+			<h4><i class="icon-table"></i> <%= @competence.name %></h4>
+			<hr>
+			<p><%= @competence.description %></p>
 
-<p>
-  <b>Name:</b>
-  <%= @competence.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @competence.description %>
-</p>
-
-
-<%= link_to 'Edit', edit_competence_path(@competence) %> |
-<%= link_to 'Back', competences_path %>
+			<div>
+				<%= link_to competences_path, :class => "btn btn-inverse" do %>
+					<i class="icon-arrow-left"></i> Back
+				<% end %>
+				
+				<%= link_to edit_competence_path(@competence), :class => "btn btn-inverse" do %>
+					<i class="icon-edit"></i> Edit
+				<% end %>
+				
+			</div>
+		</section>
+	</div>
+</div>
