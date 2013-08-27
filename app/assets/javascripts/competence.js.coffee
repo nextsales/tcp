@@ -1,4 +1,5 @@
 # Reset create competence modal when close event is triggered
+###
 $(document).ready ->
 	$("#competeneces_datatable").dataTable
 		bServerSide: true
@@ -9,5 +10,10 @@ $(document).ready ->
 	$.extend $.fn.dataTableExt.oStdClasses,
 		sWrapper: "dataTables_wrapper form-inline"
 		
+	$("#create_competence_modal").on "hidden", ->
+		$(this).find("input[type=text], textarea").val ""
+###
+
+$(document).ready ->
 	$("#create_competence_modal").on "hidden", ->
 		$(this).find("input[type=text], textarea").val ""
