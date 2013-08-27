@@ -10,6 +10,7 @@ class Ability
       
       # Company rule
       can :read, Company
+      can :add_to_matrix, Company
       can :search, Company
       can :create, Company
       can :update, Company do |company|

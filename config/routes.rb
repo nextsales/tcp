@@ -3,7 +3,6 @@ Tcp::Application.routes.draw do
     member do
       get :add, :action => 'add'
       get :feed, :action => 'feed'
-      get :add_company, :action => 'add_company'
     end
   end
 
@@ -12,6 +11,9 @@ Tcp::Application.routes.draw do
   resources :companies do
     collection do
       get :search, :action => 'search'
+    end
+    member do
+      get :add_to_matrix, :action => 'add_to_matrix'
     end
   end
   

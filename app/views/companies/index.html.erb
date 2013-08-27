@@ -42,9 +42,10 @@
 										<div class="btn-group">
 											<button class="btn btn-small btn-success" data-toggle="dropdown">Add to matrix <span class="caret"></span></button>
 											<ul class="dropdown-menu">
-												<% @matrices.each do |matrix| %>
-													<%= link_to matrix.name, add_company_matrix_path(matrix)%>
-													<!-- <li><a href="#"><%= matrix.name%></a></li> -->
+												<% current_user.matrices.each do |matrix| %>	
+													<% unless matrix.contain?(company)%>												
+														<li><a href=<%=add_to_matrix_company_path(:id => company.id, :matrix_id => matrix.id)%>><%= matrix.name%></a></li>
+													<% end %>
 												<% end %>
 											</ul>
 										</div>
@@ -124,10 +125,7 @@
 		</form>
 	</div>
 </div>
--->
 
-<% @suggested_companies.each do |company| %>
-<p><%= company.id %>: <%= company.name %> - <%= company.logo_url %></p>
-<% end %>
+-->
 
 

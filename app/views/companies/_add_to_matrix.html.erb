@@ -1,0 +1,4 @@
+<%= form_for(@company.company_matrix_rs.build(matrix_id: @matrix.id)) do |f| %>
+  <div><%= f.hidden_field :matrix_id %></div>
+  <%= f.submit @matrix.name, class: "btn btn-large btn-primary" %>
+<% end %>

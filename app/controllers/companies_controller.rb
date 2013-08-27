@@ -5,7 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
-    @suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
+    #@suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
     @matrices = current_user.matrices
     
     #@linkedin_following_companies = current_user.test_following_companies
@@ -88,6 +88,17 @@ class CompaniesController < ApplicationController
     end
   end
 
+   
+  def add_to_matrix
+    matrix_id = params[:matrix_id]
+    @company.company_matrix_rs.build(matrix_id: matrix_id).save
+    
+    respond_to do |format|
+      format.html {redirect_to companies_url }
+      format.json
+    end
+  end
+  
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
