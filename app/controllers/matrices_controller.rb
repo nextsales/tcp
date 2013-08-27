@@ -104,6 +104,16 @@ class MatricesController < ApplicationController
     end
   end
   
+  def add_company
+    company_id = params[:id]
+    @matrix.company_matrix_rs.build(company_id: company_id).save
+    
+    respond_to do |format|
+      format.html{ redirect_to @matrix}
+      format.json
+    end
+  end
+  
   def feed
     #raise @matrix.feeds.first.raw_data.to_json
     @feeds = @matrix.feeds.order('created_at DESC')
