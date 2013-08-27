@@ -5,37 +5,14 @@
 				<h4><i class="icon-file-alt"></i> Competence</h4>
 			</header>
 			<div class="body">
-				<table id="datatable-table" class="table table-striped">
+				<table id="competeneces_datatable" class="table table-striped" data-source="<%= competences_url(format: "js") %>">
 					<thead>
 						<tr>
 							<th>Id</th>
 							<th>Name</th>
-							<th class="no-sort">Description</th>
-							<th class="no-sort"></th>
+							<th>Description</th>
 						</tr>
 					</thead>
-					<tbody>
-						<% @competences.each do |competence| %>
-							<% if can? :read, competence%>
-								<tr>
-									<td class="hidden-phone-portrait"><%= competence.id %></td>
-		              <td><%= link_to competence.name, competence %></td>
-		              <td><%= competence.description %></td>
-									<td>
-										<% if can? :update, competence%>
-											<%= link_to edit_competence_path(competence), :class => "btn btn-small btn-primary" do %>
-												<i class="icon-edit"></i> Edit
-											<% end %>
-											<%= link_to competence, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-danger" do %>
-											<i class="icon-trash"></i> Delete
-											<% end %>
-										<% end %>
-									</td>
-								</tr>
-							<% end %>
-						<% end %>
-						
-					</tbody>
 				</table>
 
 				<div>
