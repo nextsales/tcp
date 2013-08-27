@@ -53,6 +53,8 @@ wb.add_worksheet(name: 'Companies') do |sheet|
 	@companies.each do |company|
 		extname = File.extname(company.logo_url)
     	img = File.expand_path("../../../../tmp/temp_company_logos/#{company.id}#{extname}", __FILE__)
+    	directory_name =  File.expand_path("../../../../tmp/temp_company_logos", __FILE__)
+    	Dir.mkdir(directory_name) unless File.exists?(directory_name)
 	
 		open(img, 'wb') do |file|
 		  	file << open(company.logo_url).read

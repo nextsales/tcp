@@ -6,6 +6,18 @@ class CompanyImportsController < ApplicationController
    
   def save_imported
     raise params[:companies].to_yaml
+    
+    #getting data from js.
+    #process to get array of companies
+    
+    @imported_companies.each do |company|
+      #save the company if not exist
+      company.save unless company.exist?
+      
+      #update the user of the company as the current user
+      company.user = current_user
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.json

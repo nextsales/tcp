@@ -3,6 +3,7 @@ Tcp::Application.routes.draw do
     member do
       get :add, :action => 'add'
       get :feed, :action => 'feed'
+      get :add_company, :action => 'add_company'
     end
   end
 
@@ -16,7 +17,7 @@ Tcp::Application.routes.draw do
   
   resources :company_imports do
     collection do
-      get :save_imported, :action => 'save_imported'
+      post :save_imported, :action => 'save_imported'
     end
   end
   resources :industry_imports
