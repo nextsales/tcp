@@ -16,7 +16,7 @@ Tcp::Application.routes.draw do
   
   resources :company_imports do
     collection do
-      get :save_imported, :action => 'save_imported'
+      post :save_imported, :action => 'save_imported'
     end
   end
   resources :industry_imports
