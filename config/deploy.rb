@@ -1,25 +1,25 @@
-require "rvm/capistrano"
 require "bundler/capistrano"
+require "rvm/capistrano"
 
-server "192.168.156.129", :web, :app, :db, primary: true
+server "dashboard.topcompetitors.net", :web, :app, :db, primary: true
 
 set :application, "tcp"
-set :user, "notroot"
+set :user, "deployer"
+set :port, 22
 set :deploy_to, "/home/#{user}/apps/#{application}"
 set :deploy_via, :remote_cache
 set :use_sudo, false
 
 set :scm, "git"
 set :repository, "git@github.com:nextsales/#{application}.git"
-set :branch,      "production"
-set :rvm_type,    :system
+set :branch, "master"
 
-ssh_options[:keys] = [File.join(ENV["HOME"], ".ssh", user)]
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
 
 after "deploy", "deploy:cleanup" # keep only the last 5 releases
+after "deploy", "deploy:migrate"
 
 namespace :deploy do
   %w[start stop restart].each do |command|
@@ -33,7 +33,7 @@ namespace :deploy do
     sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
     sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
     run "mkdir -p #{shared_path}/config"
-    put File.read("config/database.yml"), "#{shared_path}/config/database.yml"
+    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
     puts "Now edit the config files in #{shared_path}."
   end
   after "deploy:setup", "deploy:setup_config"
@@ -45,8 +45,8 @@ namespace :deploy do
 
   desc "Make sure local git is in sync with remote."
   task :check_revision, roles: :web do
-    unless `git rev-parse HEAD` == `git rev-parse origin/production`
-      puts "WARNING: HEAD is not the same as origin/production"
+    unless `git rev-parse HEAD` == `git rev-parse origin/master`
+      puts "WARNING: HEAD is not the same as origin/master"
       puts "Run `git push` to sync changes."
       exit
     end

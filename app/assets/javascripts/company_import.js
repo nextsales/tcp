@@ -9,6 +9,11 @@
     });
   });
   */
+
+/*
+
+Loi khi compile -> 
+
 $(document).ready(function() {
 	$('#company_import_all').click(function(){
 	    $.ajax({
@@ -21,3 +26,4 @@ $(document).ready(function() {
 		
 	});
 });
+*/

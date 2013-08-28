@@ -38,6 +38,8 @@ gem 'activeadmin'
 
 group :development, :test do
   gem 'rspec-rails', '2.11.0'
+	# gem 'capistrano'
+	# gem 'rvm-capistrano'
 end
 
 
@@ -62,11 +64,11 @@ gem 'jquery-rails', '~> 2.3.0'
 # gem 'jbuilder'
 
 # Use unicorn as the app server
-#gem 'unicorn'
+gem 'unicorn'
 
 # Deploy with Capistrano
-#gem 'capistrano'
-#gem 'rvm-capistrano'
+gem 'capistrano'
+gem 'rvm-capistrano'
 
 # To use debugger
 # gem 'debugger'
