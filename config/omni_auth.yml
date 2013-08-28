@@ -13,3 +13,5 @@ test:
 production:
   linkedin_app_id: 776lxo8io7pf
   linkedin_app_secret: 3yyNxefUTnVrMbUw
+  TWITTER_CONSUMER_KEY: JCml0HxekzC5d3baAmWTew
+  TWITTER_CONSUMER_SECRET: rOLlBBF4RbuIMKGF7DhyAieJZlYKmHAsihqam3hwi4s

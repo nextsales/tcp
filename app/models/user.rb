@@ -33,10 +33,7 @@ class User < ActiveRecord::Base
   
   def twitter_client
     return nil unless twitter_auth
-    client = Twitter::Client.new(
-      :oauth_token => twitter_auth.token,
-      :oauth_token_secret => twitter_auth.secret
-    )
+    client = Twitter::Client.new(OMNI_AUTH_CONFIG['TWITTER_CONSUMER_KEY'], OMNI_AUTH_CONFIG['TWITTER_CONSUMER_SECRET'])
     client
   end
   
