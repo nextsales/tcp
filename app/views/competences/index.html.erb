@@ -21,10 +21,10 @@
 							<i class="icon-plus"></i> Add new
 						<% end %>
 						
-						<% if can? :manage, :all %>
+						
 						<%= link_to new_competence_import_path, {:class => "btn btn-inverse"} do %>
 							<i class="icon-exchange"></i> Import
-						<% end %>
+						
 						<% end %>
 						
 						<%= render("modal_form") %>

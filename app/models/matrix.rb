@@ -32,28 +32,33 @@ class Matrix < ActiveRecord::Base
     twitter_last_ids = Hash.new
     linkedin_next_start_ids = Hash.new
     self.companies.each do |company|
-      if linkedin_start_ids && linkedin_start_ids[company.id.to_s]
-        li_feeds, next_start_id = company.crawl_linkedin_update(linkedin_client, feeds_count, linkedin_start_ids[company.id.to_s].to_i)
-      else
-        li_feeds, next_start_id = company.crawl_linkedin_update(linkedin_client, feeds_count,0)
+      # If the user has linkedin ID, crawl Linkedin
+      if linkedin_client
+        if linkedin_start_ids && linkedin_start_ids[company.id.to_s]
+          li_feeds, next_start_id = company.crawl_linkedin_update(linkedin_client, feeds_count, linkedin_start_ids[company.id.to_s].to_i)
+        else
+          li_feeds, next_start_id = company.crawl_linkedin_update(linkedin_client, feeds_count,0)
+        end
+        if li_feeds
+          feeds = feeds + li_feeds
+        end
+        if next_start_id
+          linkedin_next_start_ids[company.id.to_s] = next_start_id
+        end
       end
-      if li_feeds
-        feeds = feeds + li_feeds
-      end
-      if next_start_id
-        linkedin_next_start_ids[company.id.to_s] = next_start_id
-      end
-      
-      if twitter_maxids && twitter_maxids[company.id.to_s]
-        tw_feeds, tw_id = company.crawl_twitter_tweets(twitter_client, feeds_count, twitter_maxids[company.id.to_s].to_i - 1)
-      else
-        tw_feeds, tw_id = company.crawl_twitter_tweets(twitter_client, feeds_count, 0)
-      end
-      if tw_feeds
-        feeds  = feeds + tw_feeds
-      end
-      if tw_id
-        twitter_last_ids[company.id.to_s] =  tw_id
+      # If the user has Twitter ID, crawl Twitter
+      if twitter_client
+        if twitter_maxids && twitter_maxids[company.id.to_s]
+          tw_feeds, tw_id = company.crawl_twitter_tweets(twitter_client, feeds_count, twitter_maxids[company.id.to_s].to_i - 1)
+        else
+          tw_feeds, tw_id = company.crawl_twitter_tweets(twitter_client, feeds_count, 0)
+        end
+        if tw_feeds
+          feeds  = feeds + tw_feeds
+        end
+        if tw_id
+          twitter_last_ids[company.id.to_s] =  tw_id
+        end
       end
     end
     [feeds, twitter_last_ids,linkedin_next_start_ids]

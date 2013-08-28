@@ -54,7 +54,7 @@ class Company < ActiveRecord::Base
   
   # Should move to company crawl #
   def crawl_linkedin_update(linkedin_client, updates_count, start_id)
-    return nil unless linkedin_client && self.linkedin_id
+    return nil unless linkedin_client && self.linkedin_id != ''
     feeds = Array.new
     if (crawl_results = linkedin_client.company_updates({:id => self.linkedin_id, :count => updates_count, :start => start_id}).all)
       crawl_results.each do |update|
@@ -69,8 +69,8 @@ class Company < ActiveRecord::Base
   end
   
   def crawl_twitter_tweets(twitter_client, tweets_count, max_id)
-    return nil unless twitter_client && self.twitter_id
-    
+    return nil unless twitter_client && self.twitter_id != ''
+    puts twitter_client
     feeds = Array.new
     if max_id == 0
       tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count)

@@ -106,7 +106,6 @@ class MatricesController < ApplicationController
  
   def add_follower
     follower_id = params[:follower_id]
-    puts @matrix.user.to_s
     @matrix.matrix_follower_rs.build(follower_id: follower_id).save
     
     respond_to do |format|
