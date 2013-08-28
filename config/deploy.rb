@@ -1,53 +1,54 @@
-require 'bundler/capistrano'
+require "bundler/capistrano"
+require "rvm/capistrano"
 
-require 'bundler/capistrano'
-$:.unshift(File.expand_path("./lib", ENV["rvm_path"]))
-require 'rvm/capistrano'
+server "dashboard.topcompetitors.net", :web, :app, :db, primary: true
 
-default_run_options[:shell] = 'bash'
-set :rvm_ruby_string, "ruby-1.9.3-p429"
-set :rvm_type, :user
-set :bundle_cmd, 'source $HOME/.bash_profile && bundle'
-
-set :application, "TopCompetitors Dashboard"
-set :repository,  "git@github.com:nextsales/tcp.git"
-set :deploy_to, "/home/deployer/topcompetitors/rails"
-set :scm, :git
-set :branch, "master"
+set :application, "tcp"
 set :user, "deployer"
-set :group, "deployers"
+set :port, 22
+set :deploy_to, "/home/#{user}/apps/#{application}"
+set :deploy_via, :remote_cache
 set :use_sudo, false
-set :rails_env, "production"
-set :deploy_via, :copy
-set :ssh_options, { :forward_agent => true, :port => 4321 }
-set :keep_releases, 5
+
+set :scm, "git"
+set :repository, "git@github.com:username/#{application}.git"
+set :branch, "master"
+
+
 default_run_options[:pty] = true
-server "dashboard.topcompetitors.net", :app, :web, :db, :primary => true
+ssh_options[:forward_agent] = true
+
+after "deploy", "deploy:cleanup" # keep only the last 5 releases
 
 namespace :deploy do
-  task :start do ; end
-  task :stop do ; end
-
-  desc "Symlink shared config files"
-  task :symlink_config_files do
-    run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
+  %w[start stop restart].each do |command|
+    desc "#{command} unicorn server"
+    task command, roles: :app, except: {no_release: true} do
+      run "/etc/init.d/unicorn_#{application} #{command}"
+    end
   end
 
-  # NOTE: I don't use this anymore, but this is how I used to do it.
-  desc "Precompile assets after deploy"
-  task :precompile_assets do
-    run <<-CMD
-      cd #{ current_path } &&
-      #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
-    CMD
+  task :setup_config, roles: :app do
+    sudo "ln -nfs #{current_path}/config/nginx.conf /etc/nginx/sites-enabled/#{application}"
+    sudo "ln -nfs #{current_path}/config/unicorn_init.sh /etc/init.d/unicorn_#{application}"
+    run "mkdir -p #{shared_path}/config"
+    put File.read("config/database.example.yml"), "#{shared_path}/config/database.yml"
+    puts "Now edit the config files in #{shared_path}."
   end
+  after "deploy:setup", "deploy:setup_config"
 
-  desc "Restart applicaiton"
-  task :restart do
-    run "#{ try_sudo } touch #{ File.join(current_path, 'tmp', 'restart.txt') }"
+  task :symlink_config, roles: :app do
+    run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   end
+  after "deploy:finalize_update", "deploy:symlink_config"
+
+  desc "Make sure local git is in sync with remote."
+  task :check_revision, roles: :web do
+    unless `git rev-parse HEAD` == `git rev-parse origin/master`
+      puts "WARNING: HEAD is not the same as origin/master"
+      puts "Run `git push` to sync changes."
+      exit
+    end
+  end
+  before "deploy", "deploy:check_revision"
 end
-
-after "deploy", "deploy:symlink_config_files"
-after "deploy", "deploy:restart"
-after "deploy", "deploy:cleanup"
