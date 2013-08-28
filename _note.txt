@@ -33,7 +33,49 @@ c.profile(:fields => %w(following), :start => 16).following.companies
 TEst
 
 
+
+
 rake db:migrate RAILS_ENV="production"
 rake assets:precompile
 rails s -e production
 
+
+https://coderwall.com/p/yz8cha
+// From root
+ 9  apt-get update
+10  passwd
+11  cd .ssh/
+12  ls
+13  less authorized_keys 
+14  exit
+15  cd .ssh/
+16  ls
+17  cp authorized_keys id_rsa.pub
+18  nano id_rsa
+19  chmod 500 id_rsa
+20  adduser deployer
+21  cd /home/
+22  ls
+23  visudo
+24  visudo 
+25  nano /etc/ssh/sshd_config
+26  reload ssh
+27  ssh deployer@dashboard.topcompetitors.net
+
+// From developer
+sudo apt-get update
+sudo apt-get install curl git-core nodejs nginx
+curl -L get.rvm.io | bash -s stable
+nano /home/deployer/.bash_profile
+source ~/.rvm/scripts/rvm
+rvm requirements
+rvm install 2.0.0
+rvm use 2.0.0 --default
+rvm rubygems current
+gem install rails --no-ri --no-rdoc
+gem install bundler
+
+authorized_keys id_rsa.pub
+nano id_rsa
+chmod 500 id_rsa
+ssh github@github.com
