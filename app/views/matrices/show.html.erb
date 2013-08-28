@@ -24,23 +24,40 @@
 						
 					<% end %>
 				</div>	
-				
-					<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
-						<i class="icon-edit"></i> Edit
+					
+				<div class="btn-group">	
+					<% if can? :update, @matrix%>
+						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
+							<i class="icon-edit"></i> Edit
+						<% end %>
 					<% end %>
 					
-					
-					
-					<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
-					
-					<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
-						<i class="icon-trash"></i> Delete
+					<% if can? :update, @matrix%>
+						<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
 					<% end %>
 					
-					<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn"} %>
-				
+					<% if can? :destroy, @matrix%>
+						<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+							<i class="icon-trash"></i> Delete
+						<% end %>
+					<% end %>
+					
+					<% if can? :read, @matrix%>
+						<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn"} %>
+					<% end %>
 			
-			
+					<% if current_user == @matrix.user%>
+						<button class="btn btn-sharing" data-toggle="dropdown">Share<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<% User.all.each do |user| %>	
+								<% next if current_user==user %> 
+								<% unless @matrix.followed_by?(user)%>
+									<li><a href=<%=add_follower_matrix_path(:id => @matrix.id, :follower_id => user.id)%>><%= user.email%></a></li>
+								<% end %>
+							<% end %>
+						</ul>
+					<% end %>
+				</div>
 			
 			<!-- Modal -->
 			<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

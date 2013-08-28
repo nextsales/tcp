@@ -5,45 +5,19 @@
 				<h4><i class="icon-file-alt"></i> Competence</h4>
 			</header>
 			<div class="body">
-				<blockquote>
-					Column sorting, live search, pagination. Built with
-					<a href="http://www.datatables.net/" target="_blank">jQuery DataTables</a>
-				</blockquote>
-				<table id="datatable-table" class="table table-striped">
+				<table id="competeneces_datatable" class="table table-striped" data-source="<%= competences_url(format: "js") %>">
 					<thead>
 						<tr>
-							<th class="no-sort">Id</th>
+							<th>Id</th>
 							<th>Name</th>
-							<th class="no-sort">Description</th>
-							<th class="no-sort">Info</th>
+							<th>Description</th>
+							<th>Action</th>
 						</tr>
 					</thead>
-					<tbody>
-						<% @competences.each do |competence| %>
-							<% if can? :read, competence%>
-								<tr>
-									<td class="hidden-phone-portrait"><%= competence.id %></td>
-		              <td><%= link_to competence.name, competence %></td>
-		              <td><%= competence.description %></td>
-									<td>
-										<% if can? :update, competence%>
-											<%= link_to edit_competence_path(competence), :class => "btn btn-small btn-primary" do %>
-												<i class="icon-edit"></i> Edit
-											<% end %>
-											<%= link_to competence, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-danger" do %>
-											<i class="icon-trash"></i> Delete
-											<% end %>
-										<% end %>
-									</td>
-								</tr>
-							<% end %>
-						<% end %>
-						
-					</tbody>
 				</table>
 
 				<div>
-            <%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
+            <%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
 							<i class="icon-plus"></i> Add new
 						<% end %>
 						
@@ -52,7 +26,8 @@
 							<i class="icon-exchange"></i> Import
 						<% end %>
 						<% end %>
-						<%= render("ajax_form") %>
+						
+						<%= render("modal_form") %>
         </div>
 				
 			</div>

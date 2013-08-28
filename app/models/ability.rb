@@ -31,7 +31,13 @@ class Ability
       can :read, Matrix do |matrix|
         matrix.try(:user) == user
       end
+      can :read, Matrix do |matrix|
+        matrix.try(:followers).include? user
+      end
       can :create, Matrix
+      
+      can :add_follower, Matrix
+      
       can :update, Matrix do |matrix|
         matrix.try(:user) == user
       end

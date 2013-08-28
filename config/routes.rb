@@ -3,6 +3,7 @@ Tcp::Application.routes.draw do
     member do
       get :add, :action => 'add'
       get :feed, :action => 'feed'
+      get :add_follower, :action => 'add_follower'
     end
   end
 

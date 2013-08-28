@@ -67,5 +67,12 @@ class Matrix < ActiveRecord::Base
     end
   end
   
+  def followed_by?(user)
+    if self.matrix_follower_rs.find_by_follower_id(user.id)
+      return true
+    else
+      return false
+    end
+  end
   
 end
