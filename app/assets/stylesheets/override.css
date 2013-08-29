@@ -56,6 +56,14 @@ ul.token-input-list-facebook {
 	width: 270px;
 }
 
+.companies.index .form-wizard .tab-content {
+	background-color:#fff;
+}
+
+.companies.index .modal .wizard-navigation li{
+	background-color:#666;
+	color:white;
+}
 .companies.index .token-input-list-facebook {
 	width: 270px;
 }
