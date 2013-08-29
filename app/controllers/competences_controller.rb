@@ -3,6 +3,7 @@ class CompetencesController < ApplicationController
   # GET /competences.json
   def index
     @competence = Competence.new
+    @competence_import = CompetenceImport.new
     @competences = Competence.all
 
     respond_to do |format|

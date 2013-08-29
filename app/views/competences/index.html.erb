@@ -17,17 +17,21 @@
 				</table>
 
 				<div>
-            <%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
-							<i class="icon-plus"></i> Add new
-						<% end %>
-						
-						
-						<%= link_to new_competence_import_path, {:class => "btn btn-inverse"} do %>
-							<i class="icon-exchange"></i> Import
-						
-						<% end %>
-						
-						<%= render("modal_form") %>
+					<%= link_to new_competence_path, {:class => "btn btn-warning", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
+						<i class="icon-plus"></i> Add new
+					<% end %>
+					
+					
+					<%= link_to new_competence_import_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#import_competences_modal"} do %>
+						<i class="icon-exchange"></i> Import (with modal)
+					<% end %>
+					
+					<%= link_to new_competence_import_path, {:class => "btn btn-inverse"} do %>
+						<i class="icon-exchange"></i> Import
+					<% end %>
+					
+					<%= render("modal_form") %>
+					<%= render("import_modal_form") %>
         </div>
 				
 			</div>
