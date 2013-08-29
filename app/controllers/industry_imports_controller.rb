@@ -8,7 +8,7 @@ class IndustryImportsController < ApplicationController
     @industry_import = IndustryImport.new(params[:industry_import])
     @industry_import.current_user=current_user
     if @industry_import.save
-      redirect_to root_url, notice: "Imported industries successfully."
+      redirect_to industries_url, notice: "Imported industries successfully."
     else
       render :new
     end

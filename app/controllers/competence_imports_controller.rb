@@ -5,10 +5,10 @@ class CompetenceImportsController < ApplicationController
   end
 
   def create
-    @competence_import = CompetenceImport.new(params[:industry_import])
+    @competence_import = CompetenceImport.new(params[:competence_import])
     @competence_import.current_user=current_user
     if @competence_import.save
-      redirect_to root_url, notice: "Competences successfully."
+      redirect_to competences_url, notice: "Competences successfully."
     else
       render :new
     end
