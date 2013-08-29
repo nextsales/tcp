@@ -1,53 +1,58 @@
-<section class="widget widget-tabs">
-	<header>
-        <ul class="nav nav-tabs">
-            <li>
-                <a href="#profiles" data-toggle="tab">Profiles</a>
-            </li>
-            
-            <li class="active">
-                <a href="#updates" data-toggle="tab">Updates</a>
-            </li>
-            
-        </ul>
-    </header>
-    <div class="body tab-content">
-    	<div id="profiles" class="tab-pane active clearfix">
-	            <h2 class="tab-header"><%= @matrix.name %></h2>
-	            <p><%= @matrix.description %></p>
-	            
-    			<div class="span12">
-					<% if @matrix.companies.any? %>
-						<div id="Companies">
-						  	<%= render partial: 'shared/companies' %>
-						</div>
-						
+<div class="row-fluid">
+	<div class="span12">
+		<section class="widget">
+			<header>
+				<h4><i class="icon-table"></i> <%= @matrix.name %></h4>
+			</header>
+			<div class="body">
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>Company Name</th>
+							<th>Competences</th>
+							<th>Industries</th>
+							<th>Country</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if @matrix.companies.any? %>
+							<% @companies.each do |company| %>
+								<tr>
+									<td><%= company.name %></td>
+									<td><%= company.industries.map(&:name).join(", ") %></td>
+									<td><%= company.competences.map(&:name).join(", ") %></td>
+									<td><%= company.country %></td>
+								</tr>
+							<% end %>
+						<% end %>
+					</tbody>
+				</table>
+				<blockquote><%= @matrix.description %></blockquote>
+				
+				<div>
+					<!-- 
+					<%= link_to new_competence_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#create_competence_modal" } do %>
+						<i class="icon-plus"></i> Add new
 					<% end %>
-				</div>	
-					
-				<div class="btn-group">	
+					-->
 					<% if can? :update, @matrix%>
-						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-warning"} do %>
+						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-inverse"} do %>
 							<i class="icon-edit"></i> Edit
 						<% end %>
 					<% end %>
 					
-					<% if can? :update, @matrix%>
-						<a href="#new_company_modal" role="button" class="btn btn-success" data-toggle="modal"><i class="icon-plus"></i> Add</a>
-					<% end %>
-					
-					<% if can? :destroy, @matrix%>
-						<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
-							<i class="icon-trash"></i> Delete
-						<% end %>
+					<% if can? :read, @matrix%>
+						<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-inverse"} %>
 					<% end %>
 					
 					<% if can? :read, @matrix%>
-						<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn"} %>
+						<%= link_to feed_matrix_path(@matrix) , {:class => "btn btn-inverse"} do %>
+							<i class="icon-edit"></i> Feed
+						<% end %>
 					<% end %>
-			
+					
 					<% if current_user == @matrix.user%>
-						<button class="btn btn-sharing" data-toggle="dropdown">Share<span class="caret"></span></button>
+						<button class="btn btn-inverse" data-toggle="dropdown">Share<span class="caret"></span></button>
 						<ul class="dropdown-menu">
 							<% User.all.each do |user| %>	
 								<% next if current_user==user %> 
@@ -57,49 +62,23 @@
 							<% end %>
 						</ul>
 					<% end %>
-				</div>
-			
-			<!-- Modal -->
-			<div id="new_company_modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-					<h3 id="myModalLabel">Create New Company</h3>
-				</div>
-			
-				<div class="modal-body">
-					<form accept-charset="UTF-8" action="<%= add_matrix_path(@matrix) %>" class="form-horizontal" method="get">
-						<fieldset>
-							 <div class="control-group">
-								<label class="control-label" for="keyword">Company Name</label>
-								<div class="controls">
-									<input type="text" name="keyword" placeholder="" class="input-xlarge">
-								</div>
-							</div>
-							
-							<div class="control-group">
-								<div class="controls">
-									<button class="btn btn-success"><i class="icon-circle-arrow-right"></i> Next</button>
-								</div>
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
-
-        </div>
-        
-        <div id="updates" class="tab-pane  active">
-			<div class="span12">
-                <% if @feeds.any? %>
-					<div id="feeds">
-					  <%= render partial: 'shared/instant_feeds' %>
-					</div>
 					
-					<%= link_to 'Load More Feeds', matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) , class: 'hook', remote: true %>
-				
-				<% end %>
-		    </div>				
+					<% if can? :destroy, @matrix%>
+						<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+							<i class="icon-trash"></i> Delete
+						<% end %>
+					<% end %>
+					
+					
+					
+					<!-- 
+					<%= link_to new_competence_import_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#import_competences_modal"} do %>
+						<i class="icon-exchange"></i> Import
+					<% end %>
+					-->
         </div>
-        
-    </div>
-</section>
+				
+			</div>
+		</section>
+	</div>
+</div>

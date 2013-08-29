@@ -23,6 +23,20 @@ class Matrix < ActiveRecord::Base
   def company_tokens=(ids)
     self.company_ids = ids.split(",")
   end
+  
+  def self.tokens(query)
+    matrices = where("name like ?", "%#{query}%")
+    if matrices.empty?
+      [{id: "<<<#{query}>>>", name: "New: \"#{query}\""}]
+    else
+      matrices
+    end
+  end
+  
+  def self.ids_from_tokens(tokens)
+    tokens.gsub!(/<<<(.+?)>>>/) {create!(name: $1).id }
+    tokens.split(',')
+  end
     
   def crawl_feed(feeds_count, twitter_maxids, linkedin_start_ids)
     feeds = Array.new

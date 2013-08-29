@@ -6,6 +6,7 @@ class CompaniesController < ApplicationController
   def index
     @companies = Company.all
     @company = Company.new
+    @company_import = CompanyImport.new
     #@suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
     @matrices = current_user.matrices
     

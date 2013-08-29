@@ -100,8 +100,12 @@
 				</div>
 				<div class="tab-pane" id="tab4">
 					<fieldset>
-						
-
+						<div class="control-group">
+							<%= f.label :matrix_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :matrix_tokens, data: {load: @company.matrices} %>
+							</div>
+						</div>
 					</fieldset>
 				</div>
 				<!-- 
