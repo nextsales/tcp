@@ -1,7 +1,7 @@
 require "bundler/capistrano"
 require "rvm/capistrano"
 
-server "dashboard.topcompetitors.net", :web, :app, :db, primary: true
+server "dashboard.topcompetitors.com", :web, :app, :db, primary: true
 
 set :application, "tcp"
 set :user, "deployer"
