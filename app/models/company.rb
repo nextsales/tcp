@@ -23,8 +23,9 @@ class Company < ActiveRecord::Base
     self.competence_ids = Competence.ids_from_tokens(tokens).uniq
   end
   
-  def industry_tokens=(ids)
-    self.industry_ids = ids.split(",")
+  def industry_tokens=(tokens)
+    #self.industry_ids = ids.split(",")
+    self.competence_ids = Industry.ids_from_tokens(tokens).uniq
   end
   
   def matrix_tokens=(ids)
