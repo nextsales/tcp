@@ -5,6 +5,7 @@ class CompaniesController < ApplicationController
   # GET /companies.json
   def index
     @companies = Company.all
+    @company = Company.new
     #@suggested_companies = current_user.suggested_companies.where(is_enable: true).order("rank DESC")
     @matrices = current_user.matrices
     
