@@ -100,7 +100,12 @@
 				</div>
 				<div class="tab-pane" id="tab4">
 					<fieldset>
-						
+						<div class="control-group">
+							<%= f.label :matrix_ids, {:class => "control-label", :for => "multiple"} %>
+							<div class="controls">
+								<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select matrix", "tabindex" => "-1"} %>
+							</div>
+						</div>
 
 					</fieldset>
 				</div>
