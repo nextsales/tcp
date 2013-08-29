@@ -110,14 +110,35 @@
 
 				<div class="body">
 					<fieldset>
+						<div class="control-group">
+							<%= f.label :competence_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :competence_tokens, data: {load: @company.competences} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :industry_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :industry_tokens, data: {load: @company.industries} %>
+							</div>
+						</div>
 						
+						<div class="control-group">
+							<%= f.label :matrix_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :matrix_tokens, data: {load: @company.matrices} %>
+							</div>
+						</div>
+						
+						<!-- 
 						<div class="control-group">
 							<%= f.label :industry_ids, {:class => "control-label", :for => "multiple"} %>
 							<div class="controls">
 								<%= f.collection_select :industry_ids, Industry.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select industries", "tabindex" => "-1"} %>
 							</div>
 						</div>
-						
+						-->
 						<!-- 
 						<div class="control-group">
 							<%= f.label :competence_ids, {:class => "control-label", :for => "multiple"} %>
@@ -126,7 +147,7 @@
 							</div>
 						</div>
 						-->
-						
+						<!-- 
 						<div class="control-group">
 							<%= f.label :competence_tokens, {:class => "control-label"} %>
 							<div class="controls">
@@ -140,6 +161,7 @@
 								<%= f.collection_select :matrix_ids, Matrix.order(:name), :id, :name, {}, {multiple: true, class: "chzn-select select-block-level", "data-placeholder" => "Select matrix", "tabindex" => "-1"} %>
 							</div>
 						</div>
+						-->
 					</fieldset>
 				</div>
       </section>
