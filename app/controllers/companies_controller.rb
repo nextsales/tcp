@@ -12,6 +12,7 @@ class CompaniesController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @companies }
+      format.js { render json: CompaniesDatatable.new(view_context) }
     end
   end
   
