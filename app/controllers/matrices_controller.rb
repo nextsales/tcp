@@ -118,10 +118,28 @@ class MatricesController < ApplicationController
   
   def feed
     #raise @matrix.feeds.first.raw_data.to_json
-    @feeds = @matrix.feeds.order('created_at DESC')
+    #@feeds = @matrix.feeds.order('created_at DESC')
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: @feeds }
+    # end
+    
+    puts params
+    if params[:twitter_last_ids]
+      if params[:linkedin_next_start_ids] 
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], nil)
+      end
+    else
+      if params[:linkedin_next_start_ids]
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(5, nil, params[:linkedin_next_start_ids])
+      else
+        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(10, nil,nil)
+      end
+    end
     respond_to do |format|
-      format.html
-      format.json { render json: @feeds }
+      format.html # show.html.erb
     end
   end
 end

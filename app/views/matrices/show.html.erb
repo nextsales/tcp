@@ -35,13 +35,20 @@
 						<i class="icon-plus"></i> Add new
 					<% end %>
 					-->
-					
-					<%= link_to edit_matrix_path(@matrix), {:class => "btn btn-inverse"} do %>
-						<i class="icon-plus"></i> Edit
+					<% if can? :update, @matrix%>
+						<%= link_to edit_matrix_path(@matrix) , {:class => "btn btn-inverse"} do %>
+							<i class="icon-edit"></i> Edit
+						<% end %>
 					<% end %>
 					
 					<% if can? :read, @matrix%>
 						<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-inverse"} %>
+					<% end %>
+					
+					<% if can? :read, @matrix%>
+						<%= link_to feed_matrix_path(@matrix) , {:class => "btn btn-inverse"} do %>
+							<i class="icon-edit"></i> Feed
+						<% end %>
 					<% end %>
 					
 					<% if current_user == @matrix.user%>
@@ -55,6 +62,14 @@
 							<% end %>
 						</ul>
 					<% end %>
+					
+					<% if can? :destroy, @matrix%>
+						<%= link_to @matrix, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" do %>
+							<i class="icon-trash"></i> Delete
+						<% end %>
+					<% end %>
+					
+					
 					
 					<!-- 
 					<%= link_to new_competence_import_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#import_competences_modal"} do %>
