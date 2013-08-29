@@ -43,6 +43,19 @@
 					<% if can? :read, @matrix%>
 						<%= link_to "Export to .xlsx", matrix_path(format: 'xlsx'), {:class => "btn btn-inverse"} %>
 					<% end %>
+					
+					<% if current_user == @matrix.user%>
+						<button class="btn btn-inverse" data-toggle="dropdown">Share<span class="caret"></span></button>
+						<ul class="dropdown-menu">
+							<% User.all.each do |user| %>	
+								<% next if current_user==user %> 
+								<% unless @matrix.followed_by?(user)%>
+									<li><a href=<%=add_follower_matrix_path(:id => @matrix.id, :follower_id => user.id)%>><%= user.email%></a></li>
+								<% end %>
+							<% end %>
+						</ul>
+					<% end %>
+					
 					<!-- 
 					<%= link_to new_competence_import_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#import_competences_modal"} do %>
 						<i class="icon-exchange"></i> Import
