@@ -11,8 +11,11 @@
 							<th>Name</th>
 							<th>Description</th>
 							<th>Linkedin</th>
+							<th>Twitter</th>
+							<th>Facebook</th>
 							<th>Industry</th>
 							<th>Competence</th>
+							<th>Country</th>
 							<th>Actions</th>
 							<th>Note</th>
 						</tr>
@@ -24,8 +27,11 @@
 							<td><%= company.name%></td>
 							<td><%= company.description %></td>
 							<td><%= company.linkedin_id %></td>
+							<td><%= company.twitter_id %></td>
+							<td><%= company.facebook_id %></td>
 							<td><%= company.industries.map(&:name).join(", ") %></td>
 							<td><%= company.competences.map(&:name).join(", ") %></td>
+							<td><%= company.country %></td>
 							<% if company.exist?%>
 							<td>
 								<div class="btn-group">
@@ -40,7 +46,7 @@
 							<td><span class="badge badge-important">existed</span></td>
 							<% else %>
 							<td>
-								<a href="#" class="imported_company btn btn-inverse" data-name="<%= company.name%>" data-description="<%= company.description %>" data-linkedinid="<%= company.linkedin_id %>"><i class="icon-plus"></i> Add</a>
+								<a href="#" class="imported_company btn btn-inverse" data-name="<%= company.name%>" data-description="<%= company.description %>" data-linkedinid="<%= company.linkedin_id %>" data-twitterid="<%= company.twitter_id %>" data-facebookid="<%= company.facebook_id %>" data-logourl="<%= company.logo_url %>"><i class="icon-plus"></i> Add</a>
 								<div class="btn-group">
 									<!--
 									<%= link_to company, :class => "btn" do %>
