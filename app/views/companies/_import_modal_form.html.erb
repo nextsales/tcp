@@ -1,0 +1,36 @@
+<div id="import_companies_modal", class="modal hide fade">
+	<%= form_for (@company_import), :html => {:class => "form-horizontal"} do |f| %>
+	
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h4>Industry Import</h4>
+  </div>
+
+  <div class="modal-body">
+		<p>A CSV or Excel file can be used to import records. The first row should be the column name. The following columns are allowed. Download template here</p>
+		
+		<% if @company_import.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@company_import.errors.count, "error") %> prohibited this import from completing:</h2>
+	      <ul>
+	      <% @company_import.errors.full_messages.each do |msg| %>
+	        <li><%= msg %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+	
+		<fieldset>
+			<div class="control-group">
+				<%= f.file_field :file %>
+			</div>
+		</fieldset>
+  </div>
+
+	<div class="modal-footer">
+		<%= link_to 'Cancel', industries_path, {:class => "btn", "data-dismiss" => "modal", "aria-hidden" => "true"} %>
+		<%= f.submit "Save  changes", :class => "btn btn-primary" %>
+	</div>
+	
+	<% end %> 
+</div>
