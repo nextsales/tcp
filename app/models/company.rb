@@ -70,7 +70,7 @@ class Company < ActiveRecord::Base
   
   def crawl_twitter_tweets(twitter_client, tweets_count, max_id)
     return nil unless twitter_client && self.twitter_id != ''
-    puts twitter_client
+    puts twitter_client.to_s
     feeds = Array.new
     if max_id == 0
       tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count)
