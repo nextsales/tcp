@@ -56,6 +56,7 @@ class CompanyImportsController < ApplicationController
       @imported_companies << company      
     end
     
+    @company = Company.new
     render "preview.html.erb"
   end
 end
