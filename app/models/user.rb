@@ -26,6 +26,7 @@ class User < ActiveRecord::Base
   has_one :twitter_auth, dependent: :destroy
   
   def linkedin_client
+    return nil unless linkedin_auth
     client = LinkedIn::Client.new(OMNI_AUTH_CONFIG['LINKEDIN_APP_ID'], OMNI_AUTH_CONFIG['LINKEDIN_APP_SECRET'])
     client.authorize_from_access(linkedin_auth.token, linkedin_auth.secret)
     client
