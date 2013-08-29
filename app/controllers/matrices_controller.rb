@@ -7,7 +7,8 @@ class MatricesController < ApplicationController
     @matrices = Matrix.all
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @matrices }
+      #format.json { render json: @matrices }
+      format.json { render json: Matrix.tokens(params[:q]) }
     end
   end
 
