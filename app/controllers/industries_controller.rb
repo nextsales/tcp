@@ -3,10 +3,12 @@ class IndustriesController < ApplicationController
   # GET /industries.json
   def index
     @industries = Industry.all
-
+    @industry = Industry.new
+    @industry_import = IndustryImport.new
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @industries }
+      format.js { render json: IndustriesDatatable.new(view_context) }
     end
   end
 
