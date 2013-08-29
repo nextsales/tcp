@@ -51,6 +51,15 @@ ul.token-input-list-facebook {
 	height:200px;
 }
 
+.companies.index .token-input-dropdown-facebook {
+	z-index:100000;
+	width: 270px;
+}
+
+.companies.index .token-input-list-facebook {
+	width: 270px;
+}
+
 .companies.search ul.token-input-list-facebook,
 .matrices.add ul.token-input-list-facebook {
 	width:350px;

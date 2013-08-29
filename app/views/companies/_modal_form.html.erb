@@ -56,6 +56,62 @@
 					<%= f.text_area :description, {:class => "input-xlarge"} %>
 				</div>
 			</div>
+			
+			<div class="control-group">
+				<%= f.label :website, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :website, {:class => "input-xlarge"} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :email, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :email, {:class => "input-xlarge"} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :phone, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :phone, {:class => "input-xlarge"} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :competence_tokens, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :competence_tokens, data: {load: @company.competences} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :industry_tokens, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :industry_tokens, data: {load: @company.industries} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :facebook_id, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :facebook_id, {:class => "input-xlarge"} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :linkedin_id, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :linkedin_id, {:class => "input-xlarge"} %>
+				</div>
+			</div>
+			
+			<div class="control-group">
+				<%= f.label :twitter_id, {:class => "control-label"} %>
+				<div class="controls">
+					<%= f.text_field :twitter_id, {:class => "input-xlarge"} %>
+				</div>
+			</div>
 
 		</fieldset>
 		
