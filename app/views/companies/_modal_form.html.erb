@@ -7,25 +7,104 @@
   </div>
 
   <div class="modal-body">
-	<!-- 
 		<div id="wizard" class="form-wizard">
 			<ul class="row-fluid wizard-navigation">
-				<li class="span3"><a class="" href="#tab1" data-toggle="tab"><small>1.</small><strong> Your Details</strong></a></li>
-				<li class="span3"><a class="" href="#tab2" data-toggle="tab"><small>2.</small> <strong>Shipping</strong></a></li>
-				<li class="span3"><a class="" href="#tab3" data-toggle="tab"><small>3.</small> <strong>Pay</strong></a></li>
-				<li class="span3"><a class="" href="#tab4" data-toggle="tab"><small>4.</small> <strong>Thank you!</strong></a></li>
+				<li class="span3"><a class="" href="#tab1" data-toggle="tab">Basic Information</a></li>
+				<li class="span3"><a class="" href="#tab2" data-toggle="tab">Industries / Competences</a></li>
+				<li class="span3"><a class="" href="#tab3" data-toggle="tab">Social Media</a></li>
+				<li class="span3"><a class="" href="#tab4" data-toggle="tab">Matrix</a></li>
 			</ul>
 			<div id="bar" class="progress progress-inverse progress-small">
 				<div class="bar"></div>
 			</div>
 			<div class="tab-content">
-				<div class="tab-pane" id="tab1"></div>
-				<div class="tab-pane" id="tab2"></div>
-				<div class="tab-pane" id="tab3"></div>
-				<div class="tab-pane" id="tab4">
-					<h2>Thank you!</h2>
-					<p>Your submission has been received.</p>
+				<div class="tab-pane" id="tab1">
+					<fieldset>
+						<div class="control-group">
+							<%= f.label :name, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :name, {:class => "input-xlarge focused"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :description, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_area :description, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :website, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :website, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :email, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :email, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :phone, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :phone, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+					</fieldset>
 				</div>
+				<div class="tab-pane" id="tab2">
+					<fieldset>
+						<div class="control-group">
+							<%= f.label :competence_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :competence_tokens, data: {load: @company.competences} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :industry_tokens, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :industry_tokens, data: {load: @company.industries} %>
+							</div>
+						</div>
+					</fieldset>
+				</div>
+				<div class="tab-pane" id="tab3">
+					<fieldset>
+						<div class="control-group">
+							<%= f.label :facebook_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :facebook_id, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :linkedin_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :linkedin_id, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+						<div class="control-group">
+							<%= f.label :twitter_id, {:class => "control-label"} %>
+							<div class="controls">
+								<%= f.text_field :twitter_id, {:class => "input-xlarge"} %>
+							</div>
+						</div>
+
+					</fieldset>
+				</div>
+				<div class="tab-pane" id="tab4">
+					<fieldset>
+						
+
+					</fieldset>
+				</div>
+				<!-- 
 				<div class="description">
 					<ul class="pager wizard">
 						<li class="previous">
@@ -39,81 +118,11 @@
 						</li>
 					</ul>
 				</div>
+				-->
 			</div>
 		</div>
-		-->
-		<fieldset>
-			<div class="control-group">
-				<%= f.label :name, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :name, {:class => "input-xlarge focused"} %>
-				</div>
-			</div>
-
-			<div class="control-group">
-				<%= f.label :description, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_area :description, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :website, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :website, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :email, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :email, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :phone, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :phone, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :competence_tokens, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :competence_tokens, data: {load: @company.competences} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :industry_tokens, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :industry_tokens, data: {load: @company.industries} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :facebook_id, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :facebook_id, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :linkedin_id, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :linkedin_id, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-			
-			<div class="control-group">
-				<%= f.label :twitter_id, {:class => "control-label"} %>
-				<div class="controls">
-					<%= f.text_field :twitter_id, {:class => "input-xlarge"} %>
-				</div>
-			</div>
-
-		</fieldset>
+		
+		
 		
   </div>
 
