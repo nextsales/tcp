@@ -23,9 +23,10 @@
 					
 					
 					<%= link_to new_industry_import_path, {:class => "btn btn-inverse", remote: true, "data-backdrop" => "false", "data-toggle" => "modal", "data-target" => "#import_industries_modal"} do %>
-						<i class="icon-exchange"></i> Import (with modal)
+						<i class="icon-exchange"></i> Import
 					<% end %>
 					
+					<%= render("modal_form") %>
 					<%= render("import_modal_form") %>
         </div>
 				
