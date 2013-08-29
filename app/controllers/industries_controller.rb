@@ -7,7 +7,7 @@ class IndustriesController < ApplicationController
     @industry_import = IndustryImport.new
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @industries }
+      format.json { render json: Industry.tokens(params[:q]) }
       format.js { render json: IndustriesDatatable.new(view_context) }
     end
   end
