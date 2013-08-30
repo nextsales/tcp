@@ -15,21 +15,21 @@ class MatricesController < ApplicationController
   # GET /matrices/1
   # GET /matrices/1.json
   def show
-    puts params
+    #puts params
     @companies = @matrix.companies
-    if params[:twitter_last_ids]
-      if params[:linkedin_next_start_ids] 
-        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])
-      else
-        @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], nil)
-      end
-    else
-      if params[:linkedin_next_start_ids]
-        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(5, nil, params[:linkedin_next_start_ids])
-      else
-        @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(10, nil,nil)
-      end
-    end
+    # if params[:twitter_last_ids]
+    #       if params[:linkedin_next_start_ids] 
+    #         @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])
+    #       else
+    #         @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], nil)
+    #       end
+    #     else
+    #       if params[:linkedin_next_start_ids]
+    #         @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(5, nil, params[:linkedin_next_start_ids])
+    #       else
+    #         @feeds, @twitter_last_ids, @linkedin_next_start_ids = @matrix.crawl_feed(10, nil,nil)
+    #       end
+    #     end
     respond_to do |format|
       format.xlsx{
         render xlsx: "show", disposition: "attachment", filename: "#{@matrix.name}.xlsx"
