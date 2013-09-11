@@ -36,7 +36,7 @@ class MatricesController < ApplicationController
       }
       format.html # show.html.erb
       format.json { render json: @matrix }
-      format.js
+      #format.js
     end
   end
 
@@ -139,7 +139,8 @@ class MatricesController < ApplicationController
       end
     end
     respond_to do |format|
-      format.html # show.html.erb
+      format.html # feed.html.erb
+      format.js
     end
   end
 end
