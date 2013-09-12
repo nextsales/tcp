@@ -72,7 +72,7 @@ class Company < ActiveRecord::Base
   
   def crawl_twitter_tweets(twitter_client, tweets_count, max_id)
     return nil unless twitter_client && self.twitter_id != ''
-    puts twitter_client.to_s
+    #puts twitter_client.to_s
     feeds = Array.new
     if max_id == 0
       tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count)
@@ -118,6 +118,10 @@ class Company < ActiveRecord::Base
     if update.update_content.company_job_update
       feed = job_posting(update, self)
     end
+    
+    if update.update_content.company_status_update
+      feed = status_update(update, self)
+    end
     return nil unless feed
     feed
   end
@@ -136,6 +140,39 @@ class Company < ActiveRecord::Base
     position = job.position
     
     feed.title = "%s is hiring: %s in %s" % [company.name, position.title, job.location_description]
+    feed
+  end
+  def status_update(update, company)
+    feed = InstantFeed.new
+    feed.feed_type = 'li_update'
+    #feed.likes = update["numLikes"]
+    if update.timestamp
+      feed.origin_created_time = update.timestamp
+    end
+    status = update.update_content.company_status_update
+    if status.share
+      share = status.share
+      if share.content
+        if share.content.description
+          feed.content = share.content.description
+        elsif share.comment
+          feed.content = share.comment
+        end
+        if share.content.submitted_url
+          feed.url = share.content.submitted_url
+        elsif share.content.eyebrow_url
+          feed.url = share.content.eyebrow_url
+        end
+        if share.content.title
+          feed.title = share.content.title
+        end
+        if share.content.submitted_image_url
+          feed.photo_url = share.content.submitted_image_url
+        elsif share.content.thumbnail_url
+          feed.photo_url = share.content.thumbnail_url
+        end
+      end
+    end
     feed
   end
 end
