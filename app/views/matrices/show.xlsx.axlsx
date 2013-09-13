@@ -51,25 +51,29 @@ wb.add_worksheet(name: 'Companies') do |sheet|
 	#LOGO
 	i = 0
 	@companies.each do |company|
-		extname = File.extname(company.logo_url)
-    	img = File.expand_path("../../../../tmp/temp_company_logos/#{company.id}#{extname}", __FILE__)
-    	directory_name =  File.expand_path("../../../../tmp/temp_company_logos", __FILE__)
-    	Dir.mkdir(directory_name) unless File.exists?(directory_name)
-	
-		open(img, 'wb') do |file|
-		  	file << open(company.logo_url).read
-			file.close
-		end
-	    # specifying the :hyperlink option will add a hyper link to your image.
-	    # @note - Numbers does not support this part of the specification.
-	   	sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>company.website) do |image|
-	      	image.width=60
-	      	image.height=60
-      		image.hyperlink.tooltip = "Labeled Link"
-	      	image.start_at i,0
-	    end
-	    sheet.column_info[i].width = 40	    
-	    i = i+1
+		if company.logo_url != ''
+			extname = File.extname(company.logo_url)
+			puts "log " + company.logo_url
+			puts "e " + extname
+	    	img = File.expand_path("../../../../tmp/temp_company_logos/#{company.id}#{extname}", __FILE__)
+	    	directory_name =  File.expand_path("../../../../tmp/temp_company_logos", __FILE__)
+	    	Dir.mkdir(directory_name) unless File.exists?(directory_name)
+		
+			open(img, 'wb') do |file|
+			  	file << open(company.logo_url).read
+				file.close
+			end
+		    # specifying the :hyperlink option will add a hyper link to your image.
+		    # @note - Numbers does not support this part of the specification.
+		   	sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>company.website) do |image|
+		      	image.width=60
+		      	image.height=60
+	      		image.hyperlink.tooltip = "Labeled Link" unless !image.hyperlink
+		      	image.start_at i,0
+		    end
+		    sheet.column_info[i].width = 40	    
+		    i = i+1
+	 end
     end
 	
 	
@@ -90,11 +94,11 @@ wb.add_worksheet(name: 'Companies') do |sheet|
     end
 end
 
-if @feeds.any?
-	wb.add_worksheet(name: 'Updates') do |sheet|
-		sheet.add_row ['Title', 'Content', 'Url']
-	    @feeds.each do |feed|
-	    	sheet.add_row [feed.title, feed.content, feed.url]
-	    end
-	end
-end
+#if @feeds.any?
+#	wb.add_worksheet(name: 'Updates') do |sheet|
+#		sheet.add_row ['Title', 'Content', 'Url']
+#	    @feeds.each do |feed|
+#	    	sheet.add_row [feed.title, feed.content, feed.url]
+#	    end
+#	end
+#end

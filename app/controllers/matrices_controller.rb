@@ -124,7 +124,7 @@ class MatricesController < ApplicationController
     #   format.json { render json: @feeds }
     # end
     
-    puts params
+    #puts params
     if params[:twitter_last_ids]
       if params[:linkedin_next_start_ids] 
         @feeds, @twitter_last_ids, @linkedin_next_start_ids  = @matrix.crawl_feed(5, params[:twitter_last_ids], params[:linkedin_next_start_ids])

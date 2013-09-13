@@ -1,0 +1,6 @@
+<% if @feeds.count>0 -%>
+$('#feeds').append('<%= escape_javascript(render(partial: 'shared/instant_feeds')) %>');
+$('a.hook').attr('href', '<%= feed_matrix_path(twitter_last_ids: @twitter_last_ids, linkedin_next_start_ids: @linkedin_next_start_ids) %>').show();
+<% else -%>
+$('a.hook').hide();
+<% end -%>
