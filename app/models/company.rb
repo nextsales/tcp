@@ -58,7 +58,12 @@ class Company < ActiveRecord::Base
   def crawl_linkedin_update(linkedin_client, updates_count, start_id)
     return nil unless linkedin_client && self.linkedin_id != ''
     feeds = Array.new
-    if (crawl_results = linkedin_client.company_updates({:id => self.linkedin_id, :count => updates_count, :start => start_id}).all)
+    begin 
+      crawl_results = linkedin_client.company_updates({:id => self.linkedin_id, :count => updates_count, :start => start_id}).all
+    rescue Exception => e
+      puts "caught exception #{e}!"
+    end
+    if crawl_results 
       crawl_results.each do |update|
         feed = linkedin_update2feed(update)
         if feed
@@ -74,12 +79,15 @@ class Company < ActiveRecord::Base
     return nil unless twitter_client && self.twitter_id != ''
     #puts twitter_client.to_s
     feeds = Array.new
-    if max_id == 0
-      tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count)
-    else
-      tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count, :max_id => max_id)
+    begin
+      if max_id == 0
+        tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count)
+      else
+        tweets = twitter_client.user_timeline(self.twitter_id, :count => tweets_count, :max_id => max_id)
+      end
+    rescue Exception => e
+      puts "caught exception #{e}!"
     end
-       
     return nil, nil  unless tweets
     ids = tweets.map(&:id)
     last_id = ids.min # the id of the oldest tweet that has been fetched
