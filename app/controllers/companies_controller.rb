@@ -82,7 +82,7 @@ class CompaniesController < ApplicationController
   def update
     respond_to do |format|
       if @company.update_attributes(params[:company])
-        format.html { redirect_to @company, notice: @company.name + ' was successfully updated.' }
+        format.html { redirect_to companies_url, notice: @company.name + ' was successfully created.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

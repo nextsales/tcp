@@ -18,9 +18,9 @@
 						<% if @matrix.companies.any? %>
 							<% @companies.each do |company| %>
 								<tr>
-									<td><%= company.name %></td>
-									<td><%= company.industries.map(&:name).join(", ") %></td>
+									<td><%= link_to company.name, company_path(company) %></td>
 									<td><%= company.competences.map(&:name).join(", ") %></td>
+									<td><%= company.industries.map(&:name).join(", ") %></td>
 									<td><%= company.country %></td>
 								</tr>
 							<% end %>

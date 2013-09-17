@@ -1,1 +1,7 @@
-<%= render 'form2' %>
+<%= render 'modal_form' %>
+
+<%= javascript_tag do %>
+	$(document).ready(function () {
+		$('#create_company_modal').modal("show");
+	});
+<% end %>

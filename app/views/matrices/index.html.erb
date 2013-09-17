@@ -28,7 +28,7 @@
 						<% @matrices.each do |matrix| %>
 							<% if can? :read, matrix%>
 								<tr>
-									<td class="hidden-phone-portrait"><%= matrix.id %></td>
+									<td><%= matrix.id %></td>
 		              <td><%= link_to matrix.name, matrix %></td>
 		              <td><%= matrix.description %></td>
 									<td><%= raw(matrix.companies.map{ |company| raw(link_to(company.name, company)) }.join(', ')) %></td>

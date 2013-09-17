@@ -11,8 +11,8 @@
 			<ul class="row-fluid wizard-navigation">
 				<li class="span3"><a class="" href="#tab1" data-toggle="tab">Basic Information</a></li>
 				<li class="span3"><a class="" href="#tab2" data-toggle="tab">Industries / Competences</a></li>
-				<li class="span3"><a class="" href="#tab3" data-toggle="tab">Social Media</a></li>
-				<li class="span3"><a class="" href="#tab4" data-toggle="tab">Matrix</a></li>
+				<li class="span3"><a class="" href="#tab3" data-toggle="tab">Social Media Information</a></li>
+				<li class="span3"><a class="" href="#tab4" data-toggle="tab">Matrices Information</a></li>
 			</ul>
 			<div id="bar" class="progress progress-inverse progress-small">
 				<div class="bar"></div>
@@ -59,14 +59,14 @@
 				<div class="tab-pane" id="tab2">
 					<fieldset>
 						<div class="control-group">
-							<%= f.label :competence_tokens, {:class => "control-label"} %>
+							<%= f.label :"Competences", {:class => "control-label"} %>
 							<div class="controls">
 								<%= f.text_field :competence_tokens, data: {load: @company.competences} %>
 							</div>
 						</div>
 
 						<div class="control-group">
-							<%= f.label :industry_tokens, {:class => "control-label"} %>
+							<%= f.label :"Industry", {:class => "control-label"} %>
 							<div class="controls">
 								<%= f.text_field :industry_tokens, data: {load: @company.industries} %>
 							</div>
@@ -101,7 +101,7 @@
 				<div class="tab-pane" id="tab4">
 					<fieldset>
 						<div class="control-group">
-							<%= f.label :matrix_tokens, {:class => "control-label"} %>
+							<%= f.label :"Matrix", {:class => "control-label"} %>
 							<div class="controls">
 								<%= f.text_field :matrix_tokens, data: {load: @company.matrices} %>
 							</div>
