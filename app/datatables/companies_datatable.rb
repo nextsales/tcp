@@ -24,7 +24,6 @@ private
         company.description,
         company.competences.map(&:name).join(", "),
         company.industries.map(&:name).join(", "),
-        company.matrices.map(&:name).join(", "),
         company.country,
         '<a href="/companies/'+company.id.to_s+'/edit" class="btn btn-small btn-info"><i class="icon-edit"></i> Edit</a>',
       ]
