@@ -211,7 +211,7 @@ nv.addGraph(function() {
     chart.xAxis
         .showMaxMin(false)
         .tickFormat(function(d) { return d3.time.format('%b %d')(new Date(d)) });
-    var data = testData(['Unique', 'Visits'], 30);
+    var data = testData(['Silverlop', 'Marketo'], 30);
     data[0].area = true;
     d3.select('#visits-chart svg')
         .datum(data)
