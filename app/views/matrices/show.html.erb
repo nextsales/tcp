@@ -9,8 +9,8 @@
 					<thead>
 						<tr>
 							<th>Company Name</th>
+							<th>Description</th>
 							<th>Competences</th>
-							<th>Industries</th>
 							<th>Country</th>
 						</tr>
 					</thead>
@@ -19,8 +19,8 @@
 							<% @companies.each do |company| %>
 								<tr>
 									<td><%= link_to company.name, company_path(company) %></td>
+									<td><%= company.description %></td>
 									<td><%= company.competences.map(&:name).join(", ") %></td>
-									<td><%= company.industries.map(&:name).join(", ") %></td>
 									<td><%= company.country %></td>
 								</tr>
 							<% end %>
